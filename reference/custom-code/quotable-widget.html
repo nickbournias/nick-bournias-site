@@ -1,0 +1,18 @@
+<div id="quote-box" style="padding:1em;border-left:4px solid #ccc;">
+  <p><em>Loading quote...</em></p>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    fetch('https://api.quotable.io/quotes/random')
+      .then(response => response.json())
+      .then(data => {
+        const box = document.getElementById('quote-box');
+        box.innerHTML = `<blockquote>"${data.content}"<br><cite>– ${data.author}</cite></blockquote>`;
+      })
+      .catch(err => {
+        document.getElementById('quote-box').innerHTML = '<p>Could not load quote.</p>';
+        console.error(err);
+      });
+  });
+</script>
