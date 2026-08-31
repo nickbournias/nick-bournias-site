@@ -1,0 +1,36 @@
+<footer>
+    <div class="site-footer container">
+        <p> © 2026 Nick Bournias</p>
+    </div>
+</footer>
+
+<style>
+    .site-footer {
+    padding-top: 48px;
+    padding-bottom: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+    .site-footer p {
+        margin: 0;
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 24px;
+    }
+
+    @media (max-width: 600px) {
+        .site-footer {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+    }
+</style>

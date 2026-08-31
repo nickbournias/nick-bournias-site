@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+	title="About Me - Nick Bournias"
+	,
+	description="Personal website of Nick Bournias"
+>
+	<section class="about-section">
+		<div class="container">
+			<div class="about-grid">
+				<div class="about-extra">
+					<p>Denver, Colorado</p>
+					<p>ServiceNow Developer</p>
+					<p>AI / Software Engineering</p>
+				</div>
+
+				<div class="about-text">
+					<p class="eyebrow">About me</p>
+
+					<h1>
+						Hi, I'm Nick Bournias
+					</h1>
+
+					<p>
+						I'm a developer and consultant interested in software,
+						AI, design, and solving interesting problems.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.hero {
+		flex: 1;
+
+		display: flex;
+		align-items: center;
+	}
+
+	.hero-content {
+		max-width: 850px;
+	}
+
+	.eyebrow {
+		margin-bottom: 16px;
+
+		color: var(--muted);
+		font-size: 1rem;
+	}
+
+	h1 {
+		font-size: clamp(2.5rem, 8vw, 5rem);
+		font-weight: 400;
+		line-height: 1.05;
+		letter-spacing: 0;
+	}
+
+	.intro {
+		margin: 0;
+
+		color: var(--muted);
+
+		font-size: clamp(1.1rem, 2vw, 1.4rem);
+	}
+
+	.container {
+		width: min(100% - 2rem, 1200px);
+		margin-inline: auto;
+	}
+
+	.about-section {
+		padding: 5rem 0;
+	}
+
+	.about-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 3rem;
+	}
+
+	/* Desktop enhancement */
+	@media (min-width: 768px) {
+		.about-grid {
+			grid-template-columns: 1fr 2fr;
+			align-items: end;
+		}
+	}
+</style>
