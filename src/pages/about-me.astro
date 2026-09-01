@@ -1,92 +1,242 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import TypedText from "../components/TypedText.astro";
+
+const timeline = [
+	{
+		date: "Aug. 2025 — Present",
+		company: "KPMG",
+		role: "Federal ServiceNow Developer",
+		type: "work",
+	},
+	{
+		date: "2024 — 2025",
+		company: "Ernst & Young",
+		role: "ServiceNow Business Analyst / Jr Developer",
+		type: "work",
+	},
+	{
+		date: "2023 — 2024",
+		company: "Ernst & Young",
+		role: "Product Analyst",
+		type: "work",
+	},
+	{
+		date: "Sep. 2022 — 2023",
+		company: "Ernst & Young (Internship)",
+		role: "Security Controls / Risk Analyst",
+		type: "work",
+	},
+	{
+		date: "Graduated May 2022",
+		company: "University of Maryland",
+		role: "Smith School of Business · B.S. Information Systems",
+		type: "education",
+	},
+];
 ---
 
-<BaseLayout
-	title="About Me - Nick Bournias"
-	,
-	description="Personal website of Nick Bournias"
->
+<BaseLayout title="About Me - Nick Bournias" description="About Nick Bournias">
 	<section class="about-section">
 		<div class="container">
-			<div class="about-grid">
-				<div class="about-extra">
-					<p>Denver, Colorado</p>
-					<p>ServiceNow Developer</p>
-					<p>AI / Software Engineering</p>
-				</div>
+			<div class="about-header">
+				<p class="eyebrow">About me</p>
 
-				<div class="about-text">
-					<p class="eyebrow">About me</p>
+				<h1>How I got here.</h1>
 
-					<h1>
-						Hi, I'm Nick Bournias
-					</h1>
+				<p class="intro">
+					<TypedText
+						text="I started my career in cybersecurity and consulting before moving deeper into software and ServiceNow development. 
+					I'm especially interested in AI, automation, and solving complex technical problems."
+					/>
+				</p>
+			</div>
 
-					<p>
-						I'm a developer and consultant interested in software,
-						AI, design, and solving interesting problems.
-					</p>
-				</div>
+			<div class="timeline">
+				{
+					timeline.map((item) => (
+						<div class="timeline-item">
+							<div class="timeline-marker">
+								<span class="timeline-dot" />
+							</div>
+
+							<div class="timeline-content">
+								<p class="timeline-date">{item.date}</p>
+
+								<h2>{item.company}</h2>
+
+								<p class="timeline-role">{item.role}</p>
+
+								{item.type === "education" && (
+									<p class="timeline-detail">
+										Minors in Cybersecurity and Philosophy
+									</p>
+								)}
+							</div>
+						</div>
+					))
+				}
 			</div>
 		</div>
 	</section>
 </BaseLayout>
 
 <style>
-	.hero {
-		flex: 1;
-
-		display: flex;
-		align-items: center;
-	}
-
-	.hero-content {
-		max-width: 850px;
-	}
-
-	.eyebrow {
-		margin-bottom: 16px;
-
-		color: var(--muted);
-		font-size: 1rem;
-	}
-
-	h1 {
-		font-size: clamp(2.5rem, 8vw, 5rem);
-		font-weight: 400;
-		line-height: 1.05;
-		letter-spacing: 0;
-	}
-
-	.intro {
-		margin: 0;
-
-		color: var(--muted);
-
-		font-size: clamp(1.1rem, 2vw, 1.4rem);
-	}
-
 	.container {
-		width: min(100% - 2rem, 1200px);
+		width: min(100% - 2rem, 1100px);
 		margin-inline: auto;
 	}
 
 	.about-section {
-		padding: 5rem 0;
+		padding: 5rem 0 7rem;
 	}
 
-	.about-grid {
+	.about-header {
+		max-width: 760px;
+		margin-bottom: 5rem;
+	}
+
+	.eyebrow {
+		margin: 0 0 1rem;
+
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
+
+	h1 {
+		margin: 0;
+
+		font-size: clamp(2.75rem, 7vw, 5rem);
+		font-weight: 400;
+		line-height: 1.05;
+	}
+
+	.intro {
+		max-width: 650px;
+		margin: 1.5rem 0 0;
+
+		color: var(--muted);
+
+		font-size: clamp(1.05rem, 2vw, 1.3rem);
+		line-height: 1.65;
+	}
+
+	.timeline {
+		position: relative;
+
+		max-width: 850px;
+	}
+
+	.timeline::before {
+		content: "";
+
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 6px;
+
+		width: 1px;
+
+		background: rgba(255, 255, 255, 0.12);
+	}
+
+	.timeline-item {
+		position: relative;
+
 		display: grid;
-		grid-template-columns: 1fr;
-		gap: 3rem;
+		grid-template-columns: 32px 1fr;
+		gap: 1.5rem;
+
+		padding-bottom: 4rem;
 	}
 
-	/* Desktop enhancement */
+	.timeline-item:last-child {
+		padding-bottom: 0;
+	}
+
+	.timeline-marker {
+		position: relative;
+
+		z-index: 1;
+	}
+
+	.timeline-dot {
+		position: absolute;
+		top: 7px;
+		left: 0;
+
+		width: 13px;
+		height: 13px;
+
+		border: 2px solid rgba(255, 255, 255, 0.75);
+		border-radius: 50%;
+
+		background: rgb(27, 27, 27);
+	}
+
+	.timeline-content {
+		max-width: 620px;
+	}
+
+	.timeline-date {
+		margin: 0 0 0.6rem;
+
+		color: var(--muted);
+
+		font-size: 0.82rem;
+		letter-spacing: 0.05em;
+	}
+
+	.timeline-content h2 {
+		margin: 0;
+
+		font-size: clamp(1.5rem, 3vw, 2rem);
+		font-weight: 500;
+		line-height: 1.2;
+	}
+
+	.timeline-role {
+		margin: 0.45rem 0 0;
+
+		color: rgba(255, 255, 255, 0.78);
+
+		font-size: 1rem;
+	}
+
+	.timeline-detail {
+		margin: 0.5rem 0 0;
+
+		color: var(--muted);
+
+		font-size: 0.9rem;
+		line-height: 1.5;
+	}
+
 	@media (min-width: 768px) {
-		.about-grid {
-			grid-template-columns: 1fr 2fr;
-			align-items: end;
+		.about-section {
+			padding-top: 7rem;
+		}
+
+		.about-header {
+			margin-bottom: 6rem;
+		}
+
+		.timeline {
+			margin-left: 12%;
+		}
+
+		.timeline-item {
+			grid-template-columns: 40px 1fr;
+			gap: 2rem;
+		}
+
+		.timeline::before {
+			left: 7px;
+		}
+
+		.timeline-dot {
+			width: 15px;
+			height: 15px;
 		}
 	}
 </style>

@@ -1,6 +1,63 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TypedText from "../components/TypedText.astro";
+
+const apps = [
+    {
+        title: "Bike Map",
+        category: "Maps / Cycling",
+        description:
+            "An interactive bike map built for exploring routes and cycling infrastructure.",
+        href: "https://nickbournias.github.io/bike-map/",
+        tech: ["JavaScript", "Web"],
+        external: true,
+    },
+    {
+        title: "Harmonograph",
+        category: "Generative Art",
+        description:
+            "An interactive exploration of harmonographs and the geometric patterns created by simulated pendulum motion.",
+        href: "/harmonograph",
+        tech: ["JavaScript", "Canvas", "Generative Art"],
+        external: false,
+    },
+    {
+        title: "BPM Detector",
+        category: "Audio",
+        description:
+            "A lightweight browser tool for estimating the tempo of music in beats per minute.",
+        href: "https://nickbournias.github.io/bpm-detector/",
+        tech: ["JavaScript", "Audio"],
+        external: true,
+    },
+    {
+        title: "Password Generator",
+        category: "Utility",
+        description:
+            "A simple browser-based tool for quickly generating randomized passwords.",
+        href: "https://nickbournias.github.io/password-generator/",
+        tech: ["JavaScript", "Web"],
+        external: true,
+    },
+    {
+        title: "Duck Hunt",
+        category: "Game",
+        description:
+            "A small browser game inspired by the classic arcade-style duck hunting experience.",
+        href: "https://nickbournias.github.io/duck-hunt/",
+        tech: ["JavaScript", "Game"],
+        external: true,
+    },
+    {
+        title: "Ambient Visualizer",
+        category: "Audio / Visual",
+        description:
+            "An experimental ambient audio visualizer built around sound, motion, and color.",
+        href: "https://nickbournias.github.io/ambient-visualizer/",
+        tech: ["JavaScript", "Audio", "Visuals"],
+        external: true,
+    },
+];
 ---
 
 <BaseLayout
@@ -15,72 +72,64 @@ import TypedText from "../components/TypedText.astro";
                 <h1>Things I’ve built.</h1>
 
                 <p class="intro">
-                    <TypedText text="Some small apps I've created for fun. Audio
-							visualizers, games, and more!" />
+                    <TypedText
+                        text="Some small apps I've created for fun. Audio visualizers, games, utilities, and more."
+                    />
+                </p>
+
+                <p class="mobile-note">
+                    Some projects are best experienced on desktop.
                 </p>
             </header>
 
             <div class="divider"></div>
 
             <div class="apps-list">
-                <a class="app-entry" href="#">
-                    <div class="app-visual">
-                        <div class="app-placeholder">
-                            <span>Screenshot</span>
-                        </div>
-                    </div>
+                {
+                    apps.map((app) => (
+                        <a
+                            class="app-entry"
+                            href={app.href}
+                            target={app.external ? "_blank" : undefined}
+                            rel={
+                                app.external ? "noopener noreferrer" : undefined
+                            }
+                        >
+                            <div class="app-content">
+                                <div class="app-meta">
+                                    <span>{app.category}</span>
+                                </div>
 
-                    <div class="app-content">
-                        <div class="app-meta">
-                            <span>AI / Development</span>
-                            <span>2026</span>
-                        </div>
+                                <h2>{app.title}</h2>
 
-                        <h2>ServiceNow AI Copilot</h2>
+                                <p>{app.description}</p>
 
-                        <p>
-                            An agentic AI incident investigation tool
-                            integrating Claude with ServiceNow to investigate
-                            incidents and produce structured recommendations.
-                        </p>
+                                <div class="app-tech">
+                                    {app.tech.map((item) => (
+                                        <span>{item}</span>
+                                    ))}
+                                </div>
+                            </div>
 
-                        <div class="app-tech">
-                            <span>Python</span>
-                            <span>Claude</span>
-                            <span>ServiceNow</span>
-                        </div>
-                    </div>
+                            <div class="app-arrow" aria-hidden="true">
+                                ↗︎
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
 
-                    <div class="app-arrow" aria-hidden="true">↗</div>
-                </a>
-
-                <a class="app-entry" href="#">
-                    <div class="app-visual">
-                        <div class="app-placeholder">
-                            <span>Screenshot</span>
-                        </div>
-                    </div>
-
-                    <div class="app-content">
-                        <div class="app-meta">
-                            <span>Web App</span>
-                            <span>2026</span>
-                        </div>
-
-                        <h2>Another Project</h2>
-
-                        <p class="intro">
-                            A collection of thoughts on technology, AI, development, work, and whatever else I find interesting.
-                        </p>
-
-                        <div class="app-tech">
-                            <span>Astro</span>
-                            <span>JavaScript</span>
-                        </div>
-                    </div>
-
-                    <div class="app-arrow" aria-hidden="true">↗</div>
-                </a>
+            <div class="github-footer">
+                <p>
+                    More projects and source code on
+                    <a
+                        href="https://github.com/nickbournias"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        GitHub ↗︎
+                    </a>
+                </p>
             </div>
         </div>
     </section>
@@ -92,11 +141,9 @@ import TypedText from "../components/TypedText.astro";
     }
 
     .container {
-        width: min(100% - 2rem, 1200px);
-        margin-inline: auto;
+        width: 100%;
+        padding-inline: 1.25rem;
     }
-
-    /* HEADER */
 
     .apps-header {
         max-width: 760px;
@@ -123,14 +170,22 @@ import TypedText from "../components/TypedText.astro";
     }
 
     .intro {
-        margin: 1.6rem 0 0;
-
         max-width: 620px;
+
+        margin: 1.6rem 0 0;
 
         color: var(--muted);
 
         font-size: clamp(1rem, 2vw, 1.2rem);
         line-height: 1.65;
+    }
+
+    .mobile-note {
+        margin: 0.9rem 0 0;
+
+        color: rgba(255, 255, 255, 0.3);
+
+        font-size: 0.75rem;
     }
 
     .divider {
@@ -142,16 +197,14 @@ import TypedText from "../components/TypedText.astro";
         background: rgba(255, 255, 255, 0.12);
     }
 
-    /* PROJECT LIST */
-
     .apps-list {
         width: 100%;
     }
 
     .app-entry {
         display: grid;
-        grid-template-columns: 230px minmax(0, 1fr) auto;
-        gap: 2.5rem;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 2rem;
         align-items: center;
 
         padding: 2.5rem 0;
@@ -162,45 +215,9 @@ import TypedText from "../components/TypedText.astro";
         text-decoration: none;
     }
 
-    /* IMAGE */
-
-    .app-visual {
-        width: 100%;
-    }
-
-    .app-placeholder {
-        aspect-ratio: 16 / 10;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        overflow: hidden;
-
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-
-        background: linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.055),
-            rgba(255, 255, 255, 0.015)
-        );
-
-        color: rgba(255, 255, 255, 0.2);
-
-        font-size: 0.65rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-
-        transition:
-            transform 0.3s ease,
-            border-color 0.3s ease;
-    }
-
-    /* CONTENT */
-
     .app-content {
-        max-width: 650px;
+        width: 100%;
+        max-width: none;
     }
 
     .app-meta {
@@ -217,14 +234,6 @@ import TypedText from "../components/TypedText.astro";
         text-transform: uppercase;
     }
 
-    .app-meta span + span::before {
-        content: "•";
-
-        margin-right: 0.7rem;
-
-        color: rgba(255, 255, 255, 0.15);
-    }
-
     .app-content h2 {
         margin: 0;
 
@@ -239,17 +248,15 @@ import TypedText from "../components/TypedText.astro";
     }
 
     .app-content p {
-        margin: 0.75rem 0 0;
+        max-width: 620px;
 
-        max-width: 600px;
+        margin: 0.75rem 0 0;
 
         color: rgba(255, 255, 255, 0.45);
 
         font-size: 0.92rem;
         line-height: 1.65;
     }
-
-    /* TECHNOLOGY */
 
     .app-tech {
         display: flex;
@@ -270,8 +277,6 @@ import TypedText from "../components/TypedText.astro";
         font-size: 0.64rem;
     }
 
-    /* ARROW */
-
     .app-arrow {
         color: rgba(255, 255, 255, 0.25);
 
@@ -282,14 +287,6 @@ import TypedText from "../components/TypedText.astro";
             color 0.25s ease;
     }
 
-    /* HOVER */
-
-    .app-entry:hover .app-placeholder {
-        transform: scale(1.02);
-
-        border-color: rgba(255, 255, 255, 0.2);
-    }
-
     .app-entry:hover .app-content h2 {
         transform: translateX(3px);
     }
@@ -298,6 +295,31 @@ import TypedText from "../components/TypedText.astro";
         transform: translate(3px, -3px);
 
         color: rgba(255, 255, 255, 0.75);
+    }
+
+    .github-footer {
+        padding-top: 2.5rem;
+
+        color: rgba(255, 255, 255, 0.35);
+
+        font-size: 0.8rem;
+    }
+
+    .github-footer p {
+        margin: 0;
+    }
+
+    .github-footer a {
+        margin-left: 0.3rem;
+
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+
+        transition: color 0.2s ease;
+    }
+
+    .github-footer a:hover {
+        color: white;
     }
 
     .typing-cursor {
@@ -324,8 +346,6 @@ import TypedText from "../components/TypedText.astro";
         }
     }
 
-    /* MOBILE */
-
     @media (max-width: 767px) {
         .apps-section {
             padding: 3.5rem 0 4rem;
@@ -344,18 +364,14 @@ import TypedText from "../components/TypedText.astro";
         }
 
         .app-entry {
-            grid-template-columns: 110px 1fr;
-            gap: 1.25rem;
+            grid-template-columns: 1fr;
+            gap: 0;
 
             padding: 2rem 0;
         }
 
         .app-arrow {
             display: none;
-        }
-
-        .app-placeholder {
-            border-radius: 9px;
         }
 
         .app-meta {
@@ -377,6 +393,10 @@ import TypedText from "../components/TypedText.astro";
 
         .app-tech {
             margin-top: 0.8rem;
+        }
+
+        .github-footer {
+            padding-top: 2rem;
         }
     }
 </style>
