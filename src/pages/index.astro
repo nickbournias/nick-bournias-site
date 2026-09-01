@@ -184,9 +184,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 						onEnter: () => {
 							if (item.classList.contains("middle-left")) {
 								document.dispatchEvent(
-									new CustomEvent(
-										"init-interactive-sphere",
-									),
+									new CustomEvent("init-interactive-sphere"),
 								);
 							}
 
@@ -197,8 +195,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 							}
 
 							if (item.classList.contains("middle-right")) {
-								const image =
-									item.querySelector("img");
+								const image = item.querySelector("img");
 
 								if (
 									image instanceof HTMLImageElement &&
@@ -221,13 +218,9 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 	});
 
 	mm.add("(min-width: 768px)", () => {
-		document.dispatchEvent(
-			new CustomEvent("init-interactive-sphere"),
-		);
+		document.dispatchEvent(new CustomEvent("init-interactive-sphere"));
 
-		document.dispatchEvent(
-			new CustomEvent("init-daily-quote"),
-		);
+		document.dispatchEvent(new CustomEvent("init-daily-quote"));
 	});
 
 	gsap.fromTo(
@@ -577,11 +570,9 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 		}
 
 		.hero-widget {
-			width: calc(100% + 48px);
+			width: 100%;
 			max-width: 430px;
-
-			margin-inline: -24px;
-
+			margin-inline: auto;
 			perspective: 1000px;
 		}
 
