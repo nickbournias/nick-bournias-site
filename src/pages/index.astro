@@ -197,17 +197,14 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 							if (item.classList.contains("middle-right")) {
 								const image = item.querySelector("img");
 
-								if (
-									image instanceof HTMLImageElement &&
-									image.src
-								) {
-									const src = image.src;
+								if (image instanceof HTMLImageElement) {
+									const originalSrc =
+										image.dataset.originalSrc ||
+										image.src.split("?")[0];
 
-									image.src = "";
+									image.dataset.originalSrc = originalSrc;
 
-									requestAnimationFrame(() => {
-										image.src = src;
-									});
+									image.src = `${originalSrc}?restart=${Date.now()}`;
 								}
 							}
 						},
@@ -570,9 +567,9 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 		}
 
 		.hero-widget {
-			width: 100%;
+			width: calc(100% + 48px);
 			max-width: 430px;
-			margin-inline: auto;
+			margin-inline: -24px;
 			perspective: 1000px;
 		}
 
