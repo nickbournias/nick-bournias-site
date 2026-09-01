@@ -1,96 +1,35 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import DailyQuote from "../components/DailyQuote.astro";
+import InteractiveSphere from "../components/home/InteractiveSphere.astro";
+import HarmonographCard from "../components/home/HarmonographCard.astro";
+import LocationWidget from "../components/home/LocationWidget.astro";
 ---
 
 <BaseLayout
 	title="Nick Bournias"
-	,
 	description="Personal website of Nick Bournias"
 >
 	<section class="about-section">
 		<div class="container">
 			<div class="about-grid">
 				<div class="about-extra">
-					<div class="location-widget">
-						<div
-							class="location-selector"
-							aria-label="Location selector"
-						>
-							<button
-								class="location-option active"
-								type="button"
-								data-location="denver"
-							>
-								Denver
-							</button>
+					<div class="hero-widget">
+						<div class="hero-flipper">
+							<div class="headshot-layer">
+								<div class="headshot-wrap">
+									<img
+										src="/assets/images/nick-bournias-headshot.jpg"
+										alt="Nick Bournias"
+										class="headshot"
+									/>
+								</div>
+							</div>
 
-							<button
-								class="location-option"
-								type="button"
-								data-location="nyc"
-							>
-								NYC
-							</button>
-
-							<button
-								class="location-option"
-								type="button"
-								data-location="la"
-							>
-								LA
-							</button>
-
-							<button
-								class="location-option visitor-location"
-								type="button"
-								data-location="you"
-								hidden
-							>
-								You
-							</button>
+							<div class="weather-layer">
+								<LocationWidget />
+							</div>
 						</div>
-
-						<div class="location-heading">
-							<span class="location-dot"></span>
-
-							<span class="location-name"> Denver, CO </span>
-
-							<span
-								class="day-night-icon"
-								role="img"
-								aria-label="Nighttime"
-							>
-								<span
-									class="sun-icon"
-									aria-hidden="true"
-									hidden
-								>
-									☀
-								</span>
-
-								<canvas
-									class="moon-phase-canvas"
-									width="96"
-									height="96"
-									aria-hidden="true"
-									hidden></canvas>
-
-								<span class="moon-fallback" aria-hidden="true">
-									☾
-								</span>
-							</span>
-						</div>
-
-						<div class="location-time">10:18 PM</div>
-
-						<div class="location-weather">
-							<span class="temperature"> 67°F </span>
-
-							<span class="weather-condition"> Clear </span>
-						</div>
-
-						<div class="location-timezone">Mountain Time</div>
 					</div>
 				</div>
 
@@ -107,52 +46,94 @@ import DailyQuote from "../components/DailyQuote.astro";
 						engineering, Cyber, and AI.
 					</p>
 
-					<p class="light-large">
-						Let's connect:
-						<a href="mailto:Nick@NickBournias.com"
-							>Nick@NickBournias.com</a
-						>
-					</p>
+					<div class="connect">
+						<p class="light-large">Let's connect:</p>
+
+						<div class="social-links">
+							<a href="mailto:Nick@NickBournias.com"> Email ↗ </a>
+
+							<a
+								href="https://www.linkedin.com/in/nickbournias/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								LinkedIn ↗
+							</a>
+
+							<a
+								href="https://github.com/nickbournias"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								GitHub ↗
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 
 			<div class="divider"></div>
 
-			<section class="lower-section">
-				<div class="lower-grid">
-					<div class="lower-left">
-						<!-- YOUR THREE.JS WIDGET -->
-						<div class="nb-viz-card">
-							<div class="nb-viz-wrap">
-								<canvas id="viz"></canvas>
-							</div>
-
-							<div class="nb-viz-hint">(click me)</div>
-						</div>
+			<section class="middle-section">
+				<div class="middle-grid">
+					<div class="middle-left scroll-reveal">
+						<InteractiveSphere />
 					</div>
 
-					<div class="lower-middle">
+					<div class="middle-center scroll-reveal">
 						<DailyQuote />
 					</div>
 
-					<div class="lower-right">
-						<div class="harm-card">
-							<a
-								href="/harmonograph"
-								class="harm-link"
-								aria-label="Learn more about the daily harmonograph"
-							>
-								<img
-									src="/harmonographs/harmonograph.gif"
-									alt="Today's harmonograph"
-									class="harm-image"
-								/>
-
-							</a>
-							<div class="nb-viz-hint">Daily Harmonograph</div>
-							<div class="harm-hint">(click to learn more)</div>
-						</div>
+					<div class="middle-right scroll-reveal">
+						<HarmonographCard />
 					</div>
+				</div>
+			</section>
+
+			<div class="divider"></div>
+
+			<section class="page-links-section scroll-reveal-links">
+				<div class="page-links-grid">
+					<a href="/portfolio" class="nb-tile-link">
+						<div class="nb-tile">
+							<div class="nb-tile-eyebrow">Collection</div>
+							<div class="nb-tile-title">Portfolio</div>
+							<div class="nb-tile-desc">
+								A collection of engineering, automation, performance, and platform problems I’ve solved in ServiceNow.
+							</div>
+						</div>
+					</a>
+
+					<a href="/writings" class="nb-tile-link">
+						<div class="nb-tile">
+							<div class="nb-tile-eyebrow">Research</div>
+							<div class="nb-tile-title">Writings</div>
+							<div class="nb-tile-desc">
+								A collection of thoughts on technology, AI, development, work, and whatever else I find interesting.
+							</div>
+						</div>
+					</a>
+
+					<a href="/apps" class="nb-tile-link">
+						<div class="nb-tile">
+							<div class="nb-tile-eyebrow">Interactive</div>
+							<div class="nb-tile-title">Apps</div>
+							<div class="nb-tile-desc">
+								Some small apps I've created for fun. Audio
+								visualizers, games, and more!
+							</div>
+						</div>
+					</a>
+
+					<a href="/about-me" class="nb-tile-link">
+						<div class="nb-tile">
+							<div class="nb-tile-eyebrow">Bio</div>
+							<div class="nb-tile-title">About Me</div>
+							<div class="nb-tile-desc">
+								More about who I am and my life.
+							</div>
+						</div>
+					</a>
 				</div>
 			</section>
 		</div>
@@ -160,1175 +141,97 @@ import DailyQuote from "../components/DailyQuote.astro";
 </BaseLayout>
 
 <script>
-	import * as THREE from "three";
-
-	const locations = {
-		denver: {
-			city: "Denver, CO",
-			timeZone: "America/Denver",
-			label: "Mountain Time",
-			latitude: 39.7392,
-			longitude: -104.9903,
-		},
-
-		bethesda: {
-			city: "Bethesda, MD",
-			timeZone: "America/New_York",
-			label: "Eastern Time",
-			latitude: 38.9847,
-			longitude: -77.0947,
-		},
-
-		nyc: {
-			city: "New York, NY",
-			timeZone: "America/New_York",
-			label: "Eastern Time",
-			latitude: 40.7128,
-			longitude: -74.006,
-		},
-
-		la: {
-			city: "Los Angeles, CA",
-			timeZone: "America/Los_Angeles",
-			label: "Pacific Time",
-			latitude: 34.0522,
-			longitude: -118.2437,
-		},
-	};
-
-	const timeElement = document.querySelector(".location-time");
-
-	const locationName = document.querySelector(".location-name");
-
-	const timezoneElement = document.querySelector(".location-timezone");
-
-	const locationButtons = document.querySelectorAll(".location-option");
-
-	const visitorButton = document.querySelector(".visitor-location");
-
-	const temperatureElement = document.querySelector(".temperature");
-
-	const conditionElement = document.querySelector(".weather-condition");
-
-	const dayNightElement = document.querySelector(".day-night-icon");
-
-	const sunIcon = document.querySelector(".sun-icon");
-
-	const moonCanvas = document.querySelector(".moon-phase-canvas");
-
-	const moonFallback = document.querySelector(".moon-fallback");
-
-	let selectedLocation = "denver";
-
-	const SYNODIC_MONTH = 29.530588853;
-
-	const NEW_MOON_EPOCH = Date.UTC(2000, 0, 6, 18, 14);
-
-	const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
-
-	function getTimezoneLabel(timeZone) {
-		const formatter = new Intl.DateTimeFormat("en-US", {
-			timeZone,
-			timeZoneName: "long",
-		});
-
-		const parts = formatter.formatToParts(new Date());
-
-		return (
-			parts.find((part) => part.type === "timeZoneName")?.value ??
-			timeZone
-		);
-	}
-
-	function updateTime() {
-		const location = locations[selectedLocation];
-
-		if (!location || !timeElement) return;
-
-		const formatter = new Intl.DateTimeFormat("en-US", {
-			timeZone: location.timeZone,
-			hour: "numeric",
-			minute: "2-digit",
-			hour12: true,
-		});
-
-		timeElement.textContent = formatter.format(new Date());
-	}
-
-	function getWeatherCondition(code) {
-		if (code === 0) {
-			return "Clear";
-		}
-
-		if ([1, 2, 3, 45, 48].includes(code)) {
-			return "Cloudy";
-		}
-
-		if (
-			[51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(code)
-		) {
-			return "Rain";
-		}
-
-		if ([71, 73, 75, 77, 85, 86].includes(code)) {
-			return "Snow";
-		}
-
-		if ([95, 96, 99].includes(code)) {
-			return "Storm";
-		}
-
-		return "Unknown";
-	}
-
-	function renderWeatherLoading() {
-		if (temperatureElement) {
-			temperatureElement.textContent = "--";
-		}
-
-		if (conditionElement) {
-			conditionElement.textContent = "Loading";
-		}
-	}
-
-	function renderWeatherError() {
-		if (temperatureElement) {
-			temperatureElement.textContent = "--";
-		}
-
-		if (conditionElement) {
-			conditionElement.textContent = "Unavailable";
-		}
-	}
-
-	function renderWeather(temperature, weatherCode) {
-		if (temperatureElement) {
-			temperatureElement.textContent = `${Math.round(temperature)}°F`;
-		}
-
-		if (conditionElement) {
-			conditionElement.textContent = getWeatherCondition(weatherCode);
-		}
-	}
-
-	function getMoonPhase(date = new Date()) {
-		const daysSinceEpoch =
-			(date.getTime() - NEW_MOON_EPOCH) / MILLISECONDS_PER_DAY;
-
-		const cyclePosition = (((daysSinceEpoch / SYNODIC_MONTH) % 1) + 1) % 1;
-
-		const illumination = (1 - Math.cos(2 * Math.PI * cyclePosition)) / 2;
-
-		return {
-			phase: cyclePosition,
-			illumination,
-			name: getMoonPhaseName(cyclePosition),
-		};
-	}
-
-	function getMoonPhaseName(phase) {
-		if (phase < 0.0625 || phase >= 0.9375) {
-			return "New Moon";
-		}
-
-		if (phase < 0.1875) {
-			return "Waxing Crescent";
-		}
-
-		if (phase < 0.3125) {
-			return "First Quarter";
-		}
-
-		if (phase < 0.4375) {
-			return "Waxing Gibbous";
-		}
-
-		if (phase < 0.5625) {
-			return "Full Moon";
-		}
-
-		if (phase < 0.6875) {
-			return "Waning Gibbous";
-		}
-
-		if (phase < 0.8125) {
-			return "Last Quarter";
-		}
-
-		return "Waning Crescent";
-	}
-
-	function renderMoonPhase(location) {
-		if (!(moonCanvas instanceof HTMLCanvasElement)) {
-			return false;
-		}
-
-		const context = moonCanvas.getContext("2d");
-
-		if (!context) {
-			return false;
-		}
-
-		const { phase, illumination, name } = getMoonPhase();
-
-		const width = moonCanvas.width;
-		const height = moonCanvas.height;
-
-		const centerX = width / 2;
-		const centerY = height / 2;
-
-		const radius = Math.min(width, height) / 2 - 2;
-
-		const image = context.createImageData(width, height);
-
-		const pixels = image.data;
-
-		/*
-			0.00 = New Moon
-			0.25 = First Quarter
-			0.50 = Full Moon
-			0.75 = Last Quarter
-		*/
-		const phaseAngle = phase * Math.PI * 2;
-
-		/*
-			In the Northern Hemisphere, waxing
-			illumination appears primarily on the
-			right side of the Moon.
-
-			For Southern Hemisphere visitors we
-			reverse the horizontal orientation.
-		*/
-		const hemisphere =
-			typeof location?.latitude === "number" && location.latitude < 0
-				? -1
-				: 1;
-
-		const sunX = Math.sin(phaseAngle) * hemisphere;
-
-		const sunZ = -Math.cos(phaseAngle);
-
-		for (let pixelY = 0; pixelY < height; pixelY++) {
-			for (let pixelX = 0; pixelX < width; pixelX++) {
-				const x = (pixelX + 0.5 - centerX) / radius;
-
-				const y = (pixelY + 0.5 - centerY) / radius;
-
-				const distanceSquared = x * x + y * y;
-
-				if (distanceSquared > 1) {
-					continue;
-				}
-
-				const z = Math.sqrt(1 - distanceSquared);
-
-				const lightAmount = x * sunX + z * sunZ;
-
-				const illuminated = lightAmount > 0;
-
-				/*
-					Add subtle spherical shading so
-					the Moon looks less like a flat
-					circle.
-				*/
-				const limbBrightness = 0.72 + z * 0.28;
-
-				const brightness = illuminated
-					? Math.round(235 * limbBrightness)
-					: Math.round(20 * limbBrightness);
-
-				const index = (pixelY * width + pixelX) * 4;
-
-				pixels[index] = brightness;
-
-				pixels[index + 1] = brightness;
-
-				pixels[index + 2] = brightness;
-
-				pixels[index + 3] = 255;
-			}
-		}
-
-		context.clearRect(0, 0, width, height);
-
-		context.putImageData(image, 0, 0);
-
-		const percentage = Math.round(illumination * 100);
-
-		if (dayNightElement) {
-			dayNightElement.setAttribute(
-				"aria-label",
-				`${name}, ${percentage}% illuminated`,
+	import gsap from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	const mm = gsap.matchMedia();
+
+	mm.add("(max-width: 767px)", () => {
+		const items = document.querySelectorAll(".scroll-reveal");
+
+		items.forEach((item) => {
+			gsap.fromTo(
+				item,
+				{
+					opacity: 0,
+					y: 40,
+				},
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.8,
+					ease: "power2.out",
+
+					scrollTrigger: {
+						trigger: item,
+						start: "center 80%",
+						once: true,
+
+						onEnter: () => {
+							if (item.classList.contains("middle-left")) {
+								document.dispatchEvent(
+									new CustomEvent("init-interactive-sphere"),
+								);
+							}
+
+							if (item.classList.contains("middle-center")) {
+								document.dispatchEvent(
+									new CustomEvent("init-daily-quote"),
+								);
+							}
+						},
+					},
+				},
 			);
-
-			dayNightElement.setAttribute(
-				"title",
-				`${name} · ${percentage}% illuminated`,
-			);
-		}
-
-		return true;
-	}
-
-	function renderDayNight(isDay, location) {
-		if (isDay) {
-			if (sunIcon) {
-				sunIcon.hidden = false;
-			}
-
-			if (moonCanvas instanceof HTMLCanvasElement) {
-				moonCanvas.hidden = true;
-			}
-
-			if (moonFallback) {
-				moonFallback.hidden = true;
-			}
-
-			if (dayNightElement) {
-				dayNightElement.setAttribute("aria-label", "Daytime");
-
-				dayNightElement.removeAttribute("title");
-			}
-
-			return;
-		}
-
-		if (sunIcon) {
-			sunIcon.hidden = true;
-		}
-
-		try {
-			const rendered = renderMoonPhase(location);
-
-			if (!rendered) {
-				throw new Error("Moon canvas unavailable");
-			}
-
-			if (moonCanvas instanceof HTMLCanvasElement) {
-				moonCanvas.hidden = false;
-			}
-
-			if (moonFallback) {
-				moonFallback.hidden = true;
-			}
-		} catch (error) {
-			console.warn("Moon phase rendering unavailable.", error);
-
-			if (moonCanvas instanceof HTMLCanvasElement) {
-				moonCanvas.hidden = true;
-			}
-
-			if (moonFallback) {
-				moonFallback.hidden = false;
-			}
-
-			if (dayNightElement) {
-				dayNightElement.setAttribute("aria-label", "Nighttime");
-			}
-		}
-	}
-
-	function getFallbackDayState(location) {
-		try {
-			const formatter = new Intl.DateTimeFormat("en-US", {
-				timeZone: location.timeZone,
-				hour: "numeric",
-				hourCycle: "h23",
-			});
-
-			const parts = formatter.formatToParts(new Date());
-
-			const hour = Number(
-				parts.find((part) => part.type === "hour")?.value,
-			);
-
-			return hour >= 6 && hour < 18;
-		} catch {
-			return false;
-		}
-	}
-
-	async function fetchWeather(location) {
-		if (
-			typeof location.latitude !== "number" ||
-			typeof location.longitude !== "number"
-		) {
-			renderWeatherError();
-
-			renderDayNight(getFallbackDayState(location), location);
-
-			return;
-		}
-
-		renderWeatherLoading();
-
-		try {
-			const params = new URLSearchParams({
-				latitude: location.latitude.toString(),
-				longitude: location.longitude.toString(),
-				current: "temperature_2m,weather_code,is_day",
-				temperature_unit: "fahrenheit",
-			});
-
-			const response = await fetch(
-				`https://api.open-meteo.com/v1/forecast?${params}`,
-			);
-
-			if (!response.ok) {
-				throw new Error("Weather request failed");
-			}
-
-			const data = await response.json();
-
-			const temperature = data.current?.temperature_2m;
-
-			const weatherCode = data.current?.weather_code;
-
-			const isDay = data.current?.is_day;
-
-			if (
-				typeof temperature !== "number" ||
-				typeof weatherCode !== "number"
-			) {
-				throw new Error("Incomplete weather data");
-			}
-
-			renderWeather(temperature, weatherCode);
-
-			if (isDay === 0 || isDay === 1) {
-				renderDayNight(isDay === 1, location);
-			} else {
-				renderDayNight(getFallbackDayState(location), location);
-			}
-		} catch (error) {
-			console.warn("Weather unavailable.", error);
-
-			renderWeatherError();
-
-			renderDayNight(getFallbackDayState(location), location);
-		}
-	}
-
-	function selectLocation(locationKey) {
-		const location = locations[locationKey];
-
-		if (!location) return;
-
-		selectedLocation = locationKey;
-
-		if (locationName) {
-			locationName.textContent = location.city;
-		}
-
-		if (timezoneElement) {
-			timezoneElement.textContent = location.label;
-		}
-
-		locationButtons.forEach((button) => {
-			button.classList.toggle(
-				"active",
-				button.dataset.location === selectedLocation,
-			);
-		});
-
-		updateTime();
-
-		/*
-			Render immediately using the timezone
-			while waiting for Open-Meteo to return
-			the more accurate day/night state.
-		*/
-		renderDayNight(getFallbackDayState(location), location);
-
-		fetchWeather(location);
-	}
-
-	async function detectVisitorLocation() {
-		try {
-			const response = await fetch("https://ipapi.co/json/");
-
-			if (!response.ok) {
-				throw new Error("Location lookup failed");
-			}
-
-			const data = await response.json();
-
-			if (
-				!data.city ||
-				!data.timezone ||
-				typeof data.latitude !== "number" ||
-				typeof data.longitude !== "number"
-			) {
-				throw new Error("Incomplete location data");
-			}
-
-			const region = data.region_code ? `, ${data.region_code}` : "";
-
-			locations.you = {
-				city: `${data.city}${region}`,
-				timeZone: data.timezone,
-				label: getTimezoneLabel(data.timezone),
-				latitude: data.latitude,
-				longitude: data.longitude,
-			};
-
-			if (visitorButton) {
-				visitorButton.hidden = false;
-			}
-		} catch (error) {
-			console.warn("Visitor location unavailable.", error);
-
-			if (visitorButton) {
-				visitorButton.hidden = true;
-			}
-		}
-	}
-
-	const canvas = document.getElementById("viz");
-
-	if (canvas instanceof HTMLCanvasElement) {
-		const scene = new THREE.Scene();
-
-		const camera = new THREE.PerspectiveCamera(70, 1, 0.01, 20);
-
-		camera.position.z = 1.05;
-
-		const renderer = new THREE.WebGLRenderer({
-			canvas,
-			antialias: true,
-			alpha: true,
-		});
-
-		renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-
-		function resizeViz() {
-			const r = canvas.getBoundingClientRect();
-
-			const w = Math.max(1, Math.floor(r.width));
-
-			const h = Math.max(1, Math.floor(r.height));
-
-			renderer.setSize(w, h, false);
-
-			camera.aspect = w / h;
-
-			camera.updateProjectionMatrix();
-		}
-
-		window.addEventListener("resize", resizeViz, {
-			passive: true,
-		});
-
-		resizeViz();
-
-		const vizMaterial = new THREE.ShaderMaterial({
-			transparent: true,
-
-			side: THREE.FrontSide,
-
-			uniforms: {
-				uTime: {
-					value: 0,
-				},
-
-				uPlay: {
-					value: 0,
-				},
-
-				uAmp: {
-					value: 0,
-				},
-
-				uBass: {
-					value: 0,
-				},
-
-				uMid: {
-					value: 0,
-				},
-
-				uHigh: {
-					value: 0,
-				},
-
-				uKick: {
-					value: 0,
-				},
-
-				uSnare: {
-					value: 0,
-				},
-			},
-
-			vertexShader: `
-				uniform float uTime;
-				uniform float uPlay;
-				uniform float uAmp;
-				uniform float uBass;
-				uniform float uMid;
-				uniform float uHigh;
-				uniform float uKick;
-				uniform float uSnare;
-
-				varying vec3 vPos;
-
-				void main() {
-					float t = uTime * 0.8;
-
-					float wave =
-						sin(position.x * 4.0 + t) +
-						sin(position.y * 5.0 + t * 1.1) +
-						sin(position.z * 6.0 + t * 0.9);
-
-					vec3 displaced =
-						position * (1.0 + 0.06 * wave);
-
-					float detail =
-						sin(
-							position.x * 10.0 +
-							t * 1.5
-						) *
-						sin(
-							position.y * 9.0 +
-							t * 1.2
-						) *
-						sin(
-							position.z * 8.0 +
-							t * 1.0
-						);
-
-					float distort =
-						(0.02 * uPlay) +
-						(0.06 * uPlay * uBass);
-
-					displaced +=
-						normalize(normal) *
-						detail *
-						distort;
-
-					float thump =
-						(0.10 * uKick) +
-						(0.07 * uSnare);
-
-					float kickShape =
-						sin(
-							t * 8.0 +
-							position.y * 5.0
-						);
-
-					displaced +=
-						normalize(normal) *
-						kickShape *
-						(0.035 * uKick);
-
-					float snareShape =
-						sin(
-							position.x * 28.0 +
-							t * 14.0
-						) *
-						sin(
-							position.z * 24.0 +
-							t * 12.0
-						);
-
-					displaced +=
-						normalize(normal) *
-						snareShape *
-						(0.018 * uSnare);
-
-					displaced *=
-						(
-							1.0 +
-							0.02 * uPlay * uAmp +
-							0.01 * thump
-						);
-
-					vPos = displaced;
-
-					gl_Position =
-						projectionMatrix *
-						modelViewMatrix *
-						vec4(
-							displaced,
-							1.0
-						);
-				}
-			`,
-
-			fragmentShader: `
-				uniform float uTime;
-				uniform float uPlay;
-				uniform float uAmp;
-				uniform float uBass;
-				uniform float uMid;
-				uniform float uHigh;
-				uniform float uKick;
-				uniform float uSnare;
-
-				varying vec3 vPos;
-
-				vec3 palette(float t) {
-					vec3 a =
-						vec3(0.5);
-
-					vec3 b =
-						vec3(0.5);
-
-					vec3 c =
-						vec3(1.0);
-
-					vec3 d =
-						vec3(
-							0.00,
-							0.33,
-							0.67
-						);
-
-					return
-						a +
-						b *
-						cos(
-							6.28318 *
-							(
-								c * t +
-								d
-							)
-						);
-				}
-
-				void main() {
-					if (!gl_FrontFacing) {
-						discard;
-					}
-
-					vec3 p =
-						normalize(vPos);
-
-					float baseT =
-						length(vPos) * 1.8 +
-						uTime * 0.12;
-
-					float phase =
-						baseT +
-						uPlay * (0.35 * uMid) +
-						uPlay * (0.18 * uHigh) -
-						uPlay * (0.10 * uBass);
-
-					phase +=
-						0.22 * uKick +
-						0.18 * uSnare;
-
-					vec3 col =
-						palette(phase);
-
-					float lift =
-						1.0 +
-						uPlay *
-						(
-							0.25 * uAmp +
-							0.15 * uHigh
-						);
-
-					col *= lift;
-
-					col =
-						mix(
-							col,
-							col + 0.12,
-							uPlay * 0.35
-						);
-
-					col +=
-						uKick *
-						vec3(
-							0.10,
-							0.06,
-							0.02
-						);
-
-					col +=
-						uSnare *
-						vec3(
-							0.04,
-							0.06,
-							0.10
-						);
-
-					float rim =
-						1.0 -
-						smoothstep(
-							0.35,
-							1.0,
-							abs(p.z)
-						);
-
-					col +=
-						rim *
-						(
-							0.06 +
-							0.10 * uPlay
-						) +
-						rim *
-						(
-							0.08 * uKick +
-							0.06 * uSnare
-						);
-
-					gl_FragColor =
-						vec4(
-							col,
-							1.0
-						);
-				}
-			`,
-		});
-
-		const SPHERE_RADIUS = 0.45;
-
-		const sphereGeo = new THREE.SphereGeometry(SPHERE_RADIUS, 160, 160);
-
-		const sphere = new THREE.Mesh(sphereGeo, vizMaterial);
-
-		scene.add(sphere);
-
-		const GROW_DURATION = 1.25;
-
-		const GROW_START_SCALE = 0.02;
-
-		let growStart = performance.now() * 0.001;
-
-		sphere.scale.setScalar(GROW_START_SCALE);
-
-		function smoothstep01(x) {
-			x = Math.min(Math.max(x, 0), 1);
-
-			return x * x * (3.0 - 2.0 * x);
-		}
-
-		const raycaster = new THREE.Raycaster();
-
-		const mouse = new THREE.Vector2();
-
-		let vizState = "idle";
-
-		let bubbles = [];
-
-		let explodeStart = 0;
-
-		const BUBBLE_COUNT = 90;
-
-		const BUBBLE_RADIUS = 0.045;
-
-		const EXPLODE_DURATION = 1.0;
-
-		const HOLD_DURATION = 0.6;
-
-		const RETURN_DURATION = 1.2;
-
-		const OUTWARD_IMPULSE_MIN = 0.02;
-
-		const OUTWARD_IMPULSE_MAX = 0.035;
-
-		const DRAG_EXPLODE = 0.985;
-
-		const DRAG_RETURN = 0.9;
-
-		const BOUNCE_RADIUS = 1.1;
-
-		function resetToSphere() {
-			for (const bubble of bubbles) {
-				scene.remove(bubble);
-
-				bubble.geometry.dispose();
-
-				bubble.material.dispose();
-			}
-
-			bubbles = [];
-
-			sphere.visible = true;
-
-			vizState = "idle";
-		}
-
-		function makeBubbles() {
-			bubbles = [];
-
-			for (let i = 0; i < BUBBLE_COUNT; i++) {
-				const bubbleGeo = new THREE.SphereGeometry(
-					BUBBLE_RADIUS,
-					24,
-					24,
-				);
-
-				const bubbleMaterial = vizMaterial.clone();
-
-				bubbleMaterial.uniforms = {
-					uTime: {
-						value: 0,
-					},
-
-					uPlay: {
-						value: 0,
-					},
-
-					uAmp: {
-						value: 0,
-					},
-
-					uBass: {
-						value: 0,
-					},
-
-					uMid: {
-						value: 0,
-					},
-
-					uHigh: {
-						value: 0,
-					},
-
-					uKick: {
-						value: 0,
-					},
-
-					uSnare: {
-						value: 0,
-					},
-				};
-
-				const bubble = new THREE.Mesh(bubbleGeo, bubbleMaterial);
-
-				const dir = new THREE.Vector3(
-					Math.random() * 2 - 1,
-					Math.random() * 2 - 1,
-					Math.random() * 2 - 1,
-				);
-
-				if (dir.lengthSq() < 1e-6) {
-					dir.set(1, 0, 0);
-				}
-
-				dir.normalize();
-
-				const home = dir
-					.clone()
-					.multiplyScalar(
-						SPHERE_RADIUS * (0.95 + Math.random() * 0.1),
-					);
-
-				bubble.position.copy(home);
-
-				const impulse =
-					OUTWARD_IMPULSE_MIN +
-					Math.random() * (OUTWARD_IMPULSE_MAX - OUTWARD_IMPULSE_MIN);
-
-				bubble.userData.vel = dir.clone().multiplyScalar(impulse);
-
-				bubble.userData.home = home;
-
-				scene.add(bubble);
-
-				bubbles.push(bubble);
-			}
-		}
-
-		function explodeAndReturn() {
-			if (vizState !== "idle") {
-				return;
-			}
-
-			explodeStart = performance.now() * 0.001;
-
-			vizState = "explode";
-
-			sphere.visible = false;
-
-			makeBubbles();
-		}
-
-		canvas.addEventListener(
-			"pointerdown",
-			(event) => {
-				if (vizState !== "idle") {
-					return;
-				}
-
-				const r = canvas.getBoundingClientRect();
-
-				mouse.x = ((event.clientX - r.left) / r.width) * 2 - 1;
-
-				mouse.y = -(((event.clientY - r.top) / r.height) * 2 - 1);
-
-				raycaster.setFromCamera(mouse, camera);
-
-				const hit = raycaster.intersectObject(sphere, false);
-
-				if (hit.length) {
-					explodeAndReturn();
-				}
-			},
-			{
-				passive: true,
-			},
-		);
-
-		const tmp = new THREE.Vector3();
-
-		const tmp2 = new THREE.Vector3();
-
-		function pushUniforms(mat) {
-			mat.uniforms.uTime.value = vizMaterial.uniforms.uTime.value;
-
-			mat.uniforms.uPlay.value = 0;
-
-			mat.uniforms.uAmp.value = 0;
-
-			mat.uniforms.uBass.value = 0;
-
-			mat.uniforms.uMid.value = 0;
-
-			mat.uniforms.uHigh.value = 0;
-
-			mat.uniforms.uKick.value = 0;
-
-			mat.uniforms.uSnare.value = 0;
-		}
-
-		function animateViz(ms) {
-			const t = ms * 0.001;
-
-			vizMaterial.uniforms.uTime.value = t;
-
-			if (sphere.visible) {
-				const g = (t - growStart) / GROW_DURATION;
-
-				const eased = smoothstep01(g);
-
-				const scale = THREE.MathUtils.lerp(
-					GROW_START_SCALE,
-					1.0,
-					eased,
-				);
-
-				sphere.scale.setScalar(scale);
-			}
-
-			if (vizState === "idle") {
-				sphere.rotation.y = t * 0.35;
-
-				sphere.rotation.x = t * 0.18;
-			}
-
-			if (vizState === "explode" || vizState === "return") {
-				const elapsed = t - explodeStart;
-
-				if (
-					vizState === "explode" &&
-					elapsed > EXPLODE_DURATION + HOLD_DURATION
-				) {
-					vizState = "return";
-				}
-
-				if (
-					vizState === "return" &&
-					elapsed > EXPLODE_DURATION + HOLD_DURATION + RETURN_DURATION
-				) {
-					resetToSphere();
-				}
-
-				for (const bubble of bubbles) {
-					pushUniforms(bubble.material);
-
-					const vel = bubble.userData.vel;
-
-					if (vizState === "explode") {
-						vel.multiplyScalar(DRAG_EXPLODE);
-
-						vel.x += (Math.random() - 0.5) * 0.00045;
-
-						vel.y += (Math.random() - 0.5) * 0.00045;
-
-						vel.z += (Math.random() - 0.5) * 0.00045;
-
-						bubble.position.add(vel);
-
-						const d = bubble.position.length();
-
-						if (d > BOUNCE_RADIUS) {
-							const n = tmp
-								.copy(bubble.position)
-								.multiplyScalar(1 / d);
-
-							const vn = vel.dot(n);
-
-							tmp2.copy(n).multiplyScalar(2 * vn);
-
-							vel.sub(tmp2);
-
-							bubble.position.copy(
-								n.multiplyScalar(BOUNCE_RADIUS),
-							);
-
-							vel.multiplyScalar(0.85);
-						}
-					} else {
-						vel.multiplyScalar(DRAG_RETURN);
-
-						tmp.copy(bubble.userData.home).sub(bubble.position);
-
-						vel.add(tmp.multiplyScalar(0.06));
-
-						bubble.position.add(vel);
-					}
-				}
-			}
-
-			renderer.render(scene, camera);
-
-			requestAnimationFrame(animateViz);
-		}
-
-		requestAnimationFrame(animateViz);
-	}
-
-	locationButtons.forEach((button) => {
-		button.addEventListener("click", () => {
-			const locationKey = button.dataset.location;
-
-			if (locationKey && locationKey in locations) {
-				selectLocation(locationKey);
-			}
 		});
 	});
 
-	updateTime();
+	mm.add("(min-width: 768px)", () => {
+		document.dispatchEvent(new CustomEvent("init-interactive-sphere"));
 
-	renderDayNight(
-		getFallbackDayState(locations[selectedLocation]),
-		locations[selectedLocation],
-	);
+		document.dispatchEvent(new CustomEvent("init-daily-quote"));
+	});
 
-	fetchWeather(locations[selectedLocation]);
-
-	setInterval(updateTime, 1000);
-
-	/*
-		Refresh weather and day/night every
-		10 minutes.
-	*/
-	setInterval(
-		() => {
-			const location = locations[selectedLocation];
-
-			if (location) {
-				fetchWeather(location);
-			}
+	gsap.fromTo(
+		".nb-tile-link",
+		{
+			opacity: 0,
+			y: 35,
 		},
-		10 * 60 * 1000,
+		{
+			opacity: 1,
+			y: 0,
+			duration: 0.7,
+			stagger: 0.1,
+			ease: "power2.out",
+
+			scrollTrigger: {
+				trigger: ".page-links-section",
+				start: "center 80%",
+				once: true,
+			},
+		},
 	);
 
-	detectVisitorLocation();
+	let heroSwapped = false;
+
+	function flipHeroWidget() {
+		if (heroSwapped) return;
+
+		const flipper = document.querySelector(".hero-flipper");
+
+		if (!(flipper instanceof HTMLElement)) return;
+
+		heroSwapped = true;
+		flipper.classList.add("is-flipped");
+	}
+
+	window.addEventListener("scroll", flipHeroWidget, {
+		once: true,
+		passive: true,
+	});
 </script>
 
 <style>
@@ -1344,250 +247,100 @@ import DailyQuote from "../components/DailyQuote.astro";
 	}
 
 	.about-extra {
+		display: flex;
+		justify-content: center;
 		width: 100%;
+		min-width: 0;
 	}
 
-	.location-widget {
+	.hero-widget {
+		width: min(100%, 390px);
+		min-width: 0;
+		perspective: 1200px;
+	}
+
+	.hero-flipper {
 		position: relative;
-
-		width: min(100%, 350px);
-		margin-inline: auto;
-		padding: 1.2rem 1.6rem;
-
-		overflow: hidden;
-
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 20px;
-
-		background: linear-gradient(
-			145deg,
-			rgba(255, 255, 255, 0.055),
-			rgba(255, 255, 255, 0.015)
-		);
-
-		box-shadow:
-			0 18px 50px rgba(0, 0, 0, 0.18),
-			inset 0 1px 0 rgba(255, 255, 255, 0.04);
+		width: 100%;
+		min-height: 270px;
+		transform-style: preserve-3d;
+		transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
-	.location-widget::before {
-		content: "";
+	.hero-flipper.is-flipped {
+		transform: rotateY(180deg);
+	}
+
+	.headshot-layer,
+	.weather-layer {
 		position: absolute;
-
-		top: -90px;
-		right: -70px;
-
-		width: 180px;
-		height: 180px;
-
-		border-radius: 50%;
-
-		background: rgba(255, 255, 255, 0.04);
-
-		filter: blur(10px);
-
-		pointer-events: none;
-	}
-
-	.location-selector {
-		position: relative;
-		z-index: 1;
-
-		display: inline-flex;
-		align-items: center;
-		gap: 0.2rem;
-
-		padding: 0.25rem;
-		margin-bottom: 1.2rem;
-
-		border: 1px solid rgba(255, 255, 255, 0.07);
-		border-radius: 999px;
-
-		background: rgba(255, 255, 255, 0.025);
-	}
-
-	.location-option {
-		border: none;
-		border-radius: 999px;
-
-		padding: 0.42rem 0.7rem;
-
-		background: transparent;
-
-		color: rgba(255, 255, 255, 0.38);
-
-		font-family: inherit;
-		font-size: 0.72rem;
-		font-weight: 500;
-		letter-spacing: 0.02em;
-
-		cursor: pointer;
-	}
-
-	.location-option.active {
-		background: rgba(255, 255, 255, 0.09);
-
-		color: rgba(255, 255, 255, 0.92);
-
-		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.06),
-			0 2px 8px rgba(0, 0, 0, 0.12);
-	}
-
-	.location-heading {
-		position: relative;
-		z-index: 1;
+		inset: 0;
 
 		display: flex;
-		align-items: center;
-		gap: 0.6rem;
-
-		margin-bottom: 0.35rem;
-		padding-right: 3.5rem;
-
-		color: rgba(255, 255, 255, 0.68);
-
-		font-size: 0.78rem;
-		font-weight: 500;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-	}
-
-	.location-dot {
-		width: 6px;
-		height: 6px;
-
-		flex-shrink: 0;
-
-		border-radius: 50%;
-
-		background: #9dd8b8;
-
-		box-shadow: 0 0 0 4px rgba(157, 216, 184, 0.08);
-	}
-
-	.day-night-icon {
-		position: absolute;
-		right: 0;
-		top: 50%;
-
-		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 
-		width: 3rem;
-		height: 3rem;
+		width: 100%;
+		min-width: 0;
 
-		margin: 0;
-		transform: translateY(-50%);
-		flex-shrink: 0;
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
 	}
 
-	.sun-icon {
-		color: rgba(255, 255, 255, 0.75);
-
-		font-size: 3rem;
-		line-height: 1;
+	.headshot-layer {
+		z-index: 2;
 	}
 
-	.moon-phase-canvas {
+	.weather-layer {
+		z-index: 1;
+		transform: rotateY(180deg) scale(1.04);
+	}
+
+	.headshot-wrap {
+		width: min(100%, 285px);
+		aspect-ratio: 1 / 1;
+
+		border-radius: 20px;
+		overflow: hidden;
+	}
+
+	.headshot {
 		display: block;
 
-		width: 3rem;
-		height: 3rem;
+		width: 100%;
+		height: 100%;
 
-		margin-right: 0.35rem;
+		object-fit: cover;
+		object-position: center;
 
-		border-radius: 50%;
-	}
-
-	.moon-fallback {
-		color: rgba(255, 255, 255, 0.75);
-
-		font-size: 1.15rem;
-		line-height: 1;
-	}
-
-	.sun-icon[hidden],
-	.moon-phase-canvas[hidden],
-	.moon-fallback[hidden] {
-		display: none;
-	}
-
-	.location-time {
-		position: relative;
-		z-index: 1;
-
-		margin-bottom: 0.85rem;
-
-		color: rgba(255, 255, 255, 0.96);
-
-		font-size: clamp(2.6rem, 10vw, 3.45rem);
-		font-weight: 400;
-
-		line-height: 0.95;
-		letter-spacing: -0.055em;
-
-		font-variant-numeric: tabular-nums;
-	}
-
-	.location-weather {
-		position: relative;
-		z-index: 1;
-
-		display: flex;
-		align-items: baseline;
-		gap: 0.7rem;
-
-		margin-bottom: 0.3rem;
-	}
-
-	.temperature {
-		color: rgba(255, 255, 255, 0.88);
-
-		font-size: 1.05rem;
-		font-weight: 500;
-	}
-
-	.weather-condition {
-		color: rgba(255, 255, 255, 0.42);
-
-		font-size: 0.8rem;
-		font-weight: 400;
-	}
-
-	.location-timezone {
-		position: relative;
-		z-index: 1;
-
-		color: rgba(255, 255, 255, 0.3);
-
-		font-size: 0.72rem;
-		font-weight: 400;
-		letter-spacing: 0.02em;
+		transform: scale(1.2);
 	}
 
 	.about-text h1 {
+		margin-bottom: 15px;
+
 		font-size: clamp(1.9rem, 5vw, 2.4rem);
 		font-weight: 400;
 		line-height: 1.05;
 		letter-spacing: 0;
-
-		margin-bottom: 15px;
 	}
 
 	.about-text h2 {
+		margin-bottom: 1.5rem;
+
 		color: var(--muted);
+
 		font-size: 1.25rem;
 		font-weight: 400;
-		margin-bottom: 1.5rem;
 	}
 
 	.about-text p {
+		max-width: 650px;
+
 		color: var(--muted);
+
 		font-size: clamp(1rem, 2vw, 1.2rem);
 		line-height: 1.6;
-		max-width: 650px;
 	}
 
 	.about-text p.light {
@@ -1607,152 +360,200 @@ import DailyQuote from "../components/DailyQuote.astro";
 	.divider {
 		width: 55%;
 		height: 1px;
+		margin: 30px auto;
 
 		background-color: rgba(255, 255, 255, 0.2);
-
-		margin: 30px auto 0px;
 	}
 
-	.lower-grid {
+	.middle-section {
+		padding: 1rem 0;
+	}
+
+	.middle-grid {
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 2rem;
 	}
 
-	.lower-middle {
+	.middle-center {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		text-align: center;
+
 		min-width: 0;
-	}
 
-	.nb-viz-card {
-		width: 100%;
-		max-width: 320px;
-		margin: 0 auto;
 		text-align: center;
 	}
 
-	.nb-viz-wrap {
-		width: 100%;
-		aspect-ratio: 1 / 1;
-		position: relative;
-		border-radius: 16px;
-		overflow: hidden;
+	.page-links-section {
+		padding-top: 1rem;
 	}
 
-	#viz {
+	.page-links-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 3rem;
+		width: 90%;
+		margin-inline: auto;
+	}
+
+	.nb-tile-link {
+		display: block;
+
 		width: 100%;
+		margin: 0;
+
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.nb-tile {
 		height: 100%;
-		display: block;
+		min-height: 170px;
+
+		padding: 24px 28px;
+
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 16px;
+
+		background: rgba(255, 255, 255, 0.04);
+
+		backdrop-filter: blur(6px);
+		-webkit-backdrop-filter: blur(6px);
+
+		transition:
+			transform 0.22s ease,
+			background 0.22s ease,
+			box-shadow 0.22s ease;
 	}
 
-	.nb-viz-hint {
-		margin-top: 10px;
-		font-size: 12px;
+	.nb-tile-link:hover .nb-tile,
+	.nb-tile-link:focus-visible .nb-tile {
+		background: rgba(255, 255, 255, 0.07);
+
+		transform: translateY(-2px);
+
+		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+	}
+
+	.nb-tile-eyebrow {
+		margin-bottom: 8px;
+
+		font-size: 11px;
 		letter-spacing: 0.18em;
 		text-transform: uppercase;
-		opacity: 0.65;
-		user-select: none;
+
+		opacity: 0.6;
 	}
 
-	.harm-card {
-		width: 100%;
-		max-width: 320px;
-		margin: 0 auto;
-		text-align: center;
+	.nb-tile-title {
+		margin-bottom: 8px;
+
+		font-size: 22px;
+		font-weight: 600;
+		line-height: 1.2;
 	}
 
-	.harm-image {
-		display: block;
-		width: 100%;
-		height: auto;
-		cursor: pointer;
+	.nb-tile-desc {
+		font-size: 14px;
+		line-height: 1.5;
+
+		opacity: 0.75;
 	}
 
-	.harm-hint {
-		margin-top: 10px;
-		font-size: 9px;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		opacity: 0.5;
-		user-select: none;
+	.connect {
+		margin-top: 1.5rem;
+
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+	}
+
+	.connect-label {
+		margin: 0;
+	}
+
+	.connect .light-large {
+		margin-bottom: 0.5rem;
+	}
+
+	.social-links {
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+	}
+
+	.social-links a {
+		color: var(--muted);
+		font-size: 0.9rem;
+		text-decoration: none;
+
+		transition:
+			color 0.2s ease,
+			transform 0.2s ease;
+	}
+
+	.social-links a:hover {
+		color: #fff;
+		transform: translateY(-1px);
 	}
 
 	@media (max-width: 767px) {
 		.about-section {
-			padding-top: 3.5rem;
+			padding-top: 3rem;
 			padding-bottom: 3rem;
+		}
+
+		.about-grid {
+			gap: 2rem;
+		}
+
+		.about-extra {
+			justify-content: center;
+		}
+
+		.hero-widget {
+			width: calc(100% + 48px);
+			max-width: 430px;
+			margin-inline: -24px;
+
+			perspective: 1000px;
+		}
+
+		.hero-flipper {
+			min-height: 275px;
+		}
+
+		.headshot-wrap {
+			width: min(82%, 285px);
+		}
+
+		.weather-layer {
+			transform: rotateY(180deg) scale(1.1);
 		}
 
 		.about-text p.light-large {
 			font-size: 1.1rem;
 		}
 
-		.location-widget {
-			width: 80%;
-			max-width: 340px;
-			margin-inline: auto;
-			padding: 0.8rem 1.25rem;
-			border-radius: 16px;
-		}
-
-		.location-selector {
-			margin-bottom: 0.65rem;
-		}
-
-		.location-heading {
-			position: relative;
-			margin-bottom: 0.1rem;
-			padding-right: 4.25rem;
-		}
-
-		.day-night-icon {
-			position: absolute;
-			right: 0;
-			top: 50%;
-
-			width: 3.75rem;
-			height: 3.75rem;
-
-			margin: 0;
-			transform: translateY(-50%);
-		}
-
-		.moon-phase-canvas {
-			width: 3.75rem;
-			height: 3.75rem;
-			margin: 0;
-		}
-
-		.sun-icon {
-			font-size: 3.75rem;
-		}
-
-		.location-time {
-			font-size: 2.4rem;
-			margin-bottom: 0.4rem;
-		}
-
-		.location-weather {
-			margin-bottom: 0;
-		}
-
-		.nb-viz-card {
-			max-width: 250px;
-		}
-
-		.lower-middle {
+		.middle-center {
 			padding-top: 1rem;
 		}
 
-		.lower-left {
+		.middle-left {
 			padding-bottom: 1rem;
+		}
+
+		.nb-tile {
+			min-height: auto;
+			padding: 20px;
+		}
+
+		.nb-tile-title {
+			font-size: 18px;
 		}
 	}
 
-	/* Desktop */
 	@media (min-width: 768px) {
 		.about-grid {
 			grid-template-columns: 2fr 3fr;
@@ -1760,22 +561,30 @@ import DailyQuote from "../components/DailyQuote.astro";
 		}
 
 		.about-extra {
-			display: flex;
 			justify-content: flex-end;
-			width: 100%;
 		}
 
-		.location-widget {
-			width: min(100%, 350px);
-			margin: 0;
+		.headshot-layer {
+			justify-content: flex-end;
 		}
 
-		.lower-grid {
+		.middle-grid {
 			grid-template-columns: 2fr 4fr 2fr;
 		}
 
-		.lower-middle {
+		.middle-center {
 			transform: translateY(-50px);
+		}
+
+		.page-links-grid {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero-flipper,
+		.nb-tile {
+			transition: none;
 		}
 	}
 </style>

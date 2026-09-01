@@ -1,71 +1,381 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import TypedText from "../components/TypedText.astro";
+
+const projects = [
+	{
+		number: "01",
+		title: "Automated Overtime Threshold Enforcement",
+		summary:
+			"Real-time overtime budget monitoring and enforcement workflow built in ServiceNow.",
+		problem:
+			"A federal client was tracking overtime spend manually, making it difficult to monitor budget usage, alert leadership at key thresholds, and prevent overspending.",
+		solution:
+			"Built an automated overtime monitoring system in ServiceNow that calculated budget usage in real time, triggered threshold-based alerts, and enforced budget limits once overtime was exhausted.",
+		technical: [
+			"Script Include to calculate overtime usage across related records",
+			"GlideRecord queries to aggregate overtime totals by fiscal period",
+			"After Business Rule to recalculate usage on record update",
+			"GlideAjax for real-time validation during entry",
+			"gs.eventQueue() to trigger alerts at 70%, 90%, and 100%",
+			"ACL and UI controls to prevent edits once budget was fully consumed",
+		],
+		outcomes: [
+			"Eliminated manual overtime tracking",
+			"Gave leadership real-time budget visibility",
+			"Automated threshold alerts and escalation",
+			"Reduced risk of overtime budget overruns",
+		],
+		tags: ["ServiceNow", "Automation", "GlideRecord", "GlideAjax"],
+	},
+	{
+		number: "02",
+		title: "Large-Scale Table Performance Optimization",
+		summary:
+			"Database and query optimization initiative focused on improving dashboard performance across a high-volume ServiceNow table containing millions of records.",
+		problem:
+			"A high-volume enterprise table containing millions of records was causing severe dashboard performance issues. Queries powering reports and dashboards were taking several minutes to execute, making operational dashboards difficult to use in real-time environments.",
+		solution:
+			"Conducted a full performance analysis of dashboard-related database activity, identified inefficient query patterns, evaluated the existing indexing strategy, and implemented targeted database indexes to improve query execution speed without introducing redundant indexes.",
+		technical: [
+			"Analyzed query patterns and execution behavior across dashboard and reporting workflows",
+			"Reviewed existing database indexes and identified indexing gaps affecting performance",
+			"Performed index gap analysis to avoid redundant or overlapping index creation",
+			"Created targeted indexes to optimize high-frequency query conditions",
+			"Validated performance improvements through dashboard load-time testing and query analysis",
+			"Balanced performance optimization with long-term database maintainability",
+		],
+		outcomes: [
+			"Reduced dashboard load times by more than 75%",
+			"Improved usability and responsiveness of operational dashboards",
+			"Enabled faster access to reporting and analytics for end users",
+			"Reduced database strain caused by inefficient large-table queries",
+		],
+		tags: ["ServiceNow", "Performance", "Database", "Indexing"],
+	},
+	{
+		number: "03",
+		title: "Import Processing Reliability Fix",
+		summary:
+			"Root cause analysis and remediation of intermittent record loss during high-volume Excel import processing in ServiceNow.",
+		problem:
+			"A catalog item-based import process was used to ingest Excel files containing large volumes of row-based data, where each row generated a corresponding platform record. During high-volume imports, records were intermittently missing after processing.",
+		solution:
+			"Performed an in-depth analysis of the import pipeline, record processing behavior, and platform logging activity to isolate the source of the missing records. Identified platform progress worker exhaustion caused by an outdated parsing API, then migrated the process to a newer supported implementation.",
+		technical: [
+			"Analyzed import output to identify patterns in missing record generation",
+			"Correlated processing gaps against execution timing and platform logs",
+			"Discovered recurring failures occurring at consistent processing intervals",
+			"Investigated high-volume production logs to isolate platform worker exhaustion errors",
+			"Identified progress worker maximum reached limitations tied to the legacy parsing implementation",
+			"Validated worker saturation behavior through platform progress worker monitoring tables",
+			"Researched updated platform documentation and migrated the parsing process to a newer supported API",
+			"Tested and validated reliable processing across large import datasets",
+		],
+		outcomes: [
+			"Resolved intermittent record loss during large-scale imports",
+			"Restored data integrity and reliability for bulk upload operations",
+			"Improved stability of high-volume catalog item processing workflows",
+			"Eliminated worker exhaustion issues caused by deprecated platform APIs",
+		],
+		tags: ["ServiceNow", "Debugging", "Imports", "Reliability"],
+	},
+];
 ---
 
 <BaseLayout
-	title="Apps - Nick Bournias"
-	,
-	description="Apps created by Nick Bournias"
+	title="Portfolio - Nick Bournias"
+	description="Selected ServiceNow engineering and platform work by Nick Bournias"
 >
-	<section class="about-section">
-		
+	<section class="portfolio-section">
+		<div class="container">
+			<header class="portfolio-header">
+				<p class="eyebrow">Portfolio</p>
+
+				<h1>Work that made an impact.</h1>
+				
+
+				<p class="intro">
+					<TypedText text="A collection of engineering, automation, performance, and
+					platform problems I’ve solved in ServiceNow." />
+				</p>
+				    
+			</header>
+
+			<div class="portfolio-list">
+				{
+					projects.map((project) => (
+						<article class="project">
+							<div class="project-heading">
+								<div class="project-meta">
+									<span class="project-number">
+										{project.number}
+									</span>
+
+									<div class="project-tags">
+										{project.tags.map((tag) => (
+											<span>{tag}</span>
+										))}
+									</div>
+								</div>
+
+								<div class="project-title-group">
+									<h2>{project.title}</h2>
+									<p>{project.summary}</p>
+								</div>
+							</div>
+
+							<div class="project-content">
+								<div class="project-section">
+									<h3>Problem</h3>
+									<p>{project.problem}</p>
+								</div>
+
+								<div class="project-section">
+									<h3>Solution</h3>
+									<p>{project.solution}</p>
+								</div>
+
+								<div class="project-section">
+									<h3>Technical Implementation</h3>
+
+									<ul>
+										{project.technical.map((item) => (
+											<li>{item}</li>
+										))}
+									</ul>
+								</div>
+
+								<div class="project-section outcome-section">
+									<h3>Outcome</h3>
+
+									<ul>
+										{project.outcomes.map((item) => (
+											<li>{item}</li>
+										))}
+									</ul>
+								</div>
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</div>
 	</section>
 </BaseLayout>
 
 <style>
-	.hero {
-		flex: 1;
-
-		display: flex;
-		align-items: center;
-	}
-
-	.hero-content {
-		max-width: 850px;
-	}
-
-	.eyebrow {
-		margin-bottom: 16px;
-
-		color: var(--muted);
-		font-size: 1rem;
-	}
-
-	h1 {
-		font-size: clamp(2.5rem, 8vw, 5rem);
-		font-weight: 400;
-		line-height: 1.05;
-		letter-spacing: 0;
-	}
-
-	.intro {
-		margin: 0;
-
-		color: var(--muted);
-
-		font-size: clamp(1.1rem, 2vw, 1.4rem);
-	}
-
 	.container {
 		width: min(100% - 2rem, 1200px);
 		margin-inline: auto;
 	}
 
-	.about-section {
-		padding: 5rem 0;
+	.portfolio-section {
+		padding: 5rem 0 7rem;
 	}
 
-	.about-grid {
+	.portfolio-header {
+		max-width: 780px;
+		margin-bottom: 5rem;
+	}
+
+	.eyebrow {
+		margin: 0 0 16px;
+
+		color: var(--muted);
+
+		font-size: 0.9rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		margin: 0;
+
+		font-size: clamp(2.8rem, 8vw, 5rem);
+		font-weight: 400;
+		line-height: 1.02;
+		letter-spacing: -0.03em;
+	}
+
+	.intro {
+		max-width: 680px;
+		margin: 1.5rem 0 0;
+
+		color: var(--muted);
+
+		font-size: clamp(1.05rem, 2vw, 1.35rem);
+		line-height: 1.6;
+	}
+
+	.portfolio-list {
+		border-top: 1px solid rgba(255, 255, 255, 0.12);
+	}
+
+	.project {
+		padding: 4rem 0;
+
+		border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+	}
+
+	.project-heading {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 3rem;
+		gap: 2rem;
+
+		margin-bottom: 3rem;
 	}
 
-	/* Desktop enhancement */
+	.project-meta {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.project-number {
+		color: rgba(255, 255, 255, 0.35);
+
+		font-size: 0.75rem;
+		letter-spacing: 0.12em;
+	}
+
+	.project-tags {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: 0.5rem;
+	}
+
+	.project-tags span {
+		padding: 0.35rem 0.6rem;
+
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 999px;
+
+		color: rgba(255, 255, 255, 0.55);
+
+		font-size: 0.7rem;
+	}
+
+	.project-title-group h2 {
+		max-width: 760px;
+		margin: 0 0 1rem;
+
+		font-size: clamp(1.8rem, 4vw, 2.8rem);
+		font-weight: 400;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+	}
+
+	.project-title-group p {
+		max-width: 760px;
+		margin: 0;
+
+		color: var(--muted);
+
+		font-size: 1.05rem;
+		line-height: 1.6;
+	}
+
+	.project-content {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+	}
+
+	.project-section h3 {
+		margin: 0 0 0.8rem;
+
+		color: rgba(255, 255, 255, 0.55);
+
+		font-size: 0.75rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.project-section p {
+		margin: 0;
+
+		color: rgba(255, 255, 255, 0.78);
+
+		font-size: 1rem;
+		line-height: 1.7;
+	}
+
+	.project-section ul {
+		display: grid;
+		gap: 0.7rem;
+
+		margin: 0;
+		padding-left: 1.1rem;
+	}
+
+	.project-section li {
+		padding-left: 0.25rem;
+
+		color: rgba(255, 255, 255, 0.7);
+
+		font-size: 0.95rem;
+		line-height: 1.6;
+	}
+
+	.outcome-section {
+		padding: 1.5rem;
+
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 14px;
+
+		background: rgba(255, 255, 255, 0.03);
+	}
+
 	@media (min-width: 768px) {
-		.about-grid {
-			grid-template-columns: 1fr 2fr;
-			align-items: end;
+		.project-heading {
+			grid-template-columns: 1fr 3fr;
+			gap: 4rem;
+		}
+
+		.project-meta {
+			display: block;
+		}
+
+		.project-tags {
+			justify-content: flex-start;
+			margin-top: 1.25rem;
+		}
+
+		.project-content {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 3rem 4rem;
+
+			padding-left: calc(25% + 1rem);
+		}
+	}
+
+	@media (max-width: 767px) {
+		.portfolio-section {
+			padding-top: 3rem;
+		}
+
+		.portfolio-header {
+			margin-bottom: 3.5rem;
+		}
+
+		.project {
+			padding: 3rem 0;
+		}
+
+		.project-meta {
+			flex-direction: column;
+		}
+
+		.project-tags {
+			justify-content: flex-start;
+		}
+
+		.outcome-section {
+			padding: 1.25rem;
 		}
 	}
 </style>

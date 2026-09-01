@@ -3,12 +3,14 @@ interface Props {
 	text: string;
 	speed?: number;
 	delay?: number;
+	startEvent?: string;
 }
 
 const {
 	text,
 	speed = 45,
 	delay = 400,
+	startEvent,
 } = Astro.props;
 ---
 
@@ -17,6 +19,7 @@ const {
 	data-text={text}
 	data-speed={speed}
 	data-delay={delay}
+	data-start-event={startEvent}
 ></span>
 
 <span class="typing-cursor" aria-hidden="true"></span>
@@ -27,18 +30,17 @@ const {
 	typedElements.forEach((element) => {
 		if (!(element instanceof HTMLElement)) return;
 
-		// Prevent the same element from being initialized twice
 		if (element.dataset.initialized === "true") return;
-
-		element.dataset.initialized = "true";
 
 		const text = element.dataset.text ?? "";
 		const speed = Number(element.dataset.speed) || 45;
 		const delay = Number(element.dataset.delay) || 400;
+		const startEvent = element.dataset.startEvent;
 
 		const cursor = element.nextElementSibling;
 
 		let index = 0;
+		let started = false;
 
 		function finishCursor() {
 			if (!(cursor instanceof HTMLElement)) return;
@@ -62,11 +64,9 @@ const {
 			element.textContent += char;
 			index++;
 
-			// Slight variation makes the typing feel more natural
 			let typingDelay =
 				speed * 0.7 + Math.random() * speed * 0.6;
 
-			// Add natural pauses after punctuation
 			if (char === "," || char === ";") {
 				typingDelay += 150;
 			}
@@ -82,7 +82,24 @@ const {
 			setTimeout(type, typingDelay);
 		}
 
-		setTimeout(type, delay);
+		function startTyping() {
+			if (started) return;
+
+			started = true;
+			element.dataset.initialized = "true";
+
+			setTimeout(type, delay);
+		}
+
+		if (startEvent) {
+			document.addEventListener(
+				startEvent,
+				startTyping,
+				{ once: true },
+			);
+		} else {
+			startTyping();
+		}
 	});
 </script>
 
