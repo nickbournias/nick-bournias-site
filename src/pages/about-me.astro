@@ -6,32 +6,48 @@ const timeline = [
 	{
 		date: "Aug. 2025 — Present",
 		company: "KPMG",
-		role: "Federal ServiceNow Developer",
+		roles: ["Federal ServiceNow Developer"],
+		description: [
+			"Develop custom ServiceNow applications and features for federal clients across front-end and server-side functionality.",
+			"Build workflow automations, business logic, access controls, and automated testing while troubleshooting complex platform issues.",
+			"Improve application performance and user experience through database optimization, reusable development patterns, and direct collaboration with end users.",
+		],
 		type: "work",
 	},
 	{
-		date: "2024 — 2025",
+		date: "Sep. 2022 — Aug. 2025",
 		company: "Ernst & Young",
-		role: "ServiceNow Business Analyst / Jr Developer",
-		type: "work",
-	},
-	{
-		date: "2023 — 2024",
-		company: "Ernst & Young",
-		role: "Product Analyst",
-		type: "work",
-	},
-	{
-		date: "Sep. 2022 — 2023",
-		company: "Ernst & Young (Internship)",
-		role: "Security Controls / Risk Analyst",
+		roles: [
+			"ServiceNow Business Analyst / Jr Developer",
+			"Product Analyst",
+			"Security Controls / Risk Analyst",
+		],
+		description: [
+			"Developed and enhanced ServiceNow TPRM and ITSM functionality, including workflows, form behavior, business rules, and other platform features.",
+			"Supported product delivery across requirements, testing, defect resolution, releases, APIs, and integrations while working closely with technical teams and stakeholders.",
+			"Performed cybersecurity risk and control assessments for federal and state clients using frameworks including NIST and MITRE ATT&CK.",
+		],
 		type: "work",
 	},
 	{
 		date: "Graduated May 2022",
 		company: "University of Maryland",
-		role: "Smith School of Business · B.S. Information Systems",
+		roles: ["Smith School of Business · B.S. Information Systems"],
+		description: [
+			"Graduated from the Honors College with a Bachelor of Science in Information Systems.",
+			"Minored in Advanced Cybersecurity Experience (ACES) and Philosophy.",
+		],
 		type: "education",
+	},
+	{
+		date: "2020 — 2021",
+		company: "Ernst & Young",
+		roles: ["Cybersecurity Intern"],
+		description: [
+			"Supported a cybersecurity supply chain risk management project.",
+			"Gained early experience working on technology risk and cybersecurity problems in a consulting environment.",
+		],
+		type: "work",
 	},
 ];
 ---
@@ -46,8 +62,7 @@ const timeline = [
 
 				<p class="intro">
 					<TypedText
-						text="I started my career in cybersecurity and consulting before moving deeper into software and ServiceNow development. 
-					I'm especially interested in AI, automation, and solving complex technical problems."
+						text="I started my career in cybersecurity and consulting before moving deeper into software and ServiceNow development. I'm especially interested in AI, automation, and solving complex technical problems."
 					/>
 				</p>
 			</div>
@@ -65,13 +80,17 @@ const timeline = [
 
 								<h2>{item.company}</h2>
 
-								<p class="timeline-role">{item.role}</p>
+								<div class="timeline-roles">
+									{item.roles.map((role) => (
+										<p class="timeline-role">{role}</p>
+									))}
+								</div>
 
-								{item.type === "education" && (
-									<p class="timeline-detail">
-										Minors in Cybersecurity and Philosophy
-									</p>
-								)}
+								<ul class="timeline-description">
+									{item.description.map((description) => (
+										<li>{description}</li>
+									))}
+								</ul>
 							</div>
 						</div>
 					))
@@ -106,9 +125,10 @@ const timeline = [
 	h1 {
 		margin: 0;
 
-		font-size: clamp(2.75rem, 7vw, 5rem);
+		font-size: clamp(2.8rem, 8vw, 5rem);
 		font-weight: 400;
-		line-height: 1.05;
+		line-height: 1.02;
+		letter-spacing: -0.03em;
 	}
 
 	.intro {
@@ -123,7 +143,6 @@ const timeline = [
 
 	.timeline {
 		position: relative;
-
 		max-width: 850px;
 	}
 
@@ -156,7 +175,6 @@ const timeline = [
 
 	.timeline-marker {
 		position: relative;
-
 		z-index: 1;
 	}
 
@@ -195,21 +213,57 @@ const timeline = [
 		line-height: 1.2;
 	}
 
+	.timeline-roles {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 0.8rem;
+
+		margin-top: 0.45rem;
+	}
+
 	.timeline-role {
-		margin: 0.45rem 0 0;
+		margin: 0;
 
 		color: rgba(255, 255, 255, 0.78);
 
 		font-size: 1rem;
 	}
 
-	.timeline-detail {
-		margin: 0.5rem 0 0;
+	.timeline-role:not(:last-child)::after {
+		content: "·";
+		margin-left: 0.8rem;
+		color: rgba(255, 255, 255, 0.25);
+	}
+
+	.timeline-description {
+		max-width: 600px;
+
+		margin: 0.9rem 0 0;
 
 		color: var(--muted);
 
 		font-size: 0.9rem;
-		line-height: 1.5;
+		line-height: 1.65;
+	}
+
+	@media (max-width: 767px) {
+		.about-section {
+			padding: 3.5rem 0 5rem;
+		}
+
+		.about-header {
+			margin-bottom: 4rem;
+		}
+
+		.timeline-role:not(:last-child)::after {
+			content: "";
+			margin-left: 0;
+		}
+
+		.timeline-roles {
+			flex-direction: column;
+			gap: 0.25rem;
+		}
 	}
 
 	@media (min-width: 768px) {

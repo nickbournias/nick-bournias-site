@@ -43,7 +43,7 @@ const apps = [
         title: "Duck Hunt",
         category: "Game",
         description:
-            "A small browser game inspired by the classic arcade-style duck hunting experience.",
+            "A small browser guessing game. See if you can find the duck!",
         href: "https://nickbournias.github.io/duck-hunt/",
         tech: ["JavaScript", "Game"],
         external: true,
@@ -52,7 +52,7 @@ const apps = [
         title: "Ambient Visualizer",
         category: "Audio / Visual",
         description:
-            "An experimental ambient audio visualizer built around sound, motion, and color.",
+            "Drop in an audio file, and watch it come to life!",
         href: "https://nickbournias.github.io/ambient-visualizer/",
         tech: ["JavaScript", "Audio", "Visuals"],
         external: true,
@@ -340,6 +340,15 @@ const apps = [
         animation: cursor-blink 0.8s step-end infinite;
     }
 
+    h1 {
+		margin: 0;
+
+		font-size: clamp(2.8rem, 8vw, 5rem);
+		font-weight: 400;
+		line-height: 1.02;
+		letter-spacing: -0.03em;
+	}
+
     @keyframes cursor-blink {
         50% {
             opacity: 0;
@@ -349,10 +358,6 @@ const apps = [
     @media (max-width: 767px) {
         .apps-section {
             padding: 3.5rem 0 4rem;
-        }
-
-        h1 {
-            font-size: 2.35rem;
         }
 
         .intro {
