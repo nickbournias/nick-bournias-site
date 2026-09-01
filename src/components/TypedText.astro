@@ -1,0 +1,113 @@
+---
+interface Props {
+	text: string;
+	speed?: number;
+	delay?: number;
+}
+
+const {
+	text,
+	speed = 45,
+	delay = 400,
+} = Astro.props;
+---
+
+<span
+	class="typed-text"
+	data-text={text}
+	data-speed={speed}
+	data-delay={delay}
+></span>
+
+<span class="typing-cursor" aria-hidden="true"></span>
+
+<script>
+	const typedElements = document.querySelectorAll(".typed-text");
+
+	typedElements.forEach((element) => {
+		if (!(element instanceof HTMLElement)) return;
+
+		// Prevent the same element from being initialized twice
+		if (element.dataset.initialized === "true") return;
+
+		element.dataset.initialized = "true";
+
+		const text = element.dataset.text ?? "";
+		const speed = Number(element.dataset.speed) || 45;
+		const delay = Number(element.dataset.delay) || 400;
+
+		const cursor = element.nextElementSibling;
+
+		let index = 0;
+
+		function finishCursor() {
+			if (!(cursor instanceof HTMLElement)) return;
+
+			cursor.classList.add("blink");
+
+			setTimeout(() => {
+				cursor.classList.remove("blink");
+				cursor.style.opacity = "0";
+			}, 2400);
+		}
+
+		function type() {
+			if (index >= text.length) {
+				finishCursor();
+				return;
+			}
+
+			const char = text[index];
+
+			element.textContent += char;
+			index++;
+
+			// Slight variation makes the typing feel more natural
+			let typingDelay =
+				speed * 0.7 + Math.random() * speed * 0.6;
+
+			// Add natural pauses after punctuation
+			if (char === "," || char === ";") {
+				typingDelay += 150;
+			}
+
+			if (
+				char === "." ||
+				char === "!" ||
+				char === "?"
+			) {
+				typingDelay += 250;
+			}
+
+			setTimeout(type, typingDelay);
+		}
+
+		setTimeout(type, delay);
+	});
+</script>
+
+<style>
+	.typing-cursor {
+		display: inline-block;
+
+		width: 0.35em;
+		height: 1em;
+
+		margin-left: 3px;
+
+		background: currentColor;
+
+		vertical-align: -0.12em;
+		opacity: 1;
+	}
+
+	.typing-cursor.blink {
+		animation: cursor-blink 0.8s step-end infinite;
+	}
+
+	@keyframes cursor-blink {
+		50% {
+			opacity: 0;
+		}
+	}
+</style>

@@ -1,0 +1,381 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TypedText from "../components/TypedText.astro";
+---
+
+<BaseLayout
+    title="Apps - Nick Bournias"
+    description="Apps created by Nick Bournias"
+>
+    <section class="apps-section">
+        <div class="container">
+            <header class="apps-header">
+                <p class="eyebrow">Apps</p>
+
+                <h1>Things I’ve built.</h1>
+
+                <p class="intro">
+                    <TypedText text="A collection of thoughts on technology, AI, development, work, and whatever else I find interesting." />
+                </p>
+            </header>
+
+            <div class="divider"></div>
+
+            <div class="apps-list">
+                <a class="app-entry" href="#">
+                    <div class="app-visual">
+                        <div class="app-placeholder">
+                            <span>Screenshot</span>
+                        </div>
+                    </div>
+
+                    <div class="app-content">
+                        <div class="app-meta">
+                            <span>AI / Development</span>
+                            <span>2026</span>
+                        </div>
+
+                        <h2>ServiceNow AI Copilot</h2>
+
+                        <p>
+                            An agentic AI incident investigation tool
+                            integrating Claude with ServiceNow to investigate
+                            incidents and produce structured recommendations.
+                        </p>
+
+                        <div class="app-tech">
+                            <span>Python</span>
+                            <span>Claude</span>
+                            <span>ServiceNow</span>
+                        </div>
+                    </div>
+
+                    <div class="app-arrow" aria-hidden="true">↗</div>
+                </a>
+
+                <a class="app-entry" href="#">
+                    <div class="app-visual">
+                        <div class="app-placeholder">
+                            <span>Screenshot</span>
+                        </div>
+                    </div>
+
+                    <div class="app-content">
+                        <div class="app-meta">
+                            <span>Web App</span>
+                            <span>2026</span>
+                        </div>
+
+                        <h2>Another Project</h2>
+
+                        <p class="intro">
+                            A collection of thoughts on technology, AI, development, work, and whatever else I find interesting.
+                        </p>
+
+                        <div class="app-tech">
+                            <span>Astro</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+
+                    <div class="app-arrow" aria-hidden="true">↗</div>
+                </a>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .apps-section {
+        padding: 5rem 0 6rem;
+    }
+
+    .container {
+        width: min(100% - 2rem, 1200px);
+        margin-inline: auto;
+    }
+
+    /* HEADER */
+
+    .apps-header {
+        max-width: 760px;
+    }
+
+    .eyebrow {
+        margin: 0 0 1rem;
+
+        color: rgba(255, 255, 255, 0.42);
+
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    h1 {
+        margin: 0;
+
+        font-size: clamp(2.4rem, 6vw, 4.4rem);
+        font-weight: 400;
+        line-height: 1.02;
+        letter-spacing: -0.035em;
+    }
+
+    .intro {
+        margin: 1.6rem 0 0;
+
+        max-width: 620px;
+
+        color: var(--muted);
+
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        line-height: 1.65;
+    }
+
+    .divider {
+        width: 100%;
+        height: 1px;
+
+        margin-top: 4rem;
+
+        background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* PROJECT LIST */
+
+    .apps-list {
+        width: 100%;
+    }
+
+    .app-entry {
+        display: grid;
+        grid-template-columns: 230px minmax(0, 1fr) auto;
+        gap: 2.5rem;
+        align-items: center;
+
+        padding: 2.5rem 0;
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* IMAGE */
+
+    .app-visual {
+        width: 100%;
+    }
+
+    .app-placeholder {
+        aspect-ratio: 16 / 10;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+
+        background: linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.055),
+            rgba(255, 255, 255, 0.015)
+        );
+
+        color: rgba(255, 255, 255, 0.2);
+
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+
+        transition:
+            transform 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    /* CONTENT */
+
+    .app-content {
+        max-width: 650px;
+    }
+
+    .app-meta {
+        display: flex;
+        gap: 0.7rem;
+
+        margin-bottom: 0.75rem;
+
+        color: rgba(255, 255, 255, 0.3);
+
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+    }
+
+    .app-meta span + span::before {
+        content: "•";
+
+        margin-right: 0.7rem;
+
+        color: rgba(255, 255, 255, 0.15);
+    }
+
+    .app-content h2 {
+        margin: 0;
+
+        color: rgba(255, 255, 255, 0.95);
+
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: -0.025em;
+
+        transition: transform 0.25s ease;
+    }
+
+    .app-content p {
+        margin: 0.75rem 0 0;
+
+        max-width: 600px;
+
+        color: rgba(255, 255, 255, 0.45);
+
+        font-size: 0.92rem;
+        line-height: 1.65;
+    }
+
+    /* TECHNOLOGY */
+
+    .app-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+
+        margin-top: 1rem;
+    }
+
+    .app-tech span {
+        padding: 0.25rem 0.55rem;
+
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 999px;
+
+        color: rgba(255, 255, 255, 0.35);
+
+        font-size: 0.64rem;
+    }
+
+    /* ARROW */
+
+    .app-arrow {
+        color: rgba(255, 255, 255, 0.25);
+
+        font-size: 1.2rem;
+
+        transition:
+            transform 0.25s ease,
+            color 0.25s ease;
+    }
+
+    /* HOVER */
+
+    .app-entry:hover .app-placeholder {
+        transform: scale(1.02);
+
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .app-entry:hover .app-content h2 {
+        transform: translateX(3px);
+    }
+
+    .app-entry:hover .app-arrow {
+        transform: translate(3px, -3px);
+
+        color: rgba(255, 255, 255, 0.75);
+    }
+
+    .typing-cursor {
+        display: inline-block;
+
+        width: 0.35em;
+        height: 1em;
+
+        margin-left: 3px;
+
+        background: currentColor;
+
+        vertical-align: -0.12em;
+        opacity: 1;
+    }
+
+    .typing-cursor.blink {
+        animation: cursor-blink 0.8s step-end infinite;
+    }
+
+    @keyframes cursor-blink {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 767px) {
+        .apps-section {
+            padding: 3.5rem 0 4rem;
+        }
+
+        h1 {
+            font-size: 2.35rem;
+        }
+
+        .intro {
+            margin-top: 1.25rem;
+        }
+
+        .divider {
+            margin-top: 3rem;
+        }
+
+        .app-entry {
+            grid-template-columns: 110px 1fr;
+            gap: 1.25rem;
+
+            padding: 2rem 0;
+        }
+
+        .app-arrow {
+            display: none;
+        }
+
+        .app-placeholder {
+            border-radius: 9px;
+        }
+
+        .app-meta {
+            margin-bottom: 0.5rem;
+
+            font-size: 0.6rem;
+        }
+
+        .app-content h2 {
+            font-size: 1.35rem;
+        }
+
+        .app-content p {
+            margin-top: 0.6rem;
+
+            font-size: 0.85rem;
+            line-height: 1.55;
+        }
+
+        .app-tech {
+            margin-top: 0.8rem;
+        }
+    }
+</style>

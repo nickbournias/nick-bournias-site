@@ -1,0 +1,93 @@
+---
+import quotes from "../data/quotes.json";
+import TypedText from "./TypedText.astro";
+
+const now = new Date();
+
+const startDate = new Date(2026, 0, 1);
+
+const daysSinceStart = Math.floor(
+	(now.getTime() - startDate.getTime()) / 86400000,
+);
+
+const quoteIndex =
+	((daysSinceStart % quotes.length) + quotes.length) % quotes.length;
+
+const todaysQuote = quotes[quoteIndex];
+
+const quoteText = `"${todaysQuote.quote}" — ${todaysQuote.author}`;
+
+const authorSearchUrl =
+	`https://www.google.com/search?q=${encodeURIComponent(todaysQuote.author)}`;
+---
+
+<div class="daily-quote">
+	<p class="quote-label">Quote of the day</p>
+
+	<p class="quote-text">
+		<TypedText
+			text={quoteText}
+			speed={32}
+			delay={500}
+		/>
+	</p>
+
+	<a
+		class="learn-more"
+		href={authorSearchUrl}
+		target="_blank"
+		rel="noopener noreferrer"
+	>
+		Learn more
+	</a>
+</div>
+
+<style>
+	.daily-quote {
+		width: 100%;
+		max-width: 800px;
+		text-align: left;
+	}
+
+	.quote-label {
+		margin: 0 0 1rem;
+
+		color: rgba(255, 255, 255, 0.35);
+
+		font-size: 0.8rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.quote-text {
+		margin: 0;
+
+		color: var(--muted);
+
+		font-size: clamp(1.4rem, 2.5vw, 1.6rem);
+		line-height: 1.5;
+	}
+
+	.learn-more {
+        display: block;
+        width: 100%;
+        margin-top: 0.75rem;
+
+        color: rgba(255, 255, 255, 0.4);
+
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+
+        text-align: right;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+
+        transition: color 0.2s ease;
+    }
+
+    .learn-more:hover {
+        color: rgba(255, 255, 255, 0.85);
+    }
+</style>

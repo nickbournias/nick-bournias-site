@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import DailyQuote from "../components/DailyQuote.astro";
 ---
 
 <BaseLayout
@@ -130,9 +131,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 						</div>
 					</div>
 
-					<div class="lower-middle"></div>
+					<div class="lower-middle">
+						<DailyQuote />
+					</div>
 
-					<div class="lower-right"></div>
+					<div class="lower-right">
+						<div class="harm-card">
+							<a
+								href="/harmonograph"
+								class="harm-link"
+								aria-label="Learn more about the daily harmonograph"
+							>
+								<img
+									src="/harmonographs/harmonograph.gif"
+									alt="Today's harmonograph"
+									class="harm-image"
+								/>
+
+							</a>
+							<div class="nb-viz-hint">Daily Harmonograph</div>
+							<div class="harm-hint">(click to learn more)</div>
+						</div>
+					</div>
 				</div>
 			</section>
 		</div>
@@ -1332,7 +1352,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 		width: min(100%, 350px);
 		margin-inline: auto;
-		padding: 1.6rem;
+		padding: 1.2rem 1.6rem;
 
 		overflow: hidden;
 
@@ -1378,7 +1398,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		gap: 0.2rem;
 
 		padding: 0.25rem;
-		margin-bottom: 2.4rem;
+		margin-bottom: 1.2rem;
 
 		border: 1px solid rgba(255, 255, 255, 0.07);
 		border-radius: 999px;
@@ -1422,7 +1442,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		align-items: center;
 		gap: 0.6rem;
 
-		margin-bottom: 0.65rem;
+		margin-bottom: 0.35rem;
+		padding-right: 3.5rem;
 
 		color: rgba(255, 255, 255, 0.68);
 
@@ -1446,7 +1467,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	}
 
 	.day-night-icon {
-		margin-left: auto;
+		position: absolute;
+		right: 0;
+		top: 50%;
 
 		display: inline-flex;
 		align-items: center;
@@ -1455,6 +1478,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		width: 3rem;
 		height: 3rem;
 
+		margin: 0;
+		transform: translateY(-50%);
 		flex-shrink: 0;
 	}
 
@@ -1493,7 +1518,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		position: relative;
 		z-index: 1;
 
-		margin-bottom: 1.65rem;
+		margin-bottom: 0.85rem;
 
 		color: rgba(255, 255, 255, 0.96);
 
@@ -1543,12 +1568,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	}
 
 	.about-text h1 {
-		font-size: clamp(2.5rem, 8vw, 3rem);
+		font-size: clamp(1.9rem, 5vw, 2.4rem);
 		font-weight: 400;
 		line-height: 1.05;
 		letter-spacing: 0;
 
-		margin-bottom: 25px;
+		margin-bottom: 15px;
 	}
 
 	.about-text h2 {
@@ -1585,13 +1610,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 		background-color: rgba(255, 255, 255, 0.2);
 
-		margin: 30px auto;
+		margin: 30px auto 0px;
 	}
 
 	.lower-grid {
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 2rem;
+	}
+
+	.lower-middle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		min-width: 0;
 	}
 
 	.nb-viz-card {
@@ -1624,33 +1657,60 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		user-select: none;
 	}
 
+	.harm-card {
+		width: 100%;
+		max-width: 320px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.harm-image {
+		display: block;
+		width: 100%;
+		height: auto;
+		cursor: pointer;
+	}
+
+	.harm-hint {
+		margin-top: 10px;
+		font-size: 9px;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		opacity: 0.5;
+		user-select: none;
+	}
+
 	@media (max-width: 767px) {
 		.about-section {
 			padding-top: 3.5rem;
 			padding-bottom: 3rem;
 		}
 
+		.about-text p.light-large {
+			font-size: 1.1rem;
+		}
+
 		.location-widget {
-			width: 90%;
+			width: 80%;
 			max-width: 340px;
 			margin-inline: auto;
-			padding: 1rem 1.25rem;
+			padding: 0.8rem 1.25rem;
 			border-radius: 16px;
 		}
 
 		.location-selector {
-			margin-bottom: 1rem;
+			margin-bottom: 0.65rem;
 		}
 
 		.location-heading {
 			position: relative;
-			margin-bottom: 0.25rem;
-			padding-right: 5rem;
+			margin-bottom: 0.1rem;
+			padding-right: 4.25rem;
 		}
 
 		.day-night-icon {
 			position: absolute;
-			left: 8rem;
+			right: 0;
 			top: 50%;
 
 			width: 3.75rem;
@@ -1672,61 +1732,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 		.location-time {
 			font-size: 2.4rem;
-			margin-bottom: 0.65rem;
+			margin-bottom: 0.4rem;
 		}
 
 		.location-weather {
 			margin-bottom: 0;
-		}
-	}
-
-	@media (max-width: 767px) {
-		.location-widget {
-			width: 80%;
-			max-width: 100%;
-			padding: 1rem 1.25rem;
-			border-radius: 16px;
-		}
-
-		.location-selector {
-			margin-bottom: 1rem;
-		}
-
-		.location-heading {
-			margin-bottom: 0.25rem;
-		}
-
-		.location-time {
-			font-size: 2.4rem;
-			margin-bottom: 0.65rem;
-		}
-
-		.location-weather {
-			margin-bottom: 0;
-		}
-
-		.day-night-icon {
-			margin-left: 0;
-			margin-right: auto;
-
-			width: 3.75rem;
-			height: 3.75rem;
-
-			transform: translateX(8rem);
-		}
-
-		.moon-phase-canvas {
-			width: 3.75rem;
-			height: 3.75rem;
-			margin-right: 0;
-		}
-
-		.sun-icon {
-			font-size: 3.75rem;
 		}
 
 		.nb-viz-card {
 			max-width: 250px;
+		}
+
+		.lower-middle {
+			padding-top: 1rem;
+		}
+
+		.lower-left {
+			padding-bottom: 1rem;
 		}
 	}
 
@@ -1750,6 +1772,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 		.lower-grid {
 			grid-template-columns: 2fr 4fr 2fr;
+		}
+
+		.lower-middle {
+			transform: translateY(-50px);
 		}
 	}
 </style>

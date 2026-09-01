@@ -1,0 +1,784 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TypedText from "../components/TypedText.astro";
+---
+
+<BaseLayout
+	title="Harmonograph - Nick Bournias"
+	description="A daily generative harmonograph and archive of previous drawings."
+>
+	<main class="harmonograph-page">
+		<div class="container">
+			<header class="page-header">
+				<p class="eyebrow">Generative art</p>
+
+				<h1>Harmonographs</h1>
+
+				<p class="intro">
+                    <TypedText text="A daily experiment in harmonic motion, mathematics, and randomness." />
+				</p>
+			</header>
+
+			<section class="info-section">
+				<div class="section-copy">
+					<p class="section-label">What is a harmonograph?</p>
+
+					<h2>Drawing with harmonic motion.</h2>
+
+					<p>
+						A <strong>harmonograph</strong> is a mechanical drawing device
+						that uses swinging pendulums to create intricate geometric
+						patterns.
+					</p>
+
+					<p>
+						As the pendulums move back and forth, they control the motion
+						of a pen across paper, producing flowing curves known as
+						<strong> Lissajous figures</strong>.
+					</p>
+
+					<p>
+						Because the motion gradually slows due to friction, each
+						drawing evolves over time, creating complex, organic patterns
+						that visually reveal the mathematics of harmonic motion.
+					</p>
+				</div>
+			</section>
+
+			<div class="divider"></div>
+
+			<section class="today-section">
+				<div class="today-copy">
+					<p class="section-label">Today's harmonograph</p>
+
+					<h2>A new pattern every day.</h2>
+
+					<p>
+						The parameters behind the drawing are randomly generated,
+						meaning every day's harmonograph is different.
+					</p>
+
+					<p class="small-copy">
+						Click the drawing to restart the animation.
+					</p>
+				</div>
+
+				<div class="today-art">
+					<img
+						id="harmImg"
+						src="/harmonographs/harmonograph.gif"
+						alt="Today's harmonograph"
+					/>
+
+					<p class="viz-hint">(click to restart)</p>
+				</div>
+			</section>
+
+			<div class="divider"></div>
+
+			<section class="process-section">
+				<div class="section-copy">
+					<p class="section-label">What happens every day?</p>
+
+					<h2>The drawing generates itself.</h2>
+
+					<p>
+						Because the pattern is generated from a mathematical function,
+						it's possible to create a completely new harmonograph every
+						day.
+					</p>
+
+					<p>
+						A scheduled job generates random parameters for the harmonograph
+						equations, calculates the resulting curve, renders the animation,
+						and archives the finished piece.
+					</p>
+
+					<div class="process-list">
+						<div class="process-item">
+							<span class="number">01</span>
+
+							<span>
+								Generate a new set of harmonic motion parameters
+							</span>
+						</div>
+
+						<div class="process-item">
+							<span class="number">02</span>
+
+							<span>
+								Calculate the curve point by point
+							</span>
+						</div>
+
+						<div class="process-item">
+							<span class="number">03</span>
+
+							<span>
+								Draw the pattern progressively into an animated GIF
+							</span>
+						</div>
+
+						<div class="process-item">
+							<span class="number">04</span>
+
+							<span>
+								Publish the new harmonograph and archive it
+							</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<br><br><br>
+
+			<section class="archive-section">
+				<header class="archive-header">
+					<p class="eyebrow">Generative archive</p>
+
+					<h2>Harmonograph Museum Wall</h2>
+
+					<p>
+						A running archive of every daily harmonograph generated so far.
+						Which one is your favorite?
+					</p>
+				</header>
+
+				<div
+					id="harmonographGrid"
+					class="archive-grid"
+				>
+					<p class="archive-status">
+						Loading archive...
+					</p>
+				</div>
+			</section>
+		</div>
+	</main>
+
+	<script>
+		const currentHarmonograph =
+			document.getElementById("harmImg");
+
+		if (
+			currentHarmonograph instanceof HTMLImageElement
+		) {
+			const refreshImage = () => {
+				currentHarmonograph.src =
+					"/harmonographs/harmonograph.gif?v=" +
+					Date.now();
+			};
+
+			refreshImage();
+
+			currentHarmonograph.addEventListener(
+				"click",
+				refreshImage,
+			);
+		}
+
+		const grid =
+			document.getElementById(
+				"harmonographGrid",
+			);
+
+		const basePath =
+			"/harmonographs/harmHistory/";
+
+		function formatDateFromFilename(
+			file: string,
+		) {
+			const match = file.match(
+				/^(\d{4})(\d{2})(\d{2})-tbn\.png$/,
+			);
+
+			if (!match) {
+				return file;
+			}
+
+			const [, year, month, day] =
+				match;
+
+			const date = new Date(
+				`${year}-${month}-${day}T12:00:00`,
+			);
+
+			if (
+				Number.isNaN(date.getTime())
+			) {
+				return `${year}.${month}.${day}`;
+			}
+
+			return date.toLocaleDateString(
+				undefined,
+				{
+					year: "numeric",
+					month: "short",
+					day: "numeric",
+				},
+			);
+		}
+
+		function fullImageFromThumb(
+			file: string,
+		) {
+			return file.replace(
+				"-tbn.png",
+				".gif",
+			);
+		}
+
+		function buildArchiveCard(
+			file: string,
+		) {
+			const link =
+				document.createElement("a");
+
+			link.className =
+				"archive-card";
+
+			link.href =
+				basePath +
+				fullImageFromThumb(file);
+
+			link.target = "_blank";
+			link.rel =
+				"noopener noreferrer";
+
+			const imageWrap =
+				document.createElement("div");
+
+			imageWrap.className =
+				"archive-image-wrap";
+
+			const image =
+				document.createElement("img");
+
+			image.className =
+				"archive-image";
+
+			image.src =
+				basePath + file;
+
+			image.alt =
+				`Harmonograph for ${formatDateFromFilename(file)}`;
+
+			image.loading = "lazy";
+
+			const meta =
+				document.createElement("div");
+
+			meta.className =
+				"archive-meta";
+
+			const date =
+				document.createElement("span");
+
+			date.className =
+				"archive-date";
+
+			date.textContent =
+				formatDateFromFilename(file);
+
+			imageWrap.appendChild(image);
+			meta.appendChild(date);
+
+			link.appendChild(imageWrap);
+			link.appendChild(meta);
+
+			return link;
+		}
+
+		async function loadArchive() {
+			if (!grid) return;
+
+			try {
+				const response =
+					await fetch(
+						`${basePath}archive.json?v=${Date.now()}`,
+						{
+							cache: "no-store",
+						},
+					);
+
+				if (!response.ok) {
+					throw new Error(
+						`HTTP ${response.status}`,
+					);
+				}
+
+				const files =
+					await response.json();
+
+				if (!Array.isArray(files)) {
+					throw new Error(
+						"archive.json is not an array",
+					);
+				}
+
+				const validFiles =
+					files.filter(
+						(file): file is string =>
+							typeof file ===
+								"string" &&
+							/^\d{8}-tbn\.png$/.test(
+								file,
+							),
+					);
+
+				grid.innerHTML = "";
+
+				if (!validFiles.length) {
+					grid.innerHTML =
+						'<p class="archive-status">No harmonographs found yet.</p>';
+
+					return;
+				}
+
+				validFiles.forEach(
+					(file) => {
+						grid.appendChild(
+							buildArchiveCard(
+								file,
+							),
+						);
+					},
+				);
+			} catch (error) {
+				console.error(
+					"Could not load harmonograph archive:",
+					error,
+				);
+
+				grid.innerHTML =
+					'<p class="archive-status">Could not load the harmonograph archive.</p>';
+			}
+		}
+
+		loadArchive();
+	</script>
+
+	<style>
+		.harmonograph-page {
+			padding: 5rem 0 7rem;
+		}
+
+		.page-header {
+			max-width: 850px;
+			margin-bottom: 5rem;
+		}
+
+		.eyebrow,
+		.section-label {
+			margin: 0 0 1rem;
+
+			color: rgba(
+				255,
+				255,
+				255,
+				0.35
+			);
+
+			font-size: 0.72rem;
+			font-weight: 500;
+
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+		}
+
+		.page-header h1 {
+			margin: 0;
+
+			font-size: clamp(
+				3rem,
+				8vw,
+				5.5rem
+			);
+
+			font-weight: 400;
+			line-height: 0.95;
+
+			letter-spacing: -0.045em;
+		}
+
+		.intro {
+			max-width: 620px;
+
+			margin: 1.5rem 0 0;
+
+			color: var(--muted);
+
+			font-size: clamp(
+				1.05rem,
+				2vw,
+				1.25rem
+			);
+
+			line-height: 1.7;
+		}
+
+		.info-section,
+		.process-section {
+			max-width: 780px;
+		}
+
+		.section-copy h2,
+		.today-copy h2,
+		.archive-header h2 {
+			margin: 0 0 1.5rem;
+
+			font-size: clamp(
+				2rem,
+				4vw,
+				3rem
+			);
+
+			font-weight: 400;
+			line-height: 1.08;
+
+			letter-spacing: -0.03em;
+		}
+
+		.section-copy > p:not(
+				.section-label
+			),
+		.today-copy > p:not(
+				.section-label
+			) {
+			max-width: 680px;
+
+			color: var(--muted);
+
+			font-size: 1.05rem;
+			line-height: 1.75;
+		}
+
+		.section-copy strong {
+			color: var(--text);
+			font-weight: 600;
+		}
+
+		.divider {
+			width: 100%;
+			height: 1px;
+
+			margin: 5rem 0;
+
+			background: rgba(
+				255,
+				255,
+				255,
+				0.1
+			);
+		}
+
+		.today-section {
+			display: grid;
+
+			grid-template-columns:
+				minmax(0, 1fr)
+				minmax(280px, 460px);
+
+			align-items: center;
+
+			gap: clamp(
+				3rem,
+				8vw,
+				8rem
+			);
+		}
+
+		.today-art {
+			width: 100%;
+			max-width: 460px;
+
+			margin: 0 auto;
+
+			text-align: center;
+		}
+
+		.today-art img {
+			display: block;
+
+			width: 100%;
+			height: auto;
+
+			cursor: pointer;
+		}
+
+		.small-copy {
+			margin-top: 2rem;
+
+			color: rgba(
+				255,
+				255,
+				255,
+				0.35
+			) !important;
+
+			font-size: 0.85rem !important;
+		}
+
+		.viz-hint {
+			margin: 10px 0 0;
+
+			font-size: 9px;
+
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+
+			opacity: 0.5;
+
+			user-select: none;
+		}
+
+		.process-list {
+			margin-top: 3rem;
+
+			border-top: 1px solid
+				rgba(
+					255,
+					255,
+					255,
+					0.1
+				);
+		}
+
+		.process-item {
+			display: grid;
+
+			grid-template-columns:
+				55px 1fr;
+
+			gap: 1rem;
+
+			padding: 1.4rem 0;
+
+			border-bottom: 1px solid
+				rgba(
+					255,
+					255,
+					255,
+					0.1
+				);
+
+			color: var(--muted);
+
+			font-size: 1rem;
+			line-height: 1.5;
+		}
+
+		.number {
+			color: rgba(
+				255,
+				255,
+				255,
+				0.3
+			);
+
+			font-size: 0.7rem;
+
+			letter-spacing: 0.12em;
+		}
+
+		.archive-header {
+			max-width: 720px;
+
+			margin: 0 auto 3.5rem;
+
+			text-align: center;
+		}
+
+		.archive-header p:last-child {
+			max-width: 620px;
+
+			margin: 0 auto;
+
+			color: var(--muted);
+
+			font-size: 1rem;
+			line-height: 1.7;
+		}
+
+		.archive-grid {
+			display: grid;
+
+			grid-template-columns:
+				repeat(
+					auto-fit,
+					minmax(
+						210px,
+						1fr
+					)
+				);
+
+			gap: 1.5rem;
+		}
+
+		:global(.archive-card) {
+			display: block;
+
+			padding: 0.65rem;
+
+			color: inherit;
+			text-decoration: none;
+
+			border: 1px solid
+				rgba(
+					255,
+					255,
+					255,
+					0.08
+				);
+
+			border-radius: 16px;
+
+			transition:
+				transform 0.25s ease,
+				border-color 0.25s ease;
+		}
+
+		:global(
+			.archive-card:hover
+		) {
+			transform: translateY(
+				-4px
+			);
+
+			border-color: rgba(
+				255,
+				255,
+				255,
+				0.18
+			);
+		}
+
+		:global(
+			.archive-image-wrap
+		) {
+			overflow: hidden;
+
+			aspect-ratio: 1 / 1;
+
+			border-radius: 10px;
+		}
+
+		:global(.archive-image) {
+			display: block;
+
+			width: 100%;
+			height: 100%;
+
+			object-fit: contain;
+
+			transition:
+				transform 0.3s ease;
+		}
+
+		:global(
+			.archive-card:hover
+				.archive-image
+		) {
+			transform: scale(1.015);
+		}
+
+		:global(.archive-meta) {
+			padding: 0.85rem 0.2rem
+				0.2rem;
+
+			text-align: center;
+		}
+
+		:global(.archive-date) {
+			color: rgba(
+				255,
+				255,
+				255,
+				0.45
+			);
+
+			font-size: 0.68rem;
+
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+		}
+
+		:global(.archive-status) {
+			grid-column: 1 / -1;
+
+			margin: 0;
+			padding: 3rem 0;
+
+			color: rgba(
+				255,
+				255,
+				255,
+				0.4
+			);
+
+			text-align: center;
+		}
+
+		@media (
+			max-width: 767px
+		) {
+			.harmonograph-page {
+				padding: 3.5rem 0
+					5rem;
+			}
+
+			.page-header {
+				margin-bottom: 3.5rem;
+			}
+
+			.divider {
+				margin: 3.5rem 0;
+			}
+
+			.today-section {
+				grid-template-columns:
+					1fr;
+
+				gap: 2.5rem;
+			}
+
+			.today-art {
+				max-width: 320px;
+			}
+
+			.process-list {
+				margin-top: 2.25rem;
+			}
+
+			.process-item {
+				grid-template-columns:
+					42px 1fr;
+			}
+
+			.archive-header {
+				margin-bottom: 2.5rem;
+			}
+
+			.archive-grid {
+				grid-template-columns:
+					repeat(
+						2,
+						minmax(
+							0,
+							1fr
+						)
+					);
+
+				gap: 1rem;
+			}
+
+			:global(
+				.archive-card
+			) {
+				padding: 0.5rem;
+
+				border-radius: 13px;
+			}
+		}
+	</style>
+</BaseLayout>
