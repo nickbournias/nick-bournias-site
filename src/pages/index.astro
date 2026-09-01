@@ -50,7 +50,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 						<p class="light-large">Let's connect:</p>
 
 						<div class="social-links">
-							<a href="mailto:Nick@NickBournias.com"> Email ↗︎ </a>
+							<a href="mailto:Nick@NickBournias.com">Email ↗︎</a>
 
 							<a
 								href="https://www.linkedin.com/in/nickbournias/"
@@ -97,7 +97,9 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 					<a href="/portfolio" class="nb-tile-link">
 						<div class="nb-tile">
 							<div class="nb-tile-eyebrow">Collection</div>
+
 							<div class="nb-tile-title">Portfolio</div>
+
 							<div class="nb-tile-desc">
 								A collection of engineering, automation,
 								performance, and platform problems I’ve solved
@@ -109,7 +111,9 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 					<a href="/writings" class="nb-tile-link">
 						<div class="nb-tile">
 							<div class="nb-tile-eyebrow">Research</div>
+
 							<div class="nb-tile-title">Writings</div>
+
 							<div class="nb-tile-desc">
 								A collection of thoughts on technology, AI,
 								development, work, and whatever else I find
@@ -121,7 +125,9 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 					<a href="/apps" class="nb-tile-link">
 						<div class="nb-tile">
 							<div class="nb-tile-eyebrow">Interactive</div>
+
 							<div class="nb-tile-title">Apps</div>
+
 							<div class="nb-tile-desc">
 								Some small apps I've created for fun. Audio
 								visualizers, games, and more!
@@ -132,7 +138,9 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 					<a href="/about-me" class="nb-tile-link">
 						<div class="nb-tile">
 							<div class="nb-tile-eyebrow">Bio</div>
+
 							<div class="nb-tile-title">About Me</div>
+
 							<div class="nb-tile-desc">
 								More about who I am and my life.
 							</div>
@@ -176,7 +184,9 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 						onEnter: () => {
 							if (item.classList.contains("middle-left")) {
 								document.dispatchEvent(
-									new CustomEvent("init-interactive-sphere"),
+									new CustomEvent(
+										"init-interactive-sphere",
+									),
 								);
 							}
 
@@ -184,6 +194,24 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 								document.dispatchEvent(
 									new CustomEvent("init-daily-quote"),
 								);
+							}
+
+							if (item.classList.contains("middle-right")) {
+								const image =
+									item.querySelector("img");
+
+								if (
+									image instanceof HTMLImageElement &&
+									image.src
+								) {
+									const src = image.src;
+
+									image.src = "";
+
+									requestAnimationFrame(() => {
+										image.src = src;
+									});
+								}
 							}
 						},
 					},
@@ -193,9 +221,13 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 	});
 
 	mm.add("(min-width: 768px)", () => {
-		document.dispatchEvent(new CustomEvent("init-interactive-sphere"));
+		document.dispatchEvent(
+			new CustomEvent("init-interactive-sphere"),
+		);
 
-		document.dispatchEvent(new CustomEvent("init-daily-quote"));
+		document.dispatchEvent(
+			new CustomEvent("init-daily-quote"),
+		);
 	});
 
 	gsap.fromTo(
@@ -229,6 +261,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 		if (!(flipper instanceof HTMLElement)) return;
 
 		heroSwapped = true;
+
 		flipper.classList.add("is-flipped");
 	}
 
@@ -253,6 +286,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 	.about-extra {
 		display: flex;
 		justify-content: center;
+
 		width: 100%;
 		min-width: 0;
 	}
@@ -260,14 +294,18 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 	.hero-widget {
 		width: min(100%, 390px);
 		min-width: 0;
+
 		perspective: 1200px;
 	}
 
 	.hero-flipper {
 		position: relative;
+
 		width: 100%;
 		min-height: 270px;
+
 		transform-style: preserve-3d;
+
 		transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
@@ -297,14 +335,17 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 
 	.weather-layer {
 		z-index: 1;
+
 		transform: rotateY(180deg) scale(1.04);
 	}
 
 	.headshot-wrap {
 		width: min(100%, 285px);
+
 		aspect-ratio: 1 / 1;
 
 		border-radius: 20px;
+
 		overflow: hidden;
 	}
 
@@ -353,17 +394,20 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 
 	.about-text p.light-large {
 		color: #cbcbcb;
+
 		font-size: 1.4rem;
 	}
 
 	.light-large a {
 		margin-left: 6px;
+
 		text-decoration: underline;
 	}
 
 	.divider {
 		width: 55%;
 		height: 1px;
+
 		margin: 30px auto;
 
 		background-color: rgba(255, 255, 255, 0.2);
@@ -397,7 +441,9 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 3rem;
+
 		width: 90%;
+
 		margin-inline: auto;
 	}
 
@@ -408,6 +454,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 		margin: 0;
 
 		color: inherit;
+
 		text-decoration: none;
 	}
 
@@ -445,6 +492,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 
 		font-size: 11px;
 		letter-spacing: 0.18em;
+
 		text-transform: uppercase;
 
 		opacity: 0.6;
@@ -470,6 +518,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 
 		display: flex;
 		align-items: center;
+
 		gap: 1.25rem;
 	}
 
@@ -484,18 +533,22 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 	.social-links {
 		display: flex;
 		align-items: center;
+
 		gap: 1.25rem;
 	}
 
 	.social-links a {
 		display: inline-flex;
 		align-items: center;
+
 		gap: 0.2rem;
 
 		white-space: nowrap;
 
 		color: var(--muted);
+
 		font-size: 0.9rem;
+
 		text-decoration: none;
 
 		transition:
@@ -505,6 +558,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 
 	.social-links a:hover {
 		color: #fff;
+
 		transform: translateY(-1px);
 	}
 
@@ -525,6 +579,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 		.hero-widget {
 			width: calc(100% + 48px);
 			max-width: 430px;
+
 			margin-inline: -24px;
 
 			perspective: 1000px;
@@ -556,6 +611,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 
 		.nb-tile {
 			min-height: auto;
+
 			padding: 20px;
 		}
 
@@ -567,6 +623,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 	@media (min-width: 768px) {
 		.about-grid {
 			grid-template-columns: 2fr 3fr;
+
 			align-items: center;
 		}
 
