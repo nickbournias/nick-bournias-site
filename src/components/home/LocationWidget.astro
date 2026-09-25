@@ -21,7 +21,7 @@
 		</button>
 		
 		<button
-			class="location-option active"
+			class="location-option"
 			type="button"
 			data-location="denver"
 		>
@@ -31,7 +31,7 @@
 		<button
 			class="location-option"
 			type="button"
-			data-location="dmv"
+			data-location="nyc"
 		>
 			NYC
 		</button>
@@ -183,7 +183,8 @@
 				".moon-fallback",
 			);
 
-		let selectedLocation = "denver";
+		let selectedLocation =
+			localStorage.getItem("selectedLocation") || "denver";
 
 		const SYNODIC_MONTH = 29.530588853;
 
@@ -236,9 +237,7 @@
 				return "Clear";
 			}
 
-			if (
-				[1, 2, 3, 45, 48].includes(code)
-			) {
+			if ([1, 2, 3, 45, 48].includes(code)) {
 				return "Cloudy";
 			}
 
@@ -253,9 +252,7 @@
 			}
 
 			if (
-				[71, 73, 75, 77, 85, 86].includes(
-					code,
-				)
+				[71, 73, 75, 77, 85, 86].includes(code)
 			) {
 				return "Snow";
 			}
@@ -273,8 +270,7 @@
 			}
 
 			if (conditionElement) {
-				conditionElement.textContent =
-					"Loading";
+				conditionElement.textContent = "Loading";
 			}
 		}
 
@@ -743,6 +739,11 @@
 			selectedLocation =
 				locationKey;
 
+			localStorage.setItem(
+				"selectedLocation",
+				locationKey,
+			);
+
 			if (locationName) {
 				locationName.textContent =
 					location.city;
@@ -865,20 +866,33 @@
 			},
 		);
 
-		updateTime();
+		// Validate the saved location. "you" is added asynchronously below.
+		if (
+			selectedLocation !== "you" &&
+			!(selectedLocation in locations)
+		) {
+			selectedLocation = "denver";
+			localStorage.setItem(
+				"selectedLocation",
+				selectedLocation,
+			);
+		}
 
-		renderDayNight(
-			getFallbackDayState(
-				locations[
-					selectedLocation
-				],
-			),
-			locations[selectedLocation],
-		);
-
-		fetchWeather(
-			locations[selectedLocation],
-		);
+		// Render the saved fixed location immediately.
+		// If "you" was saved, show Denver only as a temporary fallback
+		// without overwriting the saved "you" preference.
+		if (selectedLocation !== "you") {
+			selectLocation(selectedLocation);
+		} else {
+			const savedLocation = selectedLocation;
+			selectedLocation = "denver";
+			selectLocation("denver");
+			selectedLocation = savedLocation;
+			localStorage.setItem(
+				"selectedLocation",
+				savedLocation,
+			);
+		}
 
 		setInterval(
 			updateTime,
@@ -894,7 +908,19 @@
 			}
 		}, 10 * 60 * 1000);
 
-		detectVisitorLocation();
+		detectVisitorLocation().then(() => {
+			const savedLocation =
+				localStorage.getItem(
+					"selectedLocation",
+				);
+
+			if (
+				savedLocation === "you" &&
+				locations.you
+			) {
+				selectLocation("you");
+			}
+		});
 	}
 </script>
 
