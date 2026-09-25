@@ -1,24 +1,11 @@
 ---
-import quotes from "../data/quotes.json";
+import dailyQuote from "../../public/daily-quote.json";
 import TypedText from "./TypedText.astro";
 
-const now = new Date();
-
-const startDate = new Date(2026, 0, 1);
-
-const daysSinceStart = Math.floor(
-	(now.getTime() - startDate.getTime()) / 86400000,
-);
-
-const quoteIndex =
-	((daysSinceStart % quotes.length) + quotes.length) % quotes.length;
-
-const todaysQuote = quotes[quoteIndex];
-
-const quoteText = `"${todaysQuote.quote}" — ${todaysQuote.author}`;
+const quoteText = `"${dailyQuote.quote}" — ${dailyQuote.author}`;
 
 const authorSearchUrl =
-	`https://www.google.com/search?q=${encodeURIComponent(todaysQuote.author)}`;
+	`https://www.google.com/search?q=${encodeURIComponent(dailyQuote.author)}`;
 ---
 
 <div class="daily-quote">
