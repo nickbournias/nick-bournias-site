@@ -1,8 +1,25 @@
 <div class="location-widget" data-location-widget>
 	<div
 		class="location-selector"
-		aria-label="Location selector"
-	>
+		aria-label="Location selector">
+
+		<button
+			class="location-option visitor-location"
+			type="button"
+			data-location="you"
+			hidden
+		>
+			You
+		</button>
+		
+		<button
+			class="location-option"
+			type="button"
+			data-location="la"
+		>
+			LA
+		</button>
+		
 		<button
 			class="location-option active"
 			type="button"
@@ -14,27 +31,11 @@
 		<button
 			class="location-option"
 			type="button"
-			data-location="nyc"
+			data-location="dmv"
 		>
 			NYC
 		</button>
 
-		<button
-			class="location-option"
-			type="button"
-			data-location="la"
-		>
-			LA
-		</button>
-
-		<button
-			class="location-option visitor-location"
-			type="button"
-			data-location="you"
-			hidden
-		>
-			You
-		</button>
 	</div>
 
 	<div class="location-heading">
