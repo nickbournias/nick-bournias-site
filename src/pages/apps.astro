@@ -24,8 +24,7 @@ const apps = [
     {
         title: "Audio Visualizer",
         category: "Audio / Visual",
-        description:
-            "Drop in an audio file, and watch it come to life!",
+        description: "Drop in an audio file, and watch it come to life!",
         href: "https://nickbournias.github.io/ambient-visualizer/",
         tech: ["JavaScript", "Audio", "Visuals"],
         external: true,
@@ -33,8 +32,7 @@ const apps = [
     {
         title: "Ambient Generator",
         category: "Audio / Visual",
-        description:
-            "Play a sound and enjoy!",
+        description: "Play a sound and enjoy!",
         href: "https://nickbournias.github.io/ambient-generator/",
         tech: ["JavaScript", "Audio", "Visuals"],
         external: true,
@@ -141,8 +139,8 @@ const apps = [
     }
 
     .container {
-        width: 100%;
-        padding-inline: 1.25rem;
+        width: min(100% - 2rem, 1200px);
+        margin-inline: auto;
     }
 
     .apps-header {
@@ -341,13 +339,13 @@ const apps = [
     }
 
     h1 {
-		margin: 0;
+        margin: 0;
 
-		font-size: clamp(2.8rem, 8vw, 5rem);
-		font-weight: 400;
-		line-height: 1.02;
-		letter-spacing: -0.03em;
-	}
+        font-size: clamp(2.8rem, 8vw, 5rem);
+        font-weight: 400;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+    }
 
     @keyframes cursor-blink {
         50% {
