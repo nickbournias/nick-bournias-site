@@ -8,11 +8,13 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "npm run build && wrangler dev",
+    "astro": "astro",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^14.3.1",
+    "@astrojs/cloudflare": "^14.4.1",
     "astro": "^7.3.2",
     "gsap": "^3.15.0",
     "three": "^0.185.1"
@@ -21,6 +23,7 @@
     "esbuild": true
   },
   "devDependencies": {
-    "@types/three": "^0.185.4"
+    "@types/three": "^0.185.4",
+    "wrangler": "^4.151.2"
   }
 }
