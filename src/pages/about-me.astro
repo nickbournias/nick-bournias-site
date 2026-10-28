@@ -1,3 +1,4 @@
+
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TypedText from "../components/TypedText.astro";
@@ -71,15 +72,23 @@ const timeline = [
                         <div class="timeline-marker">
                             <span class="timeline-dot" />
                         </div>
+
                         <div class="timeline-content">
-                            <p class="timeline-date">{item.date}</p>
+                            <p class="timeline-date content-label">
+                                {item.date}
+                            </p>
+
                             <h2>{item.company}</h2>
+
                             <div class="timeline-roles">
                                 {item.roles.map((role) => (
-                                    <p class="timeline-role">{role}</p>
+                                    <p class="timeline-role content-secondary">
+                                        {role}
+                                    </p>
                                 ))}
                             </div>
-                            <ul class="timeline-description">
+
+                            <ul class="timeline-description content-text">
                                 {item.description.map((description) => (
                                     <li>{description}</li>
                                 ))}
@@ -143,15 +152,16 @@ const timeline = [
     .timeline-date {
         margin: 0 0 0.6rem;
         color: var(--muted);
-        font-size: 0.82rem;
+        font-weight: 500;
         letter-spacing: 0.05em;
     }
 
     .timeline-content h2 {
         margin: 0;
-        font-size: clamp(1.5rem, 3vw, 2rem);
-        font-weight: 500;
+        font-size: clamp(1.45rem, 2.6vw, 2.15rem);
+        font-weight: 400;
         line-height: 1.2;
+        letter-spacing: -0.025em;
     }
 
     .timeline-roles {
@@ -164,7 +174,6 @@ const timeline = [
     .timeline-role {
         margin: 0;
         color: rgba(255, 255, 255, 0.78);
-        font-size: 1rem;
     }
 
     .timeline-role:not(:last-child)::after {
@@ -177,7 +186,6 @@ const timeline = [
         max-width: 600px;
         margin: 0.9rem 0 0;
         color: var(--muted);
-        font-size: 0.9rem;
         line-height: 1.65;
     }
 
@@ -190,6 +198,10 @@ const timeline = [
         .timeline-roles {
             flex-direction: column;
             gap: 0.25rem;
+        }
+
+        .timeline-content h2 {
+            font-size: 1.5rem;
         }
     }
 

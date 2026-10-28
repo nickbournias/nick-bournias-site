@@ -21,7 +21,7 @@
 			<a href="/work">Work</a>
 			<a href="/insights">Insights</a>
 			<a href="/about-me">About</a>
-			<a href="/contact">Contact</a>
+			<a href="/contact">Connect</a>
 		</nav>
 	</div>
 </header>
@@ -30,10 +30,7 @@
 	const toggle = document.querySelector(".menu-toggle");
 	const nav = document.querySelector(".nav-links");
 
-	if (
-		toggle instanceof HTMLButtonElement &&
-		nav instanceof HTMLElement
-	) {
+	if (toggle instanceof HTMLButtonElement && nav instanceof HTMLElement) {
 		const closeMenu = () => {
 			nav.classList.remove("is-open");
 			toggle.classList.remove("is-open");
@@ -65,7 +62,6 @@
 	.site-header {
 		position: relative;
 		z-index: 1000;
-
 		width: 100%;
 		padding-top: 24px;
 	}
@@ -75,14 +71,12 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 24px;
-
 		min-height: 64px;
 	}
 
 	.brand {
 		position: relative;
 		z-index: 1002;
-
 		font-size: 1.25rem;
 		font-weight: 800;
 		white-space: nowrap;
@@ -96,18 +90,21 @@
 
 	.nav-links a {
 		color: #cbcbcb;
-
 		font-size: 1.25rem;
 		font-weight: 200;
 		white-space: nowrap;
-
 		text-decoration: none;
-
 		transition: color 0.2s ease;
 	}
 
 	.nav-links a:hover {
 		color: #fffdfd;
+	}
+
+	/* Connect: bold text only */
+
+	.nav-links a.nav-cta {
+		font-weight: 700;
 	}
 
 	.menu-toggle {
@@ -127,33 +124,26 @@
 			font-size: 1rem;
 		}
 
-		/* MENU BUTTON */
+		/* Hamburger button */
 
 		.menu-toggle {
 			position: relative;
 			z-index: 1002;
-
 			display: block;
-
 			width: 32px;
 			height: 32px;
 			padding: 0;
-
 			border: 0;
 			background: transparent;
-
 			cursor: pointer;
 		}
 
 		.menu-toggle span {
 			position: absolute;
 			left: 5px;
-
 			width: 22px;
 			height: 1px;
-
 			background: #cbcbcb;
-
 			transition:
 				top 0.3s cubic-bezier(0.22, 1, 0.36, 1),
 				transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -177,7 +167,7 @@
 			transform: rotate(-45deg);
 		}
 
-		/* FULL SCREEN MENU */
+		/* Full-screen mobile navigation */
 
 		.nav-links {
 			position: fixed;
@@ -187,21 +177,19 @@
 			display: flex;
 			flex-direction: column;
 			align-items: flex-end;
-            text-align: right;
+			text-align: right;
 			justify-content: center;
 			gap: 0.6rem;
 
 			padding-inline: max(1.5rem, calc((100vw - 1200px) / 2));
 
 			background: rgba(27, 27, 27, 0.98);
-
 			backdrop-filter: blur(18px);
 			-webkit-backdrop-filter: blur(18px);
 
 			opacity: 0;
 			visibility: hidden;
 			pointer-events: none;
-
 			transform: translateY(-10px);
 
 			transition:
@@ -214,21 +202,18 @@
 			opacity: 1;
 			visibility: visible;
 			pointer-events: auto;
-
 			transform: translateY(0);
 		}
 
 		.nav-links a {
 			color: rgba(255, 255, 255, 0.72);
-
 			font-size: clamp(2.2rem, 10vw, 3.6rem);
 			font-weight: 300;
 			line-height: 1.15;
 			letter-spacing: -0.03em;
-            text-align: right;
+			text-align: right;
 
 			opacity: 0;
-
 			transform: translateY(14px);
 
 			transition:
@@ -261,9 +246,37 @@
 		.nav-links a:hover {
 			color: #fff;
 		}
+
+		/* Connect: bold on mobile */
+
+		.nav-links a.nav-cta {
+			font-weight: 700;
+		}
 	}
 
 	:global(body.menu-open) {
 		overflow: hidden;
+	}
+
+	/* Desktop navbar hover lift */
+	@media (min-width: 768px) {
+		.nav-links a {
+			display: inline-block;
+			transition:
+				color 0.2s ease,
+				transform 0.25s ease;
+		}
+
+		.nav-links a:hover,
+		.nav-links a:focus-visible {
+			color: #fffdfd;
+			transform: translateY(-4px);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.nav-links a {
+			transition: none;
+		}
 	}
 </style>

@@ -1,130 +1,137 @@
+
 ---
 interface Props {
-	text: string;
-	speed?: number;
-	delay?: number;
-	startEvent?: string;
+    text: string;
+    speed?: number;
+    delay?: number;
+    startEvent?: string;
 }
 
 const {
-	text,
-	speed = 45,
-	delay = 400,
-	startEvent,
+    text,
+    speed = 45,
+    delay = 400,
+    startEvent,
 } = Astro.props;
 ---
 
 <span
-	class="typed-text"
-	data-text={text}
-	data-speed={speed}
-	data-delay={delay}
-	data-start-event={startEvent}
+    class="typed-text"
+    data-text={text}
+    data-speed={speed}
+    data-delay={delay}
+    data-start-event={startEvent}
 ></span>
 
 <span class="typing-cursor" aria-hidden="true"></span>
 
 <script>
-	const typedElements = document.querySelectorAll(".typed-text");
+    const typedElements = document.querySelectorAll(".typed-text");
 
-	typedElements.forEach((element) => {
-		if (!(element instanceof HTMLElement)) return;
+    typedElements.forEach((element) => {
+        if (!(element instanceof HTMLElement)) return;
 
-		if (element.dataset.initialized === "true") return;
+        if (element.dataset.initialized === "true") return;
 
-		const text = element.dataset.text ?? "";
-		const speed = Number(element.dataset.speed) || 45;
-		const delay = Number(element.dataset.delay) || 400;
-		const startEvent = element.dataset.startEvent;
+        const typedElement = element;
 
-		const cursor = element.nextElementSibling;
+        const text = typedElement.dataset.text ?? "";
+        const speed = Number(typedElement.dataset.speed ?? 45);
+        const delay = Number(typedElement.dataset.delay ?? 400);
+        const startEvent = typedElement.dataset.startEvent;
 
-		let index = 0;
-		let started = false;
+        const cursor = typedElement.nextElementSibling;
 
-		function finishCursor() {
-			if (!(cursor instanceof HTMLElement)) return;
+        let index = 0;
+        let started = false;
 
-			cursor.classList.add("blink");
+        function finishCursor() {
+            if (!(cursor instanceof HTMLElement)) return;
 
-			setTimeout(() => {
-				cursor.classList.remove("blink");
-				cursor.style.opacity = "0";
-			}, 2400);
-		}
+            cursor.classList.add("blink");
 
-		function type() {
-			if (index >= text.length) {
-				finishCursor();
-				return;
-			}
+            setTimeout(() => {
+                cursor.classList.remove("blink");
+                cursor.style.opacity = "0";
+            }, 2400);
+        }
 
-			const char = text[index];
+        function type() {
+            if (index >= text.length) {
+                finishCursor();
+                return;
+            }
 
-			element.textContent += char;
-			index++;
+            const char = text[index];
 
-			let typingDelay =
-				speed * 0.7 + Math.random() * speed * 0.6;
+            typedElement.textContent =
+                (typedElement.textContent ?? "") + char;
 
-			if (char === "," || char === ";") {
-				typingDelay += 150;
-			}
+            index++;
 
-			if (
-				char === "." ||
-				char === "!" ||
-				char === "?"
-			) {
-				typingDelay += 250;
-			}
+            let typingDelay =
+                speed * 0.7 + Math.random() * speed * 0.6;
 
-			setTimeout(type, typingDelay);
-		}
+            if (char === "," || char === ";") {
+                typingDelay += 150;
+            }
 
-		function startTyping() {
-			if (started) return;
+            if (
+                char === "." ||
+                char === "!" ||
+                char === "?"
+            ) {
+                typingDelay += 250;
+            }
 
-			started = true;
-			element.dataset.initialized = "true";
+            setTimeout(type, typingDelay);
+        }
 
-			setTimeout(type, delay);
-		}
+        function startTyping() {
+            if (started) return;
 
-		if (startEvent) {
-			document.addEventListener(
-				startEvent,
-				startTyping,
-				{ once: true },
-			);
-		} else {
-			startTyping();
-		}
-	});
+            started = true;
+            typedElement.dataset.initialized = "true";
+
+            setTimeout(type, delay);
+        }
+
+        if (startEvent) {
+            document.addEventListener(
+                startEvent,
+                startTyping,
+                { once: true }
+            );
+        } else {
+            startTyping();
+        }
+    });
 </script>
 
 <style>
-	.typing-cursor {
-		display: inline-block;
+    .typing-cursor {
+        display: inline-block;
+        width: 0.35em;
+        height: 1em;
+        margin-left: 3px;
+        background: currentColor;
+        vertical-align: -0.12em;
+        opacity: 1;
+    }
 
-		width: 0.35em;
-		height: 1em;
+    .typing-cursor.blink {
+        animation: cursor-blink 0.8s step-end infinite;
+    }
 
-		margin-left: 3px;
+    @keyframes cursor-blink {
+        50% {
+            opacity: 0;
+        }
+    }
 
-		background: currentColor;
-
-		vertical-align: -0.12em;
-		opacity: 1;
-	}
-
-	.typing-cursor.blink {
-		animation: cursor-blink 0.8s step-end infinite;
-	}
-
-	@keyframes cursor-blink {
-		50% {
-			opacity: 0;
-		}
-	}
+    @media (prefers-reduced-motion: reduce) {
+        .typing-cursor.blink {
+            animation: none;
+        }
+    }
 </style>

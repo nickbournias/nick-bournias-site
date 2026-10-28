@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import DailyQuote from "../components/DailyQuote.astro";
 import InteractiveSphere from "../components/home/InteractiveSphere.astro";
 import HarmonographCard from "../components/home/HarmonographCard.astro";
-import LocationWidget from "../components/home/LocationWidget.astro";
+//import LocationWidget from "../components/home/LocationWidget.astro";
 ---
 
 <BaseLayout
@@ -14,20 +14,18 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 		<div class="container">
 			<div class="about-grid">
 				<div class="about-extra">
-					<div class="hero-widget">
-						<div class="hero-flipper">
-							<div class="headshot-layer">
-								<div class="headshot-wrap">
-									<img
-										src="/assets/images/nick-bournias-headshot.png"
-										alt="Nick Bournias"
-										class="headshot"
-									/>
+					<div class="about-extra">
+						<div class="hero-widget">
+							<div class="hero-flipper">
+								<div class="headshot-layer">
+									<div class="headshot-wrap">
+										<img
+											src="/assets/images/nick-bournias-headshot.png"
+											alt="Nick Bournias"
+											class="headshot"
+										/>
+									</div>
 								</div>
-							</div>
-
-							<div class="weather-layer">
-								<LocationWidget />
 							</div>
 						</div>
 					</div>
@@ -39,10 +37,10 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 					<p class="light-large">ServiceNow Technical Consultant</p>
 
 					<p>
-						I help organizations improve efficiency and reduce cost by 
-						designing and building solutions that are practical, reliable, 
-						and secure. I specialize in ServiceNow, with a focus on custom 
-						app development, cyber, and AI.
+						I help organizations improve efficiency and reduce cost
+						by designing and building solutions that are practical,
+						reliable, and secure. I specialize in ServiceNow, with a
+						focus on custom app development, cyber, and AI.
 					</p>
 
 					<div class="connect">
@@ -70,8 +68,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 					</div>
 				</div>
 			</div>
-
-			<div class="divider"></div>
+			<br />
 
 			<section class="middle-section">
 				<div class="middle-grid">
@@ -80,7 +77,9 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 					</div>
 
 					<div class="middle-center scroll-reveal">
-						<DailyQuote />
+						<div class="quote-wrapper">
+							<DailyQuote />
+						</div>
 					</div>
 
 					<div class="middle-right scroll-reveal">
@@ -89,7 +88,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 				</div>
 			</section>
 
-			<div class="divider"></div>
+			<br />
 
 			<section class="page-links-section scroll-reveal-links">
 				<div class="page-links-grid">
@@ -100,7 +99,8 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 							<div class="nb-tile-title">Work</div>
 
 							<div class="nb-tile-desc">
-								A collection of problems I’ve solved in ServiceNow.
+								A collection of problems I’ve solved in
+								ServiceNow.
 							</div>
 						</div>
 					</a>
@@ -294,7 +294,8 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 	}
 
 	.hero-flipper.is-flipped {
-		transform: rotateY(180deg);
+		/*transform: rotateY(180deg);*/
+		transform: none;
 	}
 
 	.headshot-layer,
@@ -396,7 +397,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 	}
 
 	.middle-section {
-		padding: 1rem 0;
+		padding: 0;
 	}
 
 	.middle-grid {
@@ -409,10 +410,15 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 		display: flex;
 		align-items: center;
 		justify-content: center;
-
 		min-width: 0;
-
 		text-align: center;
+	}
+
+	.quote-wrapper {
+		width: 100%;
+		padding: 48px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.2);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 	}
 
 	.page-links-section {
@@ -559,10 +565,12 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 		}
 
 		.hero-widget {
-			width: calc(100% + 48px);
-			max-width: 430px;
-			margin-inline: -24px;
-			perspective: 1000px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			width: min(100%, 390px);
+			min-width: 0;
 		}
 
 		.hero-flipper {
@@ -598,16 +606,59 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 		.nb-tile-title {
 			font-size: 18px;
 		}
+
+		/* Mobile: borders around all three components */
+
+		.middle-grid {
+			width: 100%;
+			position: relative;
+			border-top: none;
+			border-bottom: none;
+			padding: 16px 0 40px;
+		}
+
+		.middle-grid::before,
+		.middle-grid::after {
+			content: "";
+			position: absolute;
+			left: 10%;
+			width: 80%;
+			height: 1px;
+			background: rgba(255, 255, 255, 0.2);
+		}
+
+		.middle-grid::before {
+			top: 0;
+		}
+
+		.middle-grid::after {
+			bottom: 0;
+		}
+
+		/* Remove quote-only borders on mobile */
+		.quote-wrapper {
+			border-top: none;
+			border-bottom: none;
+			padding: 0;
+		}
+
+		/* Maintain centered quote */
+		.middle-center {
+			padding-top: 0;
+		}
 	}
 
 	@media (min-width: 768px) {
 		.about-grid {
 			grid-template-columns: 2fr 3fr;
-
 			align-items: center;
 		}
 
 		.about-extra {
+			justify-content: flex-end;
+		}
+
+		.hero-widget {
 			justify-content: flex-end;
 		}
 
@@ -620,7 +671,7 @@ import LocationWidget from "../components/home/LocationWidget.astro";
 		}
 
 		.middle-center {
-			transform: translateY(-50px);
+			/*transform: translateY(-50px);*/
 		}
 
 		.page-links-grid {

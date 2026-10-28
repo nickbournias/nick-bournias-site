@@ -36,7 +36,7 @@ const formatDate = (date: Date | string) =>
                 {
                     insights.map((insight) => (
                         <article class="writing-entry">
-                            <div class="writing-meta">
+                            <div class="writing-meta content-label">
                                 <time datetime={new Date(insight.data.date).toISOString()}>
                                     {formatDate(insight.data.date)}
                                 </time>
@@ -50,8 +50,12 @@ const formatDate = (date: Date | string) =>
                                 href={`/insights/${insight.id}/`}
                             >
                                 <h2>{insight.data.title}</h2>
-                                <p>{insight.data.description}</p>
-                                <span class="read-link">Read essay</span>
+                                <p class="content-text">
+                                    {insight.data.description}
+                                </p>
+                                <span class="read-link content-secondary">
+                                    Read essay
+                                </span>
                             </a>
                         </article>
                     ))
@@ -85,8 +89,7 @@ const formatDate = (date: Date | string) =>
         flex-direction: column;
         gap: 0.45rem;
         padding-top: 0.4rem;
-        color: rgba(255, 255, 255, 0.3);
-        font-size: 0.72rem;
+        color: rgba(255, 255, 255, 0.4);
         font-weight: 500;
         letter-spacing: 0.06em;
         text-transform: uppercase;
@@ -103,18 +106,16 @@ const formatDate = (date: Date | string) =>
         margin: 0;
         max-width: 760px;
         color: rgba(255, 255, 255, 0.96);
-        font-size: clamp(1.9rem, 3vw, 2.7rem);
+        font-size: clamp(1.45rem, 2.6vw, 2.15rem);
         font-weight: 400;
-        line-height: 1.08;
-        letter-spacing: -0.035em;
+        line-height: 1.2;
+        letter-spacing: -0.025em;
         transition: transform 0.25s ease, color 0.25s ease;
     }
 
     .writing-link p {
         margin: 1rem 0 0;
         max-width: 700px;
-        color: rgba(255, 255, 255, 0.46);
-        font-size: 1rem;
         line-height: 1.7;
     }
 
@@ -122,8 +123,6 @@ const formatDate = (date: Date | string) =>
         display: inline-block;
         margin-top: 1.35rem;
         padding-bottom: 0.2rem;
-        color: rgba(255, 255, 255, 0.58);
-        font-size: 0.78rem;
         font-weight: 500;
         letter-spacing: 0.04em;
         border-bottom: 1px solid rgba(255, 255, 255, 0.18);
@@ -152,11 +151,7 @@ const formatDate = (date: Date | string) =>
         }
 
         .writing-link h2 {
-            font-size: 1.7rem;
-        }
-
-        .writing-link p {
-            font-size: 0.95rem;
+            font-size: 1.5rem;
         }
 
         .read-link {

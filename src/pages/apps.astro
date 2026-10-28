@@ -1,3 +1,4 @@
+
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TypedText from "../components/TypedText.astro";
@@ -66,7 +67,7 @@ const apps = [
                     />
                 </p>
 
-                <p class="mobile-note">
+                <p class="mobile-note content-secondary">
                     Some projects are best experienced on desktop.
                 </p>
             </header>
@@ -85,17 +86,21 @@ const apps = [
                             }
                         >
                             <div class="app-content">
-                                <div class="app-meta">
+                                <div class="app-meta content-label">
                                     <span>{app.category}</span>
                                 </div>
 
                                 <h2>{app.title}</h2>
 
-                                <p>{app.description}</p>
+                                <p class="content-text">
+                                    {app.description}
+                                </p>
 
                                 <div class="app-tech">
                                     {app.tech.map((item) => (
-                                        <span>{item}</span>
+                                        <span class="content-label">
+                                            {item}
+                                        </span>
                                     ))}
                                 </div>
                             </div>
@@ -108,7 +113,7 @@ const apps = [
                 }
             </div>
 
-            <div class="github-footer">
+            <div class="github-footer content-secondary">
                 <p>
                     More projects and source code on
                     <a
@@ -128,7 +133,6 @@ const apps = [
     .mobile-note {
         margin: 0.9rem 0 0;
         color: rgba(255, 255, 255, 0.3);
-        font-size: 0.75rem;
     }
 
     .divider {
@@ -162,7 +166,6 @@ const apps = [
         gap: 0.7rem;
         margin-bottom: 0.75rem;
         color: rgba(255, 255, 255, 0.3);
-        font-size: 0.68rem;
         font-weight: 500;
         letter-spacing: 0.07em;
         text-transform: uppercase;
@@ -171,9 +174,9 @@ const apps = [
     .app-content h2 {
         margin: 0;
         color: rgba(255, 255, 255, 0.95);
-        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        font-size: clamp(1.45rem, 2.6vw, 2.15rem);
         font-weight: 400;
-        line-height: 1.15;
+        line-height: 1.2;
         letter-spacing: -0.025em;
         transition: transform 0.25s ease;
     }
@@ -181,8 +184,6 @@ const apps = [
     .app-content p {
         max-width: 620px;
         margin: 0.75rem 0 0;
-        color: rgba(255, 255, 255, 0.45);
-        font-size: 0.92rem;
         line-height: 1.65;
     }
 
@@ -198,7 +199,9 @@ const apps = [
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 999px;
         color: rgba(255, 255, 255, 0.35);
-        font-size: 0.64rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        text-transform: none;
     }
 
     .app-arrow {
@@ -221,7 +224,6 @@ const apps = [
     .github-footer {
         padding-top: 2.5rem;
         color: rgba(255, 255, 255, 0.35);
-        font-size: 0.8rem;
     }
 
     .github-footer p {
@@ -252,16 +254,14 @@ const apps = [
 
         .app-meta {
             margin-bottom: 0.5rem;
-            font-size: 0.6rem;
         }
 
         .app-content h2 {
-            font-size: 1.35rem;
+            font-size: 1.5rem;
         }
 
         .app-content p {
             margin-top: 0.6rem;
-            font-size: 0.85rem;
             line-height: 1.55;
         }
 

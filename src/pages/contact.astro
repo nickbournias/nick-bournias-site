@@ -1,22 +1,218 @@
+
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import TypedText from "../components/TypedText.astro";
 ---
 
-<BaseLayout title="Contact - Nick Bournias" description="Contact Nick Bournias">
-    <section class="page-section">
+<BaseLayout
+    title="Connect | Nick Bournias"
+    description="Get in touch with Nick Bournias."
+>
+    <main class="contact-page">
         <div class="container">
-            <header class="page-header">
-                <p class="eyebrow">Contact</p>
+            <div class="contact-content">
 
-                <h1 class="page-title">Let's Connect!</h1>
-
-                <p class="page-intro">
-                    <TypedText
-                        text="........"
-                    />
+                <h1 class="page-title">Let's start a conversation.</h1>
+                <br>
+                <!--
+                <p class="intro page-intro">
+                    I'm always interested in connecting with folks across the industry!
                 </p>
-            </header>
+                -->
+                <div class="contact-options">
+                    <a
+                        class="contact-card email-card"
+                        href="mailto:Nick@NickBournias.com"
+                    >
+                        <div class="card-content">
+                            <span class="card-label content-label">
+                                01 / EMAIL
+                            </span>
+                            <h2>Send me an email</h2>
+                            <p class="content-text">Nick@NickBournias.com</p>
+                        </div>
+                        <span class="arrow" aria-hidden="true">↗</span>
+                    </a>
+
+                    <a
+                        class="contact-card linkedin-card"
+                        href="https://www.linkedin.com/in/nickbournias/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <div class="card-content">
+                            <span class="card-label content-label">
+                                02 / LINKEDIN
+                            </span>
+                            <h2>Connect on LinkedIn</h2>
+                            <p class="content-text">Let's expand our networks.</p>
+                        </div>
+                        <span class="arrow" aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </div>
         </div>
-    </section>
+    </main>
 </BaseLayout>
+
+<style>
+    .contact-page {
+        min-height: 75vh;
+        display: flex;
+        align-items: center;
+        padding: 5rem 0 7rem;
+    }
+
+    .contact-content {
+        max-width: 850px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        margin-bottom: 1.5rem;
+        font-weight: 400;
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+    }
+
+    .intro {
+        max-width: 600px;
+        margin-bottom: 3.5rem;
+        color: #a8a8a8;
+        line-height: 1.7;
+    }
+
+    .contact-options {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+
+    .contact-card {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+
+        min-height: 220px;
+        padding: 2rem;
+
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.025);
+
+        color: inherit;
+        text-decoration: none;
+
+        transition:
+            transform 0.25s ease,
+            border-color 0.3s ease,
+            background-color 0.3s ease,
+            color 0.3s ease;
+    }
+
+    .contact-card:hover,
+    .contact-card:focus-visible {
+        transform: translateY(-5px);
+    }
+
+    /* Email hover */
+
+    .email-card:hover,
+    .email-card:focus-visible {
+        background-color: #e8e8e8;
+        border-color: #e8e8e8;
+        color: #171717;
+    }
+
+    /* LinkedIn hover */
+
+    .linkedin-card:hover,
+    .linkedin-card:focus-visible {
+        background-color: #0a66c2;
+        border-color: #0a66c2;
+        color: #ffffff;
+    }
+
+    .card-label {
+        color: #999;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        transition: color 0.3s ease;
+    }
+
+    .card-content h2 {
+        margin: 2rem 0 0.75rem;
+        font-size: clamp(1.45rem, 2.6vw, 2.15rem);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.025em;
+    }
+
+    .card-content p {
+        color: #aaa;
+        overflow-wrap: anywhere;
+        transition: color 0.3s ease;
+    }
+
+    /* Text colors when filled */
+
+    .email-card:hover .card-label,
+    .email-card:hover .card-content p,
+    .email-card:focus-visible .card-label,
+    .email-card:focus-visible .card-content p {
+        color: #555;
+    }
+
+    .linkedin-card:hover .card-label,
+    .linkedin-card:hover .card-content p,
+    .linkedin-card:focus-visible .card-label,
+    .linkedin-card:focus-visible .card-content p {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Arrow animation */
+
+    .arrow {
+        font-size: 1.5rem;
+        font-weight: 300;
+        transition: transform 0.25s ease;
+    }
+
+    .contact-card:hover .arrow,
+    .contact-card:focus-visible .arrow {
+        transform: translate(4px, -4px);
+    }
+
+    @media (max-width: 767px) {
+        .contact-page {
+            min-height: auto;
+            padding: 4rem 0 6rem;
+        }
+
+        .contact-options {
+            grid-template-columns: 1fr;
+        }
+
+        .contact-card {
+            min-height: 175px;
+            padding: 1.5rem;
+        }
+
+        .intro {
+            margin-bottom: 2.5rem;
+        }
+
+        .card-content h2 {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .contact-card,
+        .arrow,
+        .card-label,
+        .card-content p {
+            transition: none;
+        }
+    }
+</style>
