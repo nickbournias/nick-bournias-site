@@ -1,0 +1,31 @@
+
+---
+import { getCollection, render } from "astro:content";
+import WritingLayout from "../../layouts/WritingLayout.astro";
+
+export async function getStaticPaths() {
+    const insights = await getCollection("insights");
+
+    return insights.map((insight) => ({
+        params: {
+            slug: insight.id,
+        },
+        props: {
+            insight,
+        },
+    }));
+}
+
+const { insight } = Astro.props;
+
+const { Content } = await render(insight);
+---
+
+<WritingLayout
+    title={insight.data.title}
+    description={insight.data.description}
+    date={insight.data.date}
+    category={insight.data.category}
+>
+    <Content />
+</WritingLayout>

@@ -3,294 +3,213 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import TypedText from "../components/TypedText.astro";
 
 const timeline = [
-	{
-		date: "Aug. 2025 — Present",
-		company: "KPMG",
-		roles: ["Federal ServiceNow Developer"],
-		description: [
-			"Develop custom ServiceNow applications and features for federal clients across front-end and server-side functionality.",
-			"Build workflow automations, business logic, access controls, and automated testing while troubleshooting complex platform issues.",
-			"Improve application performance and user experience through database optimization, reusable development patterns, and direct collaboration with end users.",
-		],
-		type: "work",
-	},
-	{
-		date: "Sep. 2022 — Aug. 2025",
-		company: "Ernst & Young",
-		roles: [
-			"ServiceNow Business Analyst / Jr Developer",
-			"Product Analyst",
-			"Security Controls / Risk Analyst",
-		],
-		description: [
-			"Developed and enhanced ServiceNow TPRM and ITSM functionality, including workflows, form behavior, business rules, and other platform features.",
-			"Supported product delivery across requirements, testing, defect resolution, releases, APIs, and integrations while working closely with technical teams and stakeholders.",
-			"Performed cybersecurity risk and control assessments for federal and state clients using frameworks including NIST and MITRE ATT&CK.",
-		],
-		type: "work",
-	},
-	{
-		date: "Graduated May 2022",
-		company: "University of Maryland",
-		roles: ["Smith School of Business · B.S. Information Systems"],
-		description: [
-			"Graduated from the Honors College with a Bachelor of Science in Information Systems.",
-			"Minored in Advanced Cybersecurity Experience (ACES) and Philosophy.",
-		],
-		type: "education",
-	},
-	{
-		date: "2020 — 2021",
-		company: "Ernst & Young",
-		roles: ["Cybersecurity Intern"],
-		description: [
-			"Supported a cybersecurity supply chain risk management project.",
-			"Gained early experience working on technology risk and cybersecurity problems in a consulting environment.",
-		],
-		type: "work",
-	},
+    {
+        date: "Aug. 2025 — Present",
+        company: "KPMG",
+        roles: ["Federal ServiceNow Developer"],
+        description: [
+            "Develop custom ServiceNow applications and features for federal clients across front-end and server-side functionality.",
+            "Build workflow automations, business logic, access controls, and automated testing while troubleshooting complex platform issues.",
+            "Improve application performance and user experience through database optimization, reusable development patterns, and direct collaboration with end users.",
+        ],
+        type: "work",
+    },
+    {
+        date: "Sep. 2022 — Aug. 2025",
+        company: "Ernst & Young",
+        roles: [
+            "ServiceNow Business Analyst / Jr Developer",
+            "Product Analyst",
+            "Security Controls / Risk Analyst",
+        ],
+        description: [
+            "Developed and enhanced ServiceNow TPRM and ITSM functionality, including workflows, form behavior, business rules, and other platform features.",
+            "Supported product delivery across requirements, testing, defect resolution, releases, APIs, and integrations while working closely with technical teams and stakeholders.",
+            "Performed cybersecurity risk and control assessments for federal and state clients using frameworks including NIST and MITRE ATT&CK.",
+        ],
+        type: "work",
+    },
+    {
+        date: "Graduated May 2022",
+        company: "University of Maryland",
+        roles: ["Smith School of Business · B.S. Information Systems"],
+        description: [
+            "Graduated from the Honors College with a Bachelor of Science in Information Systems.",
+            "Minored in Advanced Cybersecurity Experience (ACES) and Philosophy.",
+        ],
+        type: "education",
+    },
+    {
+        date: "2020 — 2021",
+        company: "Ernst & Young",
+        roles: ["Cybersecurity Intern"],
+        description: [
+            "Supported a cybersecurity supply chain risk management project.",
+            "Gained early experience working on technology risk and cybersecurity problems in a consulting environment.",
+        ],
+        type: "work",
+    },
 ];
 ---
 
 <BaseLayout title="About Me - Nick Bournias" description="About Nick Bournias">
-	<section class="about-section">
-		<div class="container">
-			<div class="about-header">
-				<p class="eyebrow">About me</p>
+    <section class="page-section">
+        <div class="container">
+            <header class="page-header">
+                <p class="eyebrow">About me</p>
+                <h1 class="page-title">How I got here.</h1>
+                <p class="page-intro">
+                    <TypedText
+                        text="I started my career in cybersecurity and consulting before moving deeper into software and ServiceNow development."
+                    />
+                </p>
+            </header>
 
-				<h1>How I got here.</h1>
-
-				<p class="intro">
-					<TypedText
-						text="I started my career in cybersecurity and consulting before moving deeper into software and ServiceNow development."
-					/>
-				</p>
-			</div>
-
-			<div class="timeline">
-				{
-					timeline.map((item) => (
-						<div class="timeline-item">
-							<div class="timeline-marker">
-								<span class="timeline-dot" />
-							</div>
-
-							<div class="timeline-content">
-								<p class="timeline-date">{item.date}</p>
-
-								<h2>{item.company}</h2>
-
-								<div class="timeline-roles">
-									{item.roles.map((role) => (
-										<p class="timeline-role">{role}</p>
-									))}
-								</div>
-
-								<ul class="timeline-description">
-									{item.description.map((description) => (
-										<li>{description}</li>
-									))}
-								</ul>
-							</div>
-						</div>
-					))
-				}
-			</div>
-		</div>
-	</section>
+            <div class="timeline">
+                {timeline.map((item) => (
+                    <div class="timeline-item">
+                        <div class="timeline-marker">
+                            <span class="timeline-dot" />
+                        </div>
+                        <div class="timeline-content">
+                            <p class="timeline-date">{item.date}</p>
+                            <h2>{item.company}</h2>
+                            <div class="timeline-roles">
+                                {item.roles.map((role) => (
+                                    <p class="timeline-role">{role}</p>
+                                ))}
+                            </div>
+                            <ul class="timeline-description">
+                                {item.description.map((description) => (
+                                    <li>{description}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
 </BaseLayout>
 
 <style>
-	.container {
-		width: min(100% - 2rem, 1100px);
-		margin-inline: auto;
-	}
+    .timeline {
+        position: relative;
+        max-width: 850px;
+    }
 
-	.about-section {
-		padding: 5rem 0 7rem;
-	}
+    .timeline::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 6px;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.12);
+    }
 
-	.about-header {
-		max-width: 760px;
-		margin-bottom: 5rem;
-	}
+    .timeline-item {
+        position: relative;
+        display: grid;
+        grid-template-columns: 32px 1fr;
+        gap: 1.5rem;
+        padding-bottom: 4rem;
+    }
 
-	.eyebrow {
-		margin: 0 0 1rem;
+    .timeline-item:last-child {
+        padding-bottom: 0;
+    }
 
-		color: var(--muted);
-		font-size: 0.9rem;
-	}
+    .timeline-marker {
+        position: relative;
+        z-index: 1;
+    }
 
-	h1 {
-		margin: 0;
+    .timeline-dot {
+        position: absolute;
+        top: 7px;
+        left: 0;
+        width: 13px;
+        height: 13px;
+        border: 2px solid rgba(255, 255, 255, 0.75);
+        border-radius: 50%;
+        background: rgb(27, 27, 27);
+    }
 
-		font-size: clamp(2.8rem, 8vw, 5rem);
-		font-weight: 400;
-		line-height: 1.02;
-		letter-spacing: -0.03em;
-	}
+    .timeline-content {
+        max-width: 620px;
+    }
 
-	.intro {
-		max-width: 650px;
-		margin: 1.5rem 0 0;
+    .timeline-date {
+        margin: 0 0 0.6rem;
+        color: var(--muted);
+        font-size: 0.82rem;
+        letter-spacing: 0.05em;
+    }
 
-		color: var(--muted);
+    .timeline-content h2 {
+        margin: 0;
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 500;
+        line-height: 1.2;
+    }
 
-		font-size: clamp(1.05rem, 2vw, 1.3rem);
-		line-height: 1.65;
-	}
+    .timeline-roles {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem 0.8rem;
+        margin-top: 0.45rem;
+    }
 
-	.timeline {
-		position: relative;
-		max-width: 850px;
-	}
+    .timeline-role {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 1rem;
+    }
 
-	.timeline::before {
-		content: "";
+    .timeline-role:not(:last-child)::after {
+        content: "·";
+        margin-left: 0.8rem;
+        color: rgba(255, 255, 255, 0.25);
+    }
 
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 6px;
+    .timeline-description {
+        max-width: 600px;
+        margin: 0.9rem 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.65;
+    }
 
-		width: 1px;
+    @media (max-width: 767px) {
+        .timeline-role:not(:last-child)::after {
+            content: "";
+            margin-left: 0;
+        }
 
-		background: rgba(255, 255, 255, 0.12);
-	}
+        .timeline-roles {
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+    }
 
-	.timeline-item {
-		position: relative;
+    @media (min-width: 768px) {
+        .timeline {
+            margin-left: 12%;
+        }
 
-		display: grid;
-		grid-template-columns: 32px 1fr;
-		gap: 1.5rem;
+        .timeline-item {
+            grid-template-columns: 40px 1fr;
+            gap: 2rem;
+        }
 
-		padding-bottom: 4rem;
-	}
+        .timeline::before {
+            left: 7px;
+        }
 
-	.timeline-item:last-child {
-		padding-bottom: 0;
-	}
-
-	.timeline-marker {
-		position: relative;
-		z-index: 1;
-	}
-
-	.timeline-dot {
-		position: absolute;
-		top: 7px;
-		left: 0;
-
-		width: 13px;
-		height: 13px;
-
-		border: 2px solid rgba(255, 255, 255, 0.75);
-		border-radius: 50%;
-
-		background: rgb(27, 27, 27);
-	}
-
-	.timeline-content {
-		max-width: 620px;
-	}
-
-	.timeline-date {
-		margin: 0 0 0.6rem;
-
-		color: var(--muted);
-
-		font-size: 0.82rem;
-		letter-spacing: 0.05em;
-	}
-
-	.timeline-content h2 {
-		margin: 0;
-
-		font-size: clamp(1.5rem, 3vw, 2rem);
-		font-weight: 500;
-		line-height: 1.2;
-	}
-
-	.timeline-roles {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.35rem 0.8rem;
-
-		margin-top: 0.45rem;
-	}
-
-	.timeline-role {
-		margin: 0;
-
-		color: rgba(255, 255, 255, 0.78);
-
-		font-size: 1rem;
-	}
-
-	.timeline-role:not(:last-child)::after {
-		content: "·";
-		margin-left: 0.8rem;
-		color: rgba(255, 255, 255, 0.25);
-	}
-
-	.timeline-description {
-		max-width: 600px;
-
-		margin: 0.9rem 0 0;
-
-		color: var(--muted);
-
-		font-size: 0.9rem;
-		line-height: 1.65;
-	}
-
-	@media (max-width: 767px) {
-		.about-section {
-			padding: 3.5rem 0 5rem;
-		}
-
-		.about-header {
-			margin-bottom: 4rem;
-		}
-
-		.timeline-role:not(:last-child)::after {
-			content: "";
-			margin-left: 0;
-		}
-
-		.timeline-roles {
-			flex-direction: column;
-			gap: 0.25rem;
-		}
-	}
-
-	@media (min-width: 768px) {
-		.about-section {
-			padding-top: 7rem;
-		}
-
-		.about-header {
-			margin-bottom: 6rem;
-		}
-
-		.timeline {
-			margin-left: 12%;
-		}
-
-		.timeline-item {
-			grid-template-columns: 40px 1fr;
-			gap: 2rem;
-		}
-
-		.timeline::before {
-			left: 7px;
-		}
-
-		.timeline-dot {
-			width: 15px;
-			height: 15px;
-		}
-	}
+        .timeline-dot {
+            width: 15px;
+            height: 15px;
+        }
+    }
 </style>
