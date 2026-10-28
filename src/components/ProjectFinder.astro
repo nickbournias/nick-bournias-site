@@ -1,0 +1,407 @@
+<div class="project-finder" id="find-project">
+    <div class="finder-progress">
+        <span id="finder-progress-text">QUESTION 01 / 02</span>
+
+        <div class="progress-bars" aria-hidden="true">
+            <span class="progress-bar active"></span>
+            <span class="progress-bar"></span>
+        </div>
+    </div>
+
+    <h2 id="finder-question">What's slowing your organization down?</h2>
+
+    <div class="finder-options" id="finder-options">
+        <button type="button" data-answer="manual">
+            <span class="option-letter">A</span>
+            <span class="option-text">Too much manual work</span>
+            <span class="option-arrow" aria-hidden="true">→</span>
+        </button>
+
+        <button type="button" data-answer="slow">
+            <span class="option-letter">B</span>
+            <span class="option-text">Slow systems or reporting</span>
+            <span class="option-arrow" aria-hidden="true">→</span>
+        </button>
+
+        <button type="button" data-answer="data">
+            <span class="option-letter">C</span>
+            <span class="option-text">Unreliable data or processes</span>
+            <span class="option-arrow" aria-hidden="true">→</span>
+        </button>
+    </div>
+
+    <button type="button" class="finder-back" id="finder-back" hidden>
+        ← Back
+    </button>
+</div>
+
+<script>
+    const questions = [
+        {
+            title: "What's slowing your organization down?",
+            options: [
+                { label: "Too much manual work", value: "manual" },
+                { label: "Slow systems or reporting", value: "slow" },
+                { label: "Unreliable data or processes", value: "data" },
+            ],
+        },
+        {
+            title: "Which outcome matters most?",
+            options: [
+                {
+                    label: "Reducing costs and controlling spending",
+                    value: "cost",
+                },
+                {
+                    label: "Saving employees time",
+                    value: "time",
+                },
+                {
+                    label: "Improving accuracy and reliability",
+                    value: "accuracy",
+                },
+            ],
+        },
+    ];
+
+    const finder = document.querySelector<HTMLElement>(".project-finder");
+
+    if (finder) {
+        const questionEl =
+            finder.querySelector<HTMLElement>("#finder-question");
+
+        const optionsEl = finder.querySelector<HTMLElement>("#finder-options");
+
+        const progressText = finder.querySelector<HTMLElement>(
+            "#finder-progress-text",
+        );
+
+        const progressBars =
+            finder.querySelectorAll<HTMLElement>(".progress-bar");
+
+        const backButton =
+            finder.querySelector<HTMLButtonElement>("#finder-back");
+
+        let step = 0;
+        const answers: string[] = [];
+
+        function renderQuestion() {
+            const question = questions[step];
+
+            if (
+                !question ||
+                !questionEl ||
+                !optionsEl ||
+                !progressText ||
+                !backButton
+            ) {
+                return;
+            }
+
+            questionEl.textContent = question.title;
+            progressText.textContent = `QUESTION 0${step + 1} / 02`;
+
+            progressBars.forEach((bar, index) => {
+                bar.classList.toggle("active", index <= step);
+            });
+
+            backButton.hidden = step === 0;
+
+            optionsEl.replaceChildren();
+
+            question.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.dataset.answer = option.value;
+
+                const letter = document.createElement("span");
+                letter.className = "option-letter";
+                letter.textContent = String.fromCharCode(65 + index);
+
+                const label = document.createElement("span");
+                label.className = "option-text";
+                label.textContent = option.label;
+
+                const arrow = document.createElement("span");
+                arrow.className = "option-arrow";
+                arrow.textContent = "→";
+                arrow.setAttribute("aria-hidden", "true");
+
+                button.append(letter, label, arrow);
+                optionsEl.appendChild(button);
+            });
+        }
+
+        function getProject(first: string, second: string): string {
+            // Slow systems or reporting → Dashboard optimization
+            if (first === "slow") {
+                return "02";
+            }
+
+            // Unreliable data or processes → Data reliability
+            if (first === "data") {
+                return "03";
+            }
+
+            // Manual work → Match the desired business outcome
+            if (first === "manual") {
+                if (second === "cost") {
+                    return "01";
+                }
+
+                return "04";
+            }
+
+            // Default: Process automation
+            return "04";
+        }
+
+        function navigateToProject(projectNumber: string) {
+            const target = document.getElementById(`project-${projectNumber}`);
+
+            if (!target) return;
+
+            document.querySelectorAll(".case-study").forEach((card) => {
+                card.classList.remove("project-highlight");
+            });
+
+            target.classList.add("project-highlight");
+
+            const reducedMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)",
+            ).matches;
+
+            target.scrollIntoView({
+                behavior: reducedMotion ? "instant" : "smooth",
+                block: "start",
+            });
+
+            window.history.replaceState(null, "", `#project-${projectNumber}`);
+
+            window.setTimeout(() => {
+                target.classList.remove("project-highlight");
+            }, 3500);
+        }
+
+        optionsEl?.addEventListener("click", (event) => {
+            const target = event.target;
+
+            if (!(target instanceof Element)) return;
+
+            const button = target.closest<HTMLButtonElement>(
+                "button[data-answer]",
+            );
+
+            if (!button) return;
+
+            const answer = button.dataset.answer;
+            if (!answer) return;
+
+            answers[step] = answer;
+
+            if (step === 0) {
+                step = 1;
+                renderQuestion();
+            } else {
+                const project = getProject(answers[0], answers[1]);
+                navigateToProject(project);
+            }
+        });
+
+        backButton?.addEventListener("click", () => {
+            step = 0;
+            renderQuestion();
+        });
+    }
+</script>
+
+<style>
+    .project-finder {
+        margin-bottom: 3.5rem;
+        padding: 1.5rem;
+        border: 1px solid #42556c;
+        border-radius: 16px;
+        background: #222e3d;
+        scroll-margin-top: 6rem;
+    }
+
+    .finder-header,
+    .finder-progress {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .finder-header {
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid #42556c;
+    }
+
+    .finder-label,
+    .finder-time,
+    .finder-progress {
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+        color: #9eafc3;
+    }
+
+    .finder-label {
+        color: #c5d9ee;
+        font-weight: 700;
+    }
+
+    .finder-progress {
+        margin-top: 1rem;
+    }
+
+    .progress-bars {
+        display: flex;
+        gap: 0.35rem;
+    }
+
+    .progress-bar {
+        width: 35px;
+        height: 3px;
+        border-radius: 3px;
+        background: #42556c;
+    }
+
+    .progress-bar.active {
+        background: #a9c4e4;
+    }
+
+    #finder-question {
+        margin: 1rem 0 1.25rem;
+        font-size: clamp(1.45rem, 2.6vw, 2.15rem);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.025em;
+        color: #f5f7fa;
+    }
+
+    /* Three horizontal options on desktop */
+    .finder-options {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+    }
+
+    /*
+     * Global selectors ensure dynamically created
+     * Question 2 buttons receive the same styling.
+     */
+
+    .finder-options :global(button) {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        min-width: 0;
+        min-height: 72px;
+        padding: 0.85rem;
+        border: 1px solid #42556c;
+        border-radius: 10px;
+        background: #2b394b;
+        color: #f5f7fa;
+        font: inherit;
+        font-size: 0.9rem;
+        line-height: 1.35;
+        text-align: left;
+        cursor: pointer;
+        transition:
+            background 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .finder-options :global(button:hover) {
+        background: #35475d;
+        border-color: #a9c4e4;
+        transform: translateY(-2px);
+    }
+
+    .finder-options :global(button:focus-visible) {
+        outline: 2px solid #a9c4e4;
+        outline-offset: 3px;
+    }
+
+    .finder-options :global(.option-letter) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        border: 1px solid #52677f;
+        border-radius: 7px;
+        font-size: 0.75rem;
+        color: #a9c4e4;
+    }
+
+    .finder-options :global(.option-text) {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .finder-options :global(.option-arrow) {
+        margin-left: auto;
+        flex-shrink: 0;
+        color: #a9c4e4;
+    }
+
+    .finder-back {
+        margin-top: 1rem;
+        padding: 0;
+        border: none;
+        background: none;
+        color: #9eafc3;
+        font: inherit;
+        cursor: pointer;
+    }
+
+    .finder-back:hover {
+        color: #f5f7fa;
+    }
+
+    .finder-back:focus-visible {
+        outline: 2px solid #a9c4e4;
+        outline-offset: 3px;
+    }
+
+    .finder-back[hidden] {
+        display: none;
+    }
+
+    /* Stack options on smaller screens */
+    @media (max-width: 700px) {
+        .project-finder {
+            margin-bottom: 2.5rem;
+            padding: 1.25rem;
+        }
+
+        #finder-question {
+            font-size: 1.5rem;
+        }
+
+        .finder-options {
+            grid-template-columns: 1fr;
+            gap: 0.6rem;
+        }
+
+        .finder-options :global(button) {
+            min-height: 52px;
+            padding: 0.75rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .finder-options :global(button) {
+            transition: none;
+        }
+
+        .finder-options :global(button:hover) {
+            transform: none;
+        }
+    }
+</style>

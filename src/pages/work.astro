@@ -1,242 +1,335 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TypedText from "../components/TypedText.astro";
+import ProjectFinder from "../components/ProjectFinder.astro";
 
 const projects = [
-  {
-    number: "01",
-    category: "Financial Operations",
-    title: "Preventing Budget Overruns Through Automation",
-    challenge: "Manual overtime tracking limited leadership's visibility into spending and made it difficult to intervene before budget limits were reached.",
-    approach: "Designed an automated workflow to calculate overtime utilization, alert stakeholders at key thresholds, and enforce controls when funding was exhausted.",
-    impact: [
-      "Replaced manual tracking with automated budget monitoring",
-      "Improved leadership visibility into overtime expenditures",
-      "Enabled proactive intervention and reduced spending risk",
-    ],
-    detail: "The workflow calculated overtime usage across related records, recalculated totals when records changed, sent alerts at 70%, 90%, and 100% utilization, and restricted edits when the budget was exhausted.",
-    technology: ["ServiceNow", "Workflow Automation", "Business Rules", "Access Controls"],
-  },
-  {
-    number: "02",
-    category: "Operational Efficiency",
-    title: "Reducing Dashboard Load Times to Accelerate Decision-Making",
-    challenge: "Dashboards backed by millions of records took several minutes to load, slowing access to information needed for operational decisions.",
-    approach: "Investigated query activity and indexing gaps, then implemented targeted database indexes without introducing unnecessary overlap.",
-    impact: [
-      "Reduced dashboard load times by more than 75%",
-      "Improved responsiveness of operational reporting",
-      "Made timely information easier for end users to access",
-    ],
-    detail: "Analyzed dashboard query patterns, reviewed existing indexes, identified high-impact gaps, and validated improvements through query analysis and load-time testing.",
-    technology: ["ServiceNow", "Database Optimization", "Query Analysis", "Indexing"],
-  },
-  {
-    number: "03",
-    category: "Data Reliability",
-    title: "Eliminating Data Loss in Enterprise Import Workflows",
-    challenge: "A bulk Excel import process intermittently failed to create expected records, undermining data completeness and confidence in the workflow.",
-    approach: "Traced failures through execution logs and processing patterns, identified worker exhaustion linked to a legacy parsing API, and migrated to a supported implementation.",
-    impact: [
-      "Resolved intermittent record loss during bulk imports",
-      "Restored confidence in data completeness",
-      "Improved stability of high-volume processing workflows",
-    ],
-    detail: "Correlated missing records with execution intervals, investigated progress worker saturation, replaced the legacy parsing implementation, and tested processing against large import datasets.",
-    technology: ["ServiceNow", "Data Processing", "API Modernization", "Troubleshooting"],
-  },
-  {
-	number: "04",
-	category: "Process Automation",
-	title: "Modernizing Business Intake Through Self-Service Automation",
-	challenge: "A client relied on email correspondence and manual data entry to collect information from external users, creating administrative overhead, inconsistent submissions, and inefficient processing workflows.",
-	approach: "Designed and developed a centralized ServiceNow portal with dynamic field validation, conditional requirements, and role-based prepopulation to simplify submissions, standardize data collection, and automate downstream processing.",
-	impact: [
-		"Reduced reliance on email-based intake and manual data entry",
-		"Improved data consistency and completeness through automated validation",
-		"Simplified the submission experience for external users",
-		"Standardized intake and enabled automated processing and notifications",
-	],
-	detail: "Led technical design and end-to-end development of a custom ServiceNow application, including Service Portal pages, Record Producers, custom widgets, and data structures. Engineered status-driven workflows using UI Actions, Business Rules, and Script Includes to manage record processing, synchronize data across related tables, and trigger automated email notifications.",
-	technology: ["ServiceNow", "Service Portal", "Workflow Automation", "Application Development"],
-  }
+	{
+		number: "01",
+		category: "Financial Operations",
+		title: "Preventing Budget Overruns Through Automation",
+		challenge:
+			"Manual overtime tracking limited leadership's visibility into spending and made it difficult to intervene before budget limits were reached.",
+		approach:
+			"Designed an automated workflow to calculate overtime utilization, alert stakeholders at key thresholds, and enforce controls when funding was exhausted.",
+		impact: [
+			"Replaced manual tracking with automated budget monitoring",
+			"Improved leadership visibility into overtime expenditures",
+			"Enabled proactive intervention and reduced spending risk",
+		],
+		detail: "The workflow calculated overtime usage across related records, recalculated totals when records changed, sent alerts at 70%, 90%, and 100% utilization, and restricted edits when the budget was exhausted.",
+		technology: [
+			"ServiceNow",
+			"Workflow Automation",
+			"Business Rules",
+			"Access Controls",
+		],
+	},
+	{
+		number: "02",
+		category: "Operational Efficiency",
+		title: "Reducing Dashboard Load Times to Accelerate Decision-Making",
+		challenge:
+			"Dashboards backed by millions of records took several minutes to load, slowing access to information needed for operational decisions.",
+		approach:
+			"Investigated query activity and indexing gaps, then implemented targeted database indexes without introducing unnecessary overlap.",
+		impact: [
+			"Reduced dashboard load times by more than 75%",
+			"Improved responsiveness of operational reporting",
+			"Made timely information easier for end users to access",
+		],
+		detail: "Analyzed dashboard query patterns, reviewed existing indexes, identified high-impact gaps, and validated improvements through query analysis and load-time testing.",
+		technology: [
+			"ServiceNow",
+			"Database Optimization",
+			"Query Analysis",
+			"Indexing",
+		],
+	},
+	{
+		number: "03",
+		category: "Data Reliability",
+		title: "Eliminating Data Loss in Enterprise Import Workflows",
+		challenge:
+			"A bulk Excel import process intermittently failed to create expected records, undermining data completeness and confidence in the workflow.",
+		approach:
+			"Traced failures through execution logs and processing patterns, identified worker exhaustion linked to a legacy parsing API, and migrated to a supported implementation.",
+		impact: [
+			"Resolved intermittent record loss during bulk imports",
+			"Restored confidence in data completeness",
+			"Improved stability of high-volume processing workflows",
+		],
+		detail: "Correlated missing records with execution intervals, investigated progress worker saturation, replaced the legacy parsing implementation, and tested processing against large import datasets.",
+		technology: [
+			"ServiceNow",
+			"Data Processing",
+			"API Modernization",
+			"Troubleshooting",
+		],
+	},
+	{
+		number: "04",
+		category: "Process Automation",
+		title: "Modernizing Business Intake Through Self-Service Automation",
+		challenge:
+			"A client relied on email correspondence and manual data entry to collect information from external users, creating administrative overhead, inconsistent submissions, and inefficient processing workflows.",
+		approach:
+			"Designed and developed a centralized ServiceNow portal with dynamic field validation, conditional requirements, and role-based prepopulation to simplify submissions, standardize data collection, and automate downstream processing.",
+		impact: [
+			"Reduced reliance on email-based intake and manual data entry",
+			"Improved data consistency and completeness through automated validation",
+			"Simplified the submission experience for external users",
+			"Standardized intake and enabled automated processing and notifications",
+		],
+		detail: "Led technical design and end-to-end development of a custom ServiceNow application, including Service Portal pages, Record Producers, custom widgets, and data structures. Engineered status-driven workflows using UI Actions, Business Rules, and Script Includes to manage record processing, synchronize data across related tables, and trigger automated email notifications.",
+		technology: [
+			"ServiceNow",
+			"Service Portal",
+			"Workflow Automation",
+			"Application Development",
+		],
+	},
 ];
 ---
 
 <BaseLayout
-  title="Portfolio - Nick Bournias"
-  description="Selected projects showing how technology can solve operational challenges and deliver business value."
+	title="Portfolio - Nick Bournias"
+	description="Selected projects showing how technology can solve operational challenges and deliver business value."
 >
-  <section class="page-section">
-    <div class="container">
-      <header class="page-header">
-        <p class="eyebrow">Professional Work</p>
-        <h1 class="page-title">Work that made an impact.</h1>
-        <p class="page-intro">
-          <TypedText text="Technology is only valuable when it solves a real problem. 
+	<section class="page-section">
+		<div class="container">
+			<header class="page-header">
+				<p class="eyebrow">Professional Work</p>
+				<h1 class="page-title">Work that made an impact.</h1>
+				<p class="page-intro">
+					<TypedText
+						text="Technology is only valuable when it solves a real problem. 
 		  Here's how I've used it to help organizations save time, reduce costs, 
-		  and operate more efficiently"/>
-        </p>
-      </header>
+		  and operate more efficiently."
+					/>
+				</p>
+			</header>
 
-      <div class="case-studies">
-        {projects.map((project) => (
-          <article class="case-study">
-            <div class="case-topline content-label">
-              <span class="case-number">{project.number} / 0{projects.length}</span>
-              <span class="case-category">{project.category}</span>
-            </div>
+			<ProjectFinder />
 
-            <div class="case-heading">
-              <h2>{project.title}</h2>
-            </div>
+			<div class="case-studies">
+				{
+					projects.map((project) => (
+						<article
+							class="case-study"
+							id={`project-${project.number}`}
+						>
+							<div class="case-topline content-label">
+								<span class="case-number">
+									{project.number} / 0{projects.length}
+								</span>
+								<span class="case-category">
+									{project.category}
+								</span>
+							</div>
 
-            <div class="case-overview">
-              <div class="overview-block">
-                <h3 class="content-label">The challenge</h3>
-                <p class="content-text">{project.challenge}</p>
-              </div>
-              <div class="overview-block">
-                <h3 class="content-label">My approach</h3>
-                <p class="content-text">{project.approach}</p>
-              </div>
-              <div class="overview-block impact-block">
-                <h3 class="content-label">Business impact</h3>
-                <ul class="content-text">
-                  {project.impact.map((item) => <li>{item}</li>)}
-                </ul>
-              </div>
-            </div>
+							<div class="case-heading">
+								<h2>{project.title}</h2>
+							</div>
 
-            <details class="case-details">
-              <summary class="content-secondary">View implementation details <span aria-hidden="true">+</span></summary>
-              <div class="details-body">
-                <p class="content-text">{project.detail}</p>
-                <div class="tech-tags">
-                  {project.technology.map((tech) => <span class="content-label">{tech}</span>)}
-                </div>
-              </div>
-            </details>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
+							<div class="case-overview">
+								<div class="overview-block">
+									<h3 class="content-label">The challenge</h3>
+									<p class="content-text">
+										{project.challenge}
+									</p>
+								</div>
+								<div class="overview-block">
+									<h3 class="content-label">My approach</h3>
+									<p class="content-text">
+										{project.approach}
+									</p>
+								</div>
+								<div class="overview-block impact-block">
+									<h3 class="content-label">
+										Business impact
+									</h3>
+									<ul class="content-text">
+										{project.impact.map((item) => (
+											<li>{item}</li>
+										))}
+									</ul>
+								</div>
+							</div>
+
+							<details class="case-details">
+								<summary class="content-secondary">
+									View implementation details{" "}
+									<span aria-hidden="true">+</span>
+								</summary>
+								<div class="details-body">
+									<p class="content-text">{project.detail}</p>
+									<div class="tech-tags">
+										{project.technology.map((tech) => (
+											<span class="content-label">
+												{tech}
+											</span>
+										))}
+									</div>
+								</div>
+							</details>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
 </BaseLayout>
 
 <style>
-  .case-studies {
-    display: grid;
-    gap: 1.25rem;
-  }
+	.case-studies {
+		display: grid;
+		gap: 1.25rem;
+	}
 
-  .case-study {
-    padding: clamp(1.4rem, 3vw, 2.5rem);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.018);
-  }
+	.case-study {
+		padding: clamp(1.4rem, 3vw, 2.5rem);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 16px;
+		background: rgba(255, 255, 255, 0.018);
+	}
 
-  .case-topline {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.35rem;
-    color: var(--muted);
-  }
+	.case-topline {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 1.35rem;
+		color: var(--muted);
+	}
 
-  .case-number { color: rgba(255, 255, 255, 0.4); }
+	.case-number {
+		color: rgba(255, 255, 255, 0.4);
+	}
 
-  .case-heading {
-    margin-bottom: 1.65rem;
-  }
+	.case-heading {
+		margin-bottom: 1.65rem;
+	}
 
-  .case-heading h2 {
-    max-width: 780px;
-    margin: 0 0 0.65rem;
-    font-size: clamp(1.45rem, 2.6vw, 2.15rem);
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.025em;
-  }
+	.case-heading h2 {
+		max-width: 780px;
+		margin: 0 0 0.65rem;
+		font-size: clamp(1.45rem, 2.6vw, 2.15rem);
+		font-weight: 400;
+		line-height: 1.2;
+		letter-spacing: -0.025em;
+	}
 
-  .case-summary {
-    max-width: 700px;
-    margin: 0;
-  }
+	.case-summary {
+		max-width: 700px;
+		margin: 0;
+	}
 
-  .case-overview {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.75rem;
-    padding: 1.5rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
+	.case-overview {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.75rem;
+		padding: 1.5rem 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+	}
 
-  .overview-block h3 {
-    margin: 0 0 0.75rem;
-    color: rgba(255, 255, 255, 0.833);
-	font-weight: 900;
-  }
+	.overview-block h3 {
+		margin: 0 0 0.75rem;
+		color: rgba(255, 255, 255, 0.833);
+		font-weight: 900;
+	}
 
-  .overview-block p,
-  .overview-block li {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+	.overview-block p,
+	.overview-block li {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
 
-  .overview-block ul {
-    display: grid;
-    gap: 0.5rem;
-    margin: 0;
-    padding-left: 1.2rem;
-  }
+	.overview-block ul {
+		display: grid;
+		gap: 0.5rem;
+		margin: 0;
+		padding-left: 1.2rem;
+	}
 
-  .case-details {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
+	.case-details {
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+	}
 
-  .case-details summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    padding-top: 1rem;
-    cursor: pointer;
-    list-style: none;
-  }
+	.case-details summary {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+		padding-top: 1rem;
+		cursor: pointer;
+		list-style: none;
+	}
 
-  .case-details summary::-webkit-details-marker { display: none; }
-  .case-details summary:hover { color: #fff; }
-  .case-details summary:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
-  .case-details[open] summary span { transform: rotate(45deg); }
-  .case-details summary span { font-size: 1.25rem; transition: transform 0.2s ease; }
+	.case-details summary::-webkit-details-marker {
+		display: none;
+	}
+	.case-details summary:hover {
+		color: #fff;
+	}
+	.case-details summary:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 5px;
+	}
+	.case-details[open] summary span {
+		transform: rotate(45deg);
+	}
+	.case-details summary span {
+		font-size: 1.25rem;
+		transition: transform 0.2s ease;
+	}
 
-  .details-body { padding-top: 1rem; }
-  .details-body p { max-width: 850px; margin: 0 0 1rem; }
+	.details-body {
+		padding-top: 1rem;
+	}
+	.details-body p {
+		max-width: 850px;
+		margin: 0 0 1rem;
+	}
 
-  .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .tech-tags span {
-    padding: 0.3rem 0.65rem;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 999px;
-    color: var(--muted);
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    text-transform: none;
-  }
+	.tech-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	.tech-tags span {
+		padding: 0.3rem 0.65rem;
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 999px;
+		color: var(--muted);
+		font-weight: 500;
+		letter-spacing: 0.02em;
+		text-transform: none;
+	}
 
-  @media (max-width: 900px) {
-    .case-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .impact-block { grid-column: 1 / -1; }
-  }
+	@media (max-width: 900px) {
+		.case-overview {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		.impact-block {
+			grid-column: 1 / -1;
+		}
+	}
 
-  @media (max-width: 600px) {
-    .case-studies { gap: 1rem; }
-    .case-overview { grid-template-columns: 1fr; gap: 1.25rem; }
-    .impact-block { grid-column: auto; }
-    .case-heading h2 { font-size: 1.5rem; }
-  }
+	@media (max-width: 600px) {
+		.case-studies {
+			gap: 1rem;
+		}
+		.case-overview {
+			grid-template-columns: 1fr;
+			gap: 1.25rem;
+		}
+		.impact-block {
+			grid-column: auto;
+		}
+		.case-heading h2 {
+			font-size: 1.5rem;
+		}
+	}
 </style>

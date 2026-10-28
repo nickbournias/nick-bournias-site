@@ -91,12 +91,12 @@ img {
 /* Shared page layout */
 
 .page-section {
-    padding: 5rem 0 7rem;
+    padding: 3rem 0 5rem;
 }
 
 .page-header {
     max-width: 780px;
-    margin-bottom: 5rem;
+    margin-bottom: 2.5rem;
 }
 
 .eyebrow {
