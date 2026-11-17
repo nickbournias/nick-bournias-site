@@ -11,7 +11,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="container">
             <div class="contact-content">
 
-                <h1 class="page-title">Let's talk!</h1>
+                <h1 class="page-title"></h1>
 
                 <div class="contact-options">
                     <a
@@ -25,7 +25,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                             <h2>Send me an email</h2>
                             <p class="content-text">Nick@NickBournias.com</p>
                         </div>
-                        <span class="arrow" aria-hidden="true">↗</span>
+                        <span class="arrow" aria-hidden="true">
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    >
+        <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+    </svg>
+</span>
                     </a>
 
                     <a
@@ -43,7 +58,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                                 Let's expand our networks.
                             </p>
                         </div>
-                        <span class="arrow" aria-hidden="true">↗</span>
+                        <span class="arrow" aria-hidden="true">
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    >
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+    </svg>
+</span>
                     </a>
                 </div>
 
@@ -54,7 +84,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 >
                     <div class="receipt-heading">
                         <span class="card-label">
-                            03 / THE DAILY PRINT
+                            03 / RECEIPT PRINTER
                         </span>
                         <svg
                             class="receipt-icon"
@@ -110,7 +140,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
                         <div class="receipt-meta">
                             <span id="receipt-counter">0 / 200</span>
-                            <span>Printed on real thermal paper</span>
+                            <a
+                                href="https://github.com/nickbournias/the-daily-print"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                How does this work? ↗
+                            </a>
                         </div>
 
                         <div class="turnstile-container">
@@ -126,7 +162,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                             class="receipt-submit"
                             type="submit"
                         >
-                            <span>Send to Printer</span>
+                            <span>Send it!</span>
                             <span aria-hidden="true">↗</span>
                         </button>
 
