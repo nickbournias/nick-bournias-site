@@ -12,7 +12,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <div class="contact-content">
 
                 <h1 class="page-title">Let's talk!</h1>
-                <br>
+
                 <div class="contact-options">
                     <a
                         class="contact-card email-card"
@@ -39,11 +39,107 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                                 02 / LINKEDIN
                             </span>
                             <h2>Connect on LinkedIn</h2>
-                            <p class="content-text">Let's expand our networks.</p>
+                            <p class="content-text">
+                                Let's expand our networks.
+                            </p>
                         </div>
                         <span class="arrow" aria-hidden="true">↗</span>
                     </a>
                 </div>
+
+                <!-- THE DAILY PRINT -->
+                <section
+                    class="receipt-card"
+                    aria-labelledby="receipt-title"
+                >
+                    <div class="receipt-heading">
+                        <span class="card-label">
+                            03 / THE DAILY PRINT
+                        </span>
+                        <svg
+                            class="receipt-icon"
+                            width="28"
+                            height="28"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M6 9V2h12v7" />
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                            <path d="M6 14h12v8H6z" />
+                            <path d="M9 18h6" />
+                        </svg>
+                    </div>
+
+                    <h2 id="receipt-title">Send me a receipt.</h2>
+
+                    <p class="receipt-description">
+                        Write something and it'll print on a real thermal
+                        receipt printer in my apartment.
+                    </p>
+
+                    <form id="receipt-form">
+                        <div class="receipt-field">
+                            <label for="receipt-name">YOUR NAME</label>
+                            <input
+                                id="receipt-name"
+                                name="sender"
+                                type="text"
+                                maxlength="40"
+                                placeholder="Anonymous"
+                                autocomplete="name"
+                            />
+                        </div>
+
+                        <div class="receipt-field">
+                            <label for="receipt-message">
+                                YOUR MESSAGE
+                            </label>
+                            <textarea
+                                id="receipt-message"
+                                name="message"
+                                maxlength="200"
+                                rows="4"
+                                placeholder="Say something interesting..."
+                                required
+                            ></textarea>
+                        </div>
+
+                        <div class="receipt-meta">
+                            <span id="receipt-counter">0 / 200</span>
+                            <span>Printed on real thermal paper</span>
+                        </div>
+
+                        <div class="turnstile-container">
+                            <div
+                                class="cf-turnstile"
+                                data-sitekey="0x4AAAAAAGET8T2BMOBYCVoA"
+                                data-theme="dark"
+                            ></div>
+                        </div>
+
+                        <button
+                            id="receipt-submit"
+                            class="receipt-submit"
+                            type="submit"
+                        >
+                            <span>Send to Printer</span>
+                            <span aria-hidden="true">↗</span>
+                        </button>
+
+                        <p
+                            id="receipt-status"
+                            class="receipt-status"
+                            role="status"
+                            aria-live="polite"
+                        ></p>
+                    </form>
+                </section>
+
             </div>
         </div>
     </main>
@@ -76,6 +172,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         line-height: 1.7;
     }
 
+    /* CONTACT CARDS */
+
     .contact-options {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -87,17 +185,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         align-items: flex-start;
         justify-content: space-between;
         gap: 1rem;
-
         min-height: 220px;
         padding: 2rem;
-
         border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 14px;
         background: rgba(255, 255, 255, 0.025);
-
         color: inherit;
         text-decoration: none;
-
         transition:
             transform 0.25s ease,
             border-color 0.3s ease,
@@ -110,16 +204,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         transform: translateY(-5px);
     }
 
-    /* Email hover */
-
     .email-card:hover,
     .email-card:focus-visible {
         background-color: #e8e8e8;
         border-color: #e8e8e8;
         color: #171717;
     }
-
-    /* LinkedIn hover */
 
     .linkedin-card:hover,
     .linkedin-card:focus-visible {
@@ -149,8 +239,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         transition: color 0.3s ease;
     }
 
-    /* Text colors when filled */
-
     .email-card:hover .card-label,
     .email-card:hover .card-content p,
     .email-card:focus-visible .card-label,
@@ -165,8 +253,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         color: rgba(255, 255, 255, 0.8);
     }
 
-    /* Arrow animation */
-
     .arrow {
         font-size: 1.5rem;
         font-weight: 300;
@@ -177,6 +263,147 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     .contact-card:focus-visible .arrow {
         transform: translate(4px, -4px);
     }
+
+    /* THE DAILY PRINT */
+
+    .receipt-card {
+        margin-top: 1.25rem;
+        padding: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.025);
+    }
+
+    .receipt-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .receipt-icon {
+        flex-shrink: 0;
+        color: #999;
+    }
+
+    .receipt-card h2 {
+        margin: 2rem 0 0.75rem;
+        font-size: clamp(1.6rem, 3vw, 2.3rem);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.025em;
+    }
+
+    .receipt-description {
+        max-width: 550px;
+        margin-bottom: 2rem;
+        color: #aaa;
+        line-height: 1.7;
+    }
+
+    #receipt-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .receipt-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    .receipt-field label {
+        color: #999;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+    }
+
+    .receipt-field input,
+    .receipt-field textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.04);
+        color: #fff;
+        font: inherit;
+        outline: none;
+        transition:
+            border-color 0.2s ease,
+            background-color 0.2s ease;
+    }
+
+    .receipt-field input::placeholder,
+    .receipt-field textarea::placeholder {
+        color: #777;
+    }
+
+    .receipt-field input:focus,
+    .receipt-field textarea:focus {
+        border-color: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .receipt-field textarea {
+        resize: vertical;
+        min-height: 110px;
+    }
+
+    .receipt-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        color: #888;
+        font-size: 0.8rem;
+    }
+
+    .turnstile-container {
+        min-height: 65px;
+    }
+
+    .receipt-submit {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 1.1rem 1.25rem;
+        border: 0;
+        border-radius: 8px;
+        background: #e8e8e8;
+        color: #171717;
+        font: inherit;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .receipt-submit:hover:not(:disabled) {
+        background: #fff;
+        transform: translateY(-2px);
+    }
+
+    .receipt-submit:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .receipt-status {
+        margin: 0;
+        color: #aaa;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .receipt-status:empty {
+        display: none;
+    }
+
+    /* MOBILE */
 
     @media (max-width: 767px) {
         .contact-page {
@@ -193,12 +420,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             padding: 1.5rem;
         }
 
+        .card-content h2 {
+            font-size: 1.5rem;
+        }
+
         .intro {
             margin-bottom: 2.5rem;
         }
 
-        .card-content h2 {
-            font-size: 1.5rem;
+        .receipt-card {
+            padding: 1.5rem;
+        }
+
+        .receipt-meta {
+            flex-wrap: wrap;
         }
     }
 
@@ -206,8 +441,122 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         .contact-card,
         .arrow,
         .card-label,
-        .card-content p {
+        .card-content p,
+        .receipt-submit,
+        .receipt-field input,
+        .receipt-field textarea {
             transition: none;
         }
     }
 </style>
+
+<!-- Cloudflare Turnstile -->
+<script
+    is:inline
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer
+></script>
+
+<!-- Receipt form logic -->
+<script>
+    const API_URL =
+        "https://daily-print-api.njb23.workers.dev";
+
+    const form =
+        document.querySelector<HTMLFormElement>("#receipt-form");
+
+    const nameInput =
+        document.querySelector<HTMLInputElement>("#receipt-name");
+
+    const messageInput =
+        document.querySelector<HTMLTextAreaElement>("#receipt-message");
+
+    const counter =
+        document.querySelector<HTMLElement>("#receipt-counter");
+
+    const button =
+        document.querySelector<HTMLButtonElement>("#receipt-submit");
+
+    const status =
+        document.querySelector<HTMLElement>("#receipt-status");
+
+    // Live character counter
+    messageInput?.addEventListener("input", () => {
+        if (counter) {
+            counter.textContent =
+                `${messageInput.value.length} / 200`;
+        }
+    });
+
+    // Submit receipt to Cloudflare
+    form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        if (!button || !status || !messageInput) return;
+
+        const token =
+            document.querySelector<HTMLInputElement>(
+                '[name="cf-turnstile-response"]'
+            )?.value;
+
+        if (!token) {
+            status.textContent =
+                "Please complete the security verification.";
+            return;
+        }
+
+        button.disabled = true;
+        status.textContent = "Sending your message...";
+
+        try {
+            const response = await fetch(
+                `${API_URL}/api/print`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        sender: nameInput?.value || "Anonymous",
+                        message: messageInput.value,
+                        turnstileToken: token
+                    })
+                }
+            );
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    result.error || "Unable to send message"
+                );
+            }
+
+            status.textContent =
+                `Message #${result.id} queued! It'll print shortly.`;
+
+            form.reset();
+
+            if (counter) {
+                counter.textContent = "0 / 200";
+            }
+
+        } catch (error) {
+            status.textContent =
+                error instanceof Error
+                    ? error.message
+                    : "Something went wrong. Please try again.";
+        } finally {
+            button.disabled = false;
+
+            const turnstile = (
+                window as Window & {
+                    turnstile?: { reset: () => void }
+                }
+            ).turnstile;
+
+            turnstile?.reset();
+        }
+    });
+</script>
